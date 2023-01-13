@@ -1,0 +1,54 @@
+
+$light: 300;
+$normal: 400;
+$semibold: 500;
+$bold: 700;
+
+$xsmall: 1rem;
+$small:1.1rem;
+$medium:1.15rem;
+$large:1.5rem;
+$xlarge:1.7rem;
+$xxlarge:1.9rem;
+
+$lineHeight: 1.5rem;
+
+h1{
+    font-weight:$bold;
+    font-size: $xxlarge;
+    line-height:$lineHeight;
+}
+
+h2{
+   font-weight:$bold;
+   font-size: $xlarge;
+   line-height:$lineHeight;
+}
+
+h3{
+   font-weight:$semibold;
+   font-size: $large;
+   line-height:$lineHeight;
+}
+
+h4{
+    font-weight:$bold;
+    font-size: $medium;
+    line-height:$lineHeight;
+}
+h5{
+    font-weight:$normal;
+    font-size: $small;
+    line-height:$lineHeight;
+}
+h6{
+    font-weight:$bold;
+    font-size: $xsmall;
+    line-height:$lineHeight;
+}
+
+h4.subHeading{
+  color: $primary-color;
+  text-align: center;
+  font-weight: 600;
+}

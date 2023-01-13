@@ -1,0 +1,64 @@
+<head><title>WebUtilities :: Member Account Search Results</title></head>
+<div *ngIf="norecords">
+  <section class="form-horizontal">
+    <article class="main-heading">
+      <h2>MEMBER ACCOUNT SEARCH RESULTS</h2>
+    </article>
+    <article class="content-center">
+      <div class="alert alert-danger box-msg" role="alert">
+        <strong *ngIf="PilotCount>0">This claimant is eligible to register through the Claims Portal, but has not yet done so.</strong>
+        <strong *ngIf="PilotCount==0">This Claimant is eligible to register through the Claims Portal, but has not yet done so. This is not a pilot Claim.</strong>
+        <strong *ngIf="PilotCount<0">No records found!</strong>
+      </div>
+      <br />
+      <div align="center">
+        <button class="btn btn-primary" type="button" [routerLink]="['/membersearch']">Back</button>
+      </div>
+    </article>
+  </section>
+</div>
+
+<div *ngIf="records">
+  <section class="form-horizontal">
+    <article class="main-heading">
+      <h2>MEMBER ACCOUNT SEARCH RESULTS</h2>
+    </article>
+    <article class="content-center">
+      <div class="table-responsive">
+      <table align="center" class="MemberDetail table table-bordered">
+        <tr>
+          <th>
+          Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Last 4 SSN #
+          </th>
+          <!-- <td>
+            <b style="margin: 25px;">Claim #</b>
+          </td> -->
+          <th>
+            Action
+         </th>
+        </tr>
+        <tr *ngFor="let Member of MemberDetailFinal">
+          <td>{{Member.FullName}}</td>
+          <td>{{Member.Email}}</td>
+          <td>{{Member.SocialSecurityNo}}</td>
+
+          <td style="font-style:italic;"><a [routerLink]="['/memberupdate', Member.Master_idEnc]">Update User Account</a></td>
+        </tr>
+      </table>
+    </div>
+      
+
+      <!--button: close-->
+      <div align="center">
+        <button class="btn btn-primary btn btn-default" type="button" [routerLink]="['/membersearch']">Close</button>
+      </div>
+
+    </article>
+  </section>
+</div>

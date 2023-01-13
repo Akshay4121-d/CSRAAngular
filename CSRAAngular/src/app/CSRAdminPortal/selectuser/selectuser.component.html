@@ -1,0 +1,24 @@
+<head><title>WebUtilities :: Select User Account Type</title></head>
+<section class="form-horizontal">
+    <article class="main-heading">
+        <h2>SELECT USER ACCOUNT TYPE</h2>
+    </article>
+    <article class="content-center">
+        <div class="container-fluid">
+            User Type<br />
+            <form #userForm="ngForm">
+                <div class="form-group" [class.has-error]="user.touched && user.invalid">
+                    <select id="user" required #user="ngModel" class="custom-select form-control" name="user" [(ngModel)]="default.user">
+                        <option value="">--Select--</option>
+                        <option *ngFor="let user of users">{{ user }}</option>
+                    </select><br />
+                    <small><span class="text-danger" *ngIf="user.touched && user.invalid">Please select user type.</span></small>
+                </div>
+                <div align="center">
+                    <button [disabled]="user.invalid" class="btn btn-primary" type="button" (click)="GoToSearch()">Select
+                        User Type</button>
+                </div>
+            </form>
+        </div>
+    </article>
+</section>

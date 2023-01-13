@@ -1,0 +1,69 @@
+  <head>
+    <title>WebUtilities :: Generate Certificate of Insurance</title>
+
+    <!-- <script src="../../../ng-pattern-restrict.min.js"></script> -->
+  </head>
+  <section class="form-horizontal">
+    <article class="main-heading">
+      <h2>DB-120.1 Certificate</h2>
+    </article>
+    <article class="content-center font-size=100px">
+      
+      <h5 style="text-align:left;color: #00579c;">
+        <strong> Download DB-120.1 </strong>
+      </h5>
+      <span style="color: #00579c;">{{PolicyActive}}</span>
+      <table width="100%" style="margin-bottom: 10px; margin-top: 20px;">
+        <tr class="tablemargin">
+          <thead>Policy Number</thead>
+          <td class="floatRight">{{l_PolicyNo}}</td>
+        </tr>
+        <tr>
+          <thead>Policy Name</thead>
+          <td class="floatRight">{{PolicyName}}</td>
+        </tr>
+        <tr>
+          <thead>Policy Effective Date</thead>
+          <td class="floatRight">{{PolicyEDate | date:'fullDate'}}</td>
+        </tr>
+      </table>
+
+      <small >
+        You may download a copy of the DB-120.1 by clicking on the Download link.
+    </small>
+    <br>
+    <br>
+
+    <small>This form may NOT be edited or modified without the written consent of the insurance company. Any person who knowingly and with intent to defraud any insurance company or other person files an application for insurance or statement of claim containing any materially false information, or conceals for the purpose of misleading, information concerning any fact material thereto, commits a fraudulent insurance act, which is a crime and shall also be subject to a civil penalty not to exceed five thousand dollars and the stated value of the claim for each such violation.</small>
+    <table  class="width=100% table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th width="10%">Id</th>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Download</th> 
+        </tr>
+      </thead>
+        <tr  *ngFor="let obj of PolicyDetails; let i=index;">
+          <td >{{i+1}}</td>
+          <td >{{obj.AgencyName}}</td>
+          <td > {{obj.ADDRESS}}</td>
+          <td >
+            <a routerLink="/generatecertificate" (click)="exportToPdf('1')">Download</a>
+            <br>
+            <a routerLink="/generatecertificate"  (click)="exportToPdf('2')">Download(w/o signature)</a>
+          
+          </td>
+        </tr>
+    </table>
+     <span style="font-weight: bold; font-size: 11px;"> Not seeing a PDF pop-up? </span> <br>
+      <span style="color: #474747; font-size: 11px;">PDF are generated in a new pop-up window.
+         Please be sure to have your pop-up blocker allow pop-ups from 
+         <a href="https://spdeviis:4431/WebUtilities" target="_blank"><u>www.shelterpoint.com.</u></a>  
+        (To add our site to the safe list, right-click on the light yellow bar on top of your browser window,
+         select "Always allow pop-ups from this Site" and confirm with "yes". The first time you change these settings,
+          you will have to resubmit your PDF info.)
+      </span>
+    </article>
+  </section>
+

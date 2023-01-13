@@ -1,0 +1,602 @@
+<head>
+  <title>WebUtilities :: Update Employer Account</title>
+</head>
+<div *ngIf="bind">
+  <section class="form-horizontal">
+    <article class="main-heading">
+      <h2><strong>{{BrokerDetailFinal[0].BrokerNumber}} | {{BrokerDetailFinal[0].BrokerName}}</strong></h2>
+    </article>
+    <article class="content-center sepscView" style="width: 1000px !important;">
+      <div class="row">
+        <div class="col-md-6 rightBr">
+          <h5 style="text-align:center" [ngStyle]="{color: '#00579c'}">
+            <u><strong>Broker Information</strong></u>
+          </h5>
+          <div class="sepViewL"><strong class="labelStrong">Broker Name: </strong><span>{{BrokerDetailFinal[0].BrokerName}}</span></div>
+          <div class="sepViewL"><strong class="labelStrong">Address: </strong><span>{{BrokerDetailFinal[0].Address}}</span></div>
+          <div class="sepViewL"><strong class="labelStrong">City: </strong>{{BrokerDetailFinal[0].City}}</div>
+          <div class="sepViewL"><strong class="labelStrong">State: </strong>{{BrokerDetailFinal[0].State}}</div>
+          <div class="sepViewL"><strong class="labelStrong">Zip Code: </strong>{{BrokerDetailFinal[0].Zipcode}}</div>
+          <div class="sepViewL"><strong class="labelStrong">Phone Number: </strong>{{BrokerDetailFinal[0].PhoneNumber}}</div>
+          <div class="sepViewL"> <strong class="labelStrong">Fax Number: </strong>{{BrokerDetailFinal[0].Fax}}</div>
+          <div class="sepViewL"><strong class="labelStrong">Email Address: </strong>{{BrokerDetailFinal[0].Email}}</div>
+          <div class="sepViewL"><strong class="labelStrong">FEIN: </strong>{{BrokerDetailFinal[0].Fein}}</div>
+        </div>
+        <br>
+        <div class="col-md-6" >
+          <h5 style="text-align:center" [ngStyle]="{color: '#00579c'}">
+            <u><strong>Broker Account</strong></u>
+          </h5>
+          <div class="sepViewL"><strong class="labelStrong">Effective Date: </strong>{{BrokerDetailFinal[0].EffDate}}</div>
+          <div class="sepViewL"><strong class="labelStrong">Termination Date: </strong>{{BrokerDetailFinal[0].TermDate}}</div>
+          <div class="sepViewL"><strong class="labelStrong">Amount of Active Policies: </strong>{{BrokerDetailFinal[0].PolCount_Active}}
+          </div>
+          <div class="sepViewL"><strong class="labelStrong">Amount of Terminated Policies:
+            </strong>{{BrokerDetailFinal[0].PolCount_Term}}</div>
+          <div class="sepViewL"><strong class="labelStrong">Amount of Policies Past Due: </strong>{{PolCount_Due}}</div>
+          <br/><br/><br/><br/>
+          <div style="float: right;"><button class="btn btn-primary" type="button" (click)="CloseDetails()">Back</button></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <div>
+    <section class="form-horizontal">
+      <article class="content-center" style="width: 1000px !important;">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 style="text-align:left" [ngStyle]="{color: '#00579c'}">
+              <strong>Policy Information</strong>
+            </h5>
+            <div class="policyInfoGrid" style="width: 207%;">
+              <div class="dbGridWrapper" style="background: white;">
+                <div class="title">
+                  <h2>DBL/PFL BaseLine policy cancellation warning
+                    <a class="tooltipbig">
+                      <img alt="" src="../../../WebUtilities/assets/Images/icon_question_22.png"
+                        style="vertical-align: middle; margin-top: -5px" />
+                      <span>
+                        <img alt="" class="callout" src="../../../WebUtilities/assets/Images/popCallout.png" />
+                        This shows your current DBL policies and their premium payment/cancellation status. Policies
+                        that
+                        have
+                        already paid or are cancelled beyond the reinstatement period will not appear.
+                      </span>
+                    </a>
+                  </h2>
+                </div>
+                <div class="toprightLink" style="padding-top: 3px;">
+                  <label style="font-size: 11px;margin: 4px 22px 0 0;">{{CancelCount_Label}}</label>
+                  <a data-toggle="modal" data-target="#ViewAllCancellationPolicies" style='margin-right:16px'
+                     data-backdrop="static" data-keyboard="false" (click)="showPolicyCancellation">View All</a>
+                  <a (click)="showPolicyCancellation && exportToPdf('1')" class="printerIcon">Print as PDF</a>
+                  <a (click)="showPolicyCancellation && exportToExcel('1')" class="excelIcon">Export to Excel</a>
+                </div>
+
+                <div style="display: none">
+                  <div *ngIf="dvCancelWarning">
+                    <div id="cancelWarning">
+                      <h3>Cancellation Warning</h3>
+                      <p>
+                        Attention! Our records show that you have some policies were overdue or being cancelled.
+                        Pay now to maintain coverage and avoid possible non-compliance.
+                      </p>
+                      <a href="##" class="cWClose float_r">
+                        <img src="../../../WebUtilities/assets/Images/closeIcon1.png" alt="Close" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <table class="dbGridTable" style="border-style:None;width:100%;border-collapse:collapse;" border="1"
+                      cellspacing="0" cellpadding="0">
+                      <tr>
+                        <th>#</th>
+                        <th class="splitheader" align="center" colspan="2" scope="col">
+                          <table>
+                            <tbody>
+                              <tr>
+                                <th colspan="2">Severity Tier </th>
+                              </tr>
+                              <tr>
+                                <th>DBL</th>
+                                <th>PFL</th>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </th>
+                        <th style="width:70px;" *ngIf="bISGA">Broker #</th>
+                        <th>Policy #</th>
+                        <th>Policyholder Name</th>
+                        <th style="width:110px;">Phone #</th>
+                        <th style="width:70px;">Est # of Lives</th>
+                        <th style="width:70px;">Bill Mode</th>
+                        <th>Renewal Date</th>
+                        <th>Term Date</th>
+                        <th># Days left to Reinstate</th>
+                        <th style="width:90px;">Action</th>
+                      </tr>
+
+                      <ng-container *ngFor="let Broker of CancellationFinal.slice(0,5)">
+                        <tr *ngIf="showPolicyCancellation">
+                          <td>
+                            {{Broker.PolCancel_Count}}
+                          </td>
+                          <td *ngIf="Broker.SEVERITY == 1" class='cancelWring' style="width: 40px;">
+                            <div align="center"><span style='font-size: 28px; color: #ed1c24;'>&bull;</span></div>
+                          </td>
+                          <td *ngIf="Broker.SEVERITY == 2" class='dueWring' style="width: 40px;">
+                            <div align="center"><span style='font-size: 28px; color: #fdb943;'>&bull;</span></div>
+                          </td>
+                          <td *ngIf="Broker.SEVERITY == 3" class='renewWring' style="width: 40px;">
+                            <div align="center"><span style='font-size: 28px; color: #8dc63f;'>&bull;</span></div>
+                          </td>
+                          <td *ngIf="Broker.SEVERITY == 0" style="width: 40px;">
+                            ""
+                          </td>
+
+                          <td *ngIf="Broker.SEVERITYPFL == 1" class='cancelWring' style="width: 40px;">
+                            <div align="center"><span style='font-size: 28px; color: #ed1c24;'>&bull;</span></div>
+                          </td>
+                          <td *ngIf="Broker.SEVERITYPFL == 2" class='dueWring' style="width: 40px;">
+                            <div align="center"><span style='font-size: 28px; color: #fdb943;'>&bull;</span></div>
+                          </td>
+                          <td *ngIf="Broker.SEVERITYPFL == 3" class='renewWring' style="width: 40px;">
+                            <div align="center"><span style='font-size: 28px; color: #8dc63f;'>&bull;</span></div>
+                          </td>
+                          <td *ngIf="Broker.SEVERITYPFL == 0" style="width: 40px;">
+                          </td>
+                          <td *ngIf="bISGA">
+                            {{Broker.broker}}
+                          </td>
+                          <td>
+                            {{Broker.pono1}}
+                          </td>
+                          <td>
+                            {{Broker.pname}} {{Broker.pname1}}
+                          </td>
+                          <td style="width:110px;">
+                            {{Broker.ptelno}}
+                          </td>
+                          <td style="width:70px;">
+                            {{Broker.count_num}}
+                          </td>
+                          <td>
+                            {{Broker.bill_mode}}
+                          </td>
+                          <td>
+                            {{Broker.renewal_date}}
+                          </td>
+                          <td>
+                            {{Broker.termi_datee}}
+                          </td>
+                          <td>
+                            {{Broker.Dayslefttoreinstate}}
+                          </td>
+                          <td style="width:90px;">
+                            <a href="{{Broker.paymentURL}}" target="_blank" style="color: #c00;font-weight: bold;">pay now</a>
+                          </td>
+                        </tr>
+                      </ng-container>
+                      <tr *ngIf="!showPolicyCancellation">
+                        <td colspan="12" style="padding-left:10px;padding-right:3px;font-size: 10px;color: #474747;">
+                          Great! All your clients seem to be current as of now. This may change on a daily basis, so
+                          please check back frequently to assure your clients don't risk losing their DBL coverage!
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <div>
+                    <table width="100%" cellspacing="0" cellpadding="0" class="grid_table_inr2">
+                      <tr>
+                        <td width="2%" style="padding-top: 2px; vertical-align: top; font-size: 32px; color: #ed1c24;">
+                          &bull;
+                        </td>
+                        <td width="30%">Policy is cancelled, pay now to maintain coverage and avoid possible
+                          non-compliance
+                        </td>
+                        <td width="2%" valign="top"
+                          style="padding-top: 2px; vertical-align: top; font-size: 32px; color: #fdb943;">&bull;
+                        </td>
+                        <td width="28%">Policy is past due, pay now to maintain coverage
+                        </td>
+                        <td width="2%" valign="top"
+                          style="padding-top: 2px;vertical-align: top; font-size: 32px; color: #8dc63f;">&bull;
+                        </td>
+                        <td width="35%">Policy renewal is coming up, pay now to maintain coverage
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- second grid start -->
+            <div class="policyInfoGrid" style="width: 207%;">
+              <div class="dbGridWrapper" style="background: white;">
+                <div class="title">
+                  <h2>DBL/PFL BaseLine recent application submissions
+                    <a class="tooltipbig">
+                      <img alt="" src="../../../WebUtilities/assets/Images/icon_question_22.png"
+                        style="vertical-align: middle; margin-top: -5px" />
+                      <span>
+                        <img alt="" class="callout" src="../../../WebUtilities/assets/Images/popCallout.png" />
+                        View your recent online application submissions for the past 3 months
+                      </span>
+                    </a>
+                  </h2>
+                </div>
+                <div class="toprightLink" style="padding-top: 3px;">
+                  <label style="font-size: 11px;margin: 4px 22px 0 0;">{{SubmissionCount_Label}}</label>
+                  <a data-toggle="modal" data-target="#ViewAllRecentSubPolicies" style='margin-right:16px' ng-click="showRecentSubmission"
+                    data-backdrop="static" data-keyboard="false">View All</a>
+                  <a (click)="showRecentSubmission && exportToPdf('2')" class="printerIcon">Print as PDF
+                  </a>
+                  <a (click)="showRecentSubmission && exportToExcel('2')" class="excelIcon">Export to Excel</a>
+                </div>
+
+                <!-- <div style="display: none">
+                  <div *ngIf="dvCancelWarning">
+                    <div id="cancelWarning">
+                      <h3>Cancellation Warning</h3>
+                      <p>
+                        Attention! Our records show that you have some policies were overdue or being cancelled.
+                        Pay now to maintain coverage and avoid possible non-compliance.
+                      </p>
+                      <a href="##" class="cWClose float_r">
+                        <img src="../images/closeIcon1.png" alt="Close" />
+                      </a>
+                    </div>
+                  </div>
+                </div> -->
+                <div>
+                  <div>
+                    <table class="dbGridTable" style="border-style:None;width:100%;border-collapse:collapse;" border="1"
+                      cellspacing="0" cellpadding="0">
+                      <tr>
+                        <th>#</th>
+                        <th>
+                          App #
+                        </th>
+                        <th>Submitted By</th>
+                        <th>Submitted On</th>
+                        <th>Status</th>
+                        <th>Policy #</th>
+                        <th>Effective Date</th>
+                        <th>Policyholder Name</th>
+                        <th>Federal ID #</th>
+                        <th>Print</th>
+                      </tr>
+
+                      <ng-container *ngFor="let Broker of RecentSubFinal.slice(0,5)">
+                        <tr *ngIf="showRecentSubmission">
+                          <td>
+                            {{Broker.PolCancel_Count}}
+                          </td>
+                          <td>
+                            {{Broker.OLAPPNO}}
+                          </td>
+                          <td>
+                            {{Broker.SUBMITTEDBY}}
+                          </td>
+                          <td style="width:110px;">
+                            {{Broker.DATESUBMITTED}}
+                          </td>
+                          <td style="width:70px;">
+                            {{Broker.STATUS}}
+                          </td>
+                          <td>
+                            {{Broker.POLNO}}
+                          </td>
+                          <td>
+                            {{Broker.EFFDT}}
+                          </td>
+                          <td>
+                            {{Broker.POLNAME1}} {{Broker.POLNAME2}}
+                          </td>
+                          <td>
+                            {{Broker.FEDIDNUM}}
+                          </td>
+                          <td style="width:90px;">
+                            <a href="{{Broker.printDB1201URL}}" target="_blank" style="color: #c00;font-weight: bold;">{{Broker.PrintDB120Link}}</a>
+                          </td>
+                        </tr>
+                      </ng-container>
+                      <tr *ngIf="noNewBusinessSub">	
+                        <td colspan="10" style="padding-left:10px;padding-right:3px;color:#474747;font-size:11px;">	
+                          There has not been any new business submitted recently.	
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+
+
+  <!-- POPUPS-->
+  <!-- All DBL/PFL BaseLine policy cancellation warning -- start-->
+  <div class="modal fade" id="ViewAllCancellationPolicies" role="dialog"
+    aria-labelledby="ViewAllCancellationPoliciesTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Policy Information</h5>
+        </div>
+        <div class="modal-body">
+          <div class="title">
+            <h2 style="font-size: 15px;">DBL/PFL BaseLine policy cancellation warning
+              <a class="tooltipbig">
+                <img alt="" src="../../../WebUtilities/assets/Images/icon_question_22.png"
+                  style="vertical-align: middle; margin-top: -5px" />
+                <span>
+                  <img alt="" class="callout" src="../../../WebUtilities/assets/Images/popCallout.png" />
+                  This shows your current DBL policies and their premium payment/cancellation status. Policies
+                  that
+                  have
+                  already paid or are cancelled beyond the reinstatement period will not appear.
+                </span>
+              </a>
+            </h2>
+          </div>
+          <div class="toprightLinkPopup">
+            <label style="font-size: 11px;margin: 4px 22px 0 0;">{{CancelCount_Label_Popup}}</label>
+            <a (click)="showPolicyCancellation && exportToPdf('1')" style=" font-size: 11px;" class="printerIcon">Print
+              as PDF</a>
+            <a (click)="showPolicyCancellation && exportToExcel('1')" style="font-size: 11px; margin: 17px;" class="excelIcon">Export
+              to Excel</a>
+          </div>
+          <form #userForm="ngForm">
+            <div class="form-group container-fluid">
+              <div>
+                <div class="underScrolling">
+                  <table id="tbPolicyCancellation" class="dbGridTable"
+                    style="border-style:None;width:100%;border-collapse:collapse;" border="1" cellspacing="0"
+                    cellpadding="0">
+                    <tr>
+                      <th>#</th>
+                      <th class="splitheader" align="center" colspan="2" scope="col">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <th colspan="2">Severity Tier </th>
+                            </tr>
+                            <tr>
+                              <th>DBL</th>
+                              <th>PFL</th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </th>
+                      <th *ngIf="bISGA">Broker #</th>
+                      <th>Policy #</th>
+                      <th>Policyholder Name</th>
+                      <th style="width:110px;">Phone #</th>
+                      <th style="width:70px;">Est # of Lives</th>
+                      <th>Bill Mode</th>
+                      <th>Renewal Date</th>
+                      <th>Term Date</th>
+                      <th># Days left to Reinstate</th>
+                      <th style="width:80px;">Action</th>
+                    </tr>
+
+                    <ng-container *ngFor="let Broker of CancellationFinal">
+                      <tr *ngIf="showPolicyCancellation">
+                        <td>
+                          {{Broker.PolCancel_Count}}
+                        </td>
+                        <td *ngIf="Broker.SEVERITY == 1" class='cancelWring' style="width: 40px;">
+                          <div align="center"><span style='font-size: 28px; color: #ed1c24;'>&bull;</span></div>
+                        </td>
+                        <td *ngIf="Broker.SEVERITY == 2" class='dueWring' style="width: 40px;">
+                          <div align="center"><span style='font-size: 28px; color: #fdb943;'>&bull;</span></div>
+                        </td>
+                        <td *ngIf="Broker.SEVERITY == 3" class='renewWring' style="width: 40px;">
+                          <div align="center"><span style='font-size: 28px; color: #8dc63f;'>&bull;</span></div>
+                        </td>
+                        <td *ngIf="Broker.SEVERITY == 0" style="width: 40px;">
+                          ""
+                        </td>
+
+                        <td *ngIf="Broker.SEVERITYPFL == 1" class='cancelWring' style="width: 40px;">
+                          <div align="center"><span style='font-size: 28px; color: #ed1c24;'>&bull;</span></div>
+                        </td>
+                        <td *ngIf="Broker.SEVERITYPFL == 2" class='dueWring' style="width: 40px;">
+                          <div align="center"><span style='font-size: 28px; color: #fdb943;'>&bull;</span></div>
+                        </td>
+                        <td *ngIf="Broker.SEVERITYPFL == 3" class='renewWring' style="width: 40px;">
+                          <div align="center"><span style='font-size: 28px; color: #8dc63f;'>&bull;</span></div>
+                        </td>
+                        <td *ngIf="Broker.SEVERITYPFL == 0" style="width: 40px;">
+                        </td>
+                        <td *ngIf="bISGA" style="width:70px;">
+                          {{Broker.broker}}
+                        </td>
+                        <td>
+                          {{Broker.pono1}}
+                        </td>
+                        <td>
+                          {{Broker.pname}} {{Broker.pname1}}
+                        </td>
+                        <td style="width:110px;">
+                          {{Broker.ptelno}}
+                        </td>
+                        <td style="width:60px;">
+                          {{Broker.count_num}}
+                        </td>
+                        <td>
+                          {{Broker.bill_mode}}
+                        </td>
+                        <td>
+                          {{Broker.renewal_date}}
+                        </td>
+                        <td>
+                          {{Broker.termi_datee}}
+                        </td>
+                        <td>
+                          {{Broker.Dayslefttoreinstate}}
+                        </td>
+                        <td style="width:80px;">
+                          <a href="{{Broker.paymentURL}}" target="_blank" style="color: #c00;font-weight: bold;">pay now</a>
+                        </td>
+                      </tr>
+                    </ng-container>
+                    <tr *ngIf="!showPolicyCancellation">
+                      <td colspan="12" style="padding-left:10px;padding-right:3px;font-size: 10px;color: #474747;">
+                        Great! All your clients seem to be current as of now. This may change on a daily basis, so
+                        please check back frequently to assure your clients don't risk losing their DBL coverage!
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div>
+                  <table width="100%" cellspacing="0" cellpadding="0" class="grid_table_inr2">
+                    <tr>
+                      <td width="2%" style="padding-top: 2px; vertical-align: top; font-size: 32px; color: #ed1c24;">
+                        &bull;
+                      </td>
+                      <td width="30%">Policy is cancelled, pay now to maintain coverage and avoid possible
+                        non-compliance
+                      </td>
+                      <td width="2%" valign="top"
+                        style="padding-top: 2px; vertical-align: top; font-size: 32px; color: #fdb943;">&bull;
+                      </td>
+                      <td width="28%">Policy is past due, pay now to maintain coverage
+                      </td>
+                      <td width="2%" valign="top"
+                        style="padding-top: 2px;vertical-align: top; font-size: 32px; color: #8dc63f;">&bull;
+                      </td>
+                      <td width="35%">Policy renewal is coming up, pay now to maintain coverage
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- All DBL/PFL BaseLine policy cancellation warning  close-->
+
+
+
+  <!-- All DBL/PFL BaseLine recent application submissions -- start-->
+  <div class="modal fade" id="ViewAllRecentSubPolicies" role="dialog" aria-labelledby="ViewAllRecentSubPoliciesTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Policy Information</h5>
+        </div>
+        <div class="modal-body">
+          <div class="title">
+            <h2 style="font-size: 15px;">DBL/PFL BaseLine recent application submissions
+              <a class="tooltipbig">
+                <img alt="" src="../../../WebUtilities/assets/Images/icon_question_22.png"
+                  style="vertical-align: middle; margin-top: -5px" />
+                <span>
+                  <img alt="" class="callout" src="../../../WebUtilities/assets/Images/popCallout.png" />
+                  View your recent online application submissions for the past 3 months
+                </span>
+              </a>
+            </h2>
+          </div>
+          <div class="toprightLinkPopup">
+            <label style="font-size: 11px;margin: 4px 22px 0 0;">{{SubmissionCount_Label_Popup}}</label>
+            <a (click)="showRecentSubmission && exportToPdf('2')" style="font-size: 11px;" class="printerIcon">Print as
+              PDF</a>
+            <a (click)="showRecentSubmission && exportToExcel('2')" style="font-size: 11px; margin: 17px;" class="excelIcon">Export to
+              Excel</a>
+          </div>
+          <form #userForm="ngForm">
+            <div class="form-group container-fluid">
+              <div>
+                <div class="underScrolling">
+                  <table class="dbGridTable" style="border-style:None;width:100%;border-collapse:collapse;" border="1"
+                    cellspacing="0" cellpadding="0">
+                    <tr>
+                      <th>#</th>
+                      <th>
+                        App #
+                      </th>
+                      <th>Submitted By</th>
+                      <th>Submitted On</th>
+                      <th>Status</th>
+                      <th>Policy #</th>
+                      <th>Effective Date</th>
+                      <th>Policyholder Name</th>
+                      <th>Federal ID #</th>
+                      <th>Print</th>
+                    </tr>
+
+                    <ng-container *ngFor="let Broker of RecentSubFinal">
+                      <tr *ngIf="showRecentSubmission">
+                        <td>
+                          {{Broker.PolCancel_Count}}
+                        </td>
+                        <td>
+                          {{Broker.OLAPPNO}}
+                        </td>
+                        <td>
+                          {{Broker.SUBMITTEDBY}}
+                        </td>
+                        <td style="width:110px;">
+                          {{Broker.DATESUBMITTED}}
+                        </td>
+                        <td style="width:70px;">
+                          {{Broker.STATUS}}
+                        </td>
+                        <td>
+                          {{Broker.POLNO}}
+                        </td>
+                        <td>
+                          {{Broker.EFFDT}}
+                        </td>
+                        <td>
+                          {{Broker.POLNAME1}} {{Broker.POLNAME2}}
+                        </td>
+                        <td>
+                          {{Broker.FEDIDNUM}}
+                        </td>
+                        <td style="width:90px;">
+                          <a href="{{Broker.printDB1201URL}}" target="_blank" style="color: #c00;font-weight: bold;">{{Broker.PrintDB120Link}}</a>
+                        </td>
+                      </tr>
+                    </ng-container>
+                    <tr *ngIf="noNewBusinessSub">	
+                      <td colspan="10" style="padding-left:10px;padding-right:3px;color:#474747;font-size:11px;">	
+                        There has not been any new business submitted recently.	
+                      </td>	
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- All DBL/PFL BaseLine recent application submissions  close-->
+
+</div>

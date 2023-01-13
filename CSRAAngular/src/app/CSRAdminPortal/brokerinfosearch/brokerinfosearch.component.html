@@ -1,0 +1,57 @@
+<head>
+  <title>WebUtilities :: Broker Information Search</title>
+</head>
+<section class="form-horizontal">
+  <article class="main-heading">
+    <h2>BROKER INFORMATION SEARCH</h2>
+  </article>
+  <article class="content-center">
+    <form #userForm="ngForm" (keyup.enter)="getBrokerInfoBySearch()">
+      <div class="alert alert-danger form-group container-fluid" *ngIf="error">Please provide at least one search criteria.</div>
+      <div class="form-group container-fluid" [class.has-error]="BrokerNo.Invalid || PhoneNo.Invalid">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-6 p-l-0">
+                <label>Broker Number</label>
+                <input type="text" autofocus class="form-control" name="BrokerNo" #BrokerNo="ngModel" [dropSpecialCharacters]="false"
+                    mask="0000-0000" maxlength="9" minlength="9" autocomplete="off" [(ngModel)]="BrokerNumber"
+                    (keydown)="OnKeyPress($event,'Bkrno')" />
+                <small>
+                    <span class="text-danger" *ngIf="invalidBNo && BrokerNo.errors?.minlength">Invalid</span>
+                </small>
+            </div>
+            <div class="col-md-6 col-6 p-r-0">
+              <label>Federal ID #</label>
+              <input type="text" name="FederalId" #FederalId="ngModel" maxlength="15" autocomplete="off" [(ngModel)]="Federalid"
+              mask="000000000" class="form-control" (keydown)="OnKeyPress($event,'federalid')" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-6 p-l-0">
+              <label>Broker Name</label>
+              <input type="text" name="BrokerName" #PolicyNo="ngModel" maxlength="250" autocomplete="off" [(ngModel)]="BrokerName"
+              oninput="this.value = this.value.toUpperCase()" class="form-control" (keydown)="OnKeyPress($event,'Bkrname')" />
+            </div>
+            <div class="col-md-6 col-6 p-r-0">
+              <label>Phone Number</label>
+              <input type="text" autofocus class="form-control" name="PhoneNo" #PhoneNo="ngModel" [dropSpecialCharacters]="false"
+                    mask="000-000-0000" maxlength="12" minlength="12" autocomplete="off" [(ngModel)]="Phno"
+                    (keydown)="OnKeyPress($event,'Phno')" />
+                <small>
+                    <span class="text-danger" *ngIf="invalidPhno && PhoneNo.errors?.minlength">Invalid</span>
+                </small>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div align="center">
+          <button class="btn btn-primary btn btn-default" style='margin-right:16px' type="button" [routerLink]="['/home']">Back</button>
+          <button id="Search" class="btn btn-primary" type="button" (click)="getBrokerInfoBySearch()">Search</button><br />
+        </div>
+      </div>
+    </form>
+  </article>
+</section>

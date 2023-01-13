@@ -1,0 +1,149 @@
+<head>
+  <title>WebUtilities :: Claim Information Search</title>
+  <style>
+  .custom_date .dp-material .dp-picker-input{
+        font-size: 15px !important;
+        padding: 15px 10px !important;
+        font-weight: 400 !important;
+        color: #495057 !important;
+      }
+  
+  </style>
+  <script src="../../../ng-pattern-restrict.min.js"></script>
+</head>
+<section class="form-horizontal">
+  <article class="main-heading">
+    <h2>SEARCH FOR CLAIM</h2>
+  </article>
+  <article class="content-center">
+    <form  #userForm="ngForm" (keyup.enter)="getClaimInfoBySearch()">
+      <div class="alert alert-danger form-group container-fluid" *ngIf="error">Please provide at least one search criteria.</div>
+        <div class="alert alert-danger form-group container-fluid" *ngIf="errorForMainFields">Please provide at least one from the below highlighted.</div>
+        <div class="form-group container-fluid" >
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-6 p-l-0">
+                <label>Claim #</label>
+                <input type="text" (keyup)="onKeydown($event)" name="Claim"  maxlength="15" autocomplete="off" [(ngModel)]="Claim"
+                  class="form-control {{dynamicBorder}}" oninput="this.value = this.value.toUpperCase()" pattern="^[A-Za-z0-9]+$" ng-pattern-restrict />
+            </div>
+            <div class="col-md-6 col-6 p-r-0">
+              <label>Social Security #</label>
+              <input type="text" (keyup)="onKeydown($event)" name="SocialSecurty" mask="000000000" minlength="7"  maxlength="9" autocomplete="off" [(ngModel)]="SocialSecurty"
+                  class="form-control {{dynamicBorder}}" oninput="this.value = this.value.toUpperCase()" />              
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-6 p-l-0">                
+                <label>First Name </label>
+                <input type="text" (keyup)="onKeydown($event)" name="FirstName"  maxlength="41" autocomplete="off" [(ngModel)]="FirstName"
+                  class="form-control {{dynamicBorder}}" oninput="this.value = this.value.toUpperCase()" />
+            </div>
+            <div class="col-md-6 col-6 p-r-0">
+              <label>Last Name </label>
+              <input type="text" (keyup)="onKeydown($event)" name="LastName"  maxlength="41" autocomplete="off" [(ngModel)]="LastName"
+                  class="form-control {{dynamicBorder}}" oninput="this.value = this.value.toUpperCase()" />              
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 col-6 p-l-0">                
+                <label>Address </label>
+                <input type="text" name="Address"  maxlength="50" autocomplete="off" [(ngModel)]="Address"
+                  class="form-control" oninput="this.value = this.value.toUpperCase()" />
+            </div>
+            <div class="col-md-4 col-6">
+              <label>City </label>
+              <input type="text" name="City"  maxlength="30" autocomplete="off" [(ngModel)]="City"
+                  class="form-control" oninput="this.value = this.value.toUpperCase()" />              
+            </div>
+            <div class="col-md-4 col-6 p-r-0">
+                <label>State </label>
+                  
+        <select class="custom-select form-control" [(ngModel)]="ddlState" name="ddlStatus">
+            <option value="">--Select--</option>
+          <option *ngFor="let state of StatesDetailFinal"  >{{ state.statecode }}</option>                      
+        </select>
+
+        <!-- <select name="state" id="state" [(ngModel)]="state.statecode" class="form-control">
+          <option disabled value=undefined>--Select--</option>
+          <option *ngFor="let state of StatesDetailFinal" [ngValue]="state">{{state.statecode}}</option>
+        </select> -->
+
+              </div>
+          </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+              <div class="col-md-4 col-6 p-l-0">                
+                  <label>Check # </label>
+                  <input type="text"  (keyup)="onKeydown($event)" name="Check"  maxlength="10" autocomplete="off" [(ngModel)]="Check"
+                    class="form-control {{dynamicBorder}}" oninput="this.value = this.value.toUpperCase()"/>
+              </div>
+              <div class="col-md-4 col-6  ">
+                  <label>Status </label>
+              
+
+                  <select class="custom-select form-control" [(ngModel)]="ddlStatus" name="ddlStatus">
+                    <option value="">--Select--</option>
+                    <option value="0">All</option>
+                    <option value="1">Active</option>
+                    <option value="I">Terminated</option> 
+                  </select>
+
+              </div>
+              <div class="col-md-4 col-6 p-r-0">
+                  <label>DOB </label>
+                      <div class="col-12 text-center dp-input p-l-0 custom_date">
+                          <!-- <dp-date-picker style="background: #fff;height: 37px;border: 1px solid #ced4da;" name="cal1" #dpcalCalls align="center" [theme]="'dp-material'"
+                              [(ngModel)]="selectedDate" (onChange)="dateSelection_Calendar($event,1)"
+                              [config]="dateConfig">
+                          </dp-date-picker>
+                          <img src="assets/Images/cal.gif" (click)="dateOpen(1);" /> -->
+                          <!-- <mat-form-field>
+                            <input matInput [matDatepicker]="picker" readonly [(ngModel)]="selectedDate" [ngModelOptions]="{standalone: true}">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field> -->
+
+                          <mat-form-field>
+                            <input matInput [matDatepicker]="picker" readonly [formControl]="serializedDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+
+                      </div>
+                </div>
+                
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: -18px !important;">
+              <div class="row">
+                <div class="col-md-6 col-6 p-l-0">
+                    <label>Policy #</label>
+                    <input type="text" (keyup)="onKeydown($event)" name="Policy"  maxlength="9" autocomplete="off" [(ngModel)]="Policy"
+                      class="form-control {{dynamicBorder}}" oninput="this.value = this.value.toUpperCase()" />
+                </div>
+                <div class="col-md-6 col-6 p-r-0">
+                  <label>Policy Name </label>
+                  <input type="text" (keyup)="onKeydown($event)" name="PolicyName"  maxlength="40" autocomplete="off" [(ngModel)]="PolicyName"
+                      class="form-control {{dynamicBorder}}" oninput="this.value = this.value.toUpperCase()"/>              
+                </div>
+              </div>
+            </div>
+            <div align="center" class="Exact_txt">
+                <input type="radio" id="id_Exact" name="Exact" [checked]="Radiovalue"  (click)="onRadioClick()" >
+                 Exact Match
+            </div>
+        <div class="clearfix"></div>
+        <div align="center">
+          <button id="Clear" class="btn btn-primary" type="button" (click)="clearClaimInfo()" style='margin-right:16px' >Clear</button>
+          <button id="Search" class="btn btn-primary" type="button" (click)="getClaimInfoBySearch()">Search</button><br />
+        </div>
+      </div>
+    </form>
+  </article>
+</section> 

@@ -1,0 +1,73 @@
+<head><title>WebUtilities :: Employer Account Search Results</title></head>
+<div *ngIf="norecords">
+  <section class="form-horizontal">
+    <article class="main-heading">
+      <h2>EMPLOYER ACCOUNT SEARCH RESULTS</h2>
+    </article>
+    <article class="content-center">
+      <div class="alert alert-danger box-msg" role="alert">
+        <strong>No records found!</strong>
+      </div>
+      <br />
+      <div align="center">
+        <button class="btn btn-primary" type="button" [routerLink]="['/employersearch']">Back</button>
+      </div>
+    </article>
+  </section>
+</div>
+
+<div *ngIf="records">
+  <section class="form-horizontal">
+    <article class="main-heading">
+      <h2>EMPLOYER ACCOUNT SEARCH RESULTS</h2>
+    </article>
+    <article class="content-center">
+      <div class="table-responsive">
+      <table align="center" style="text-align: center;" class="EmployerDetail table table-bordered">
+        <tr>
+          <th>
+            User Type
+          </th>
+          <th>
+            User IDs:
+          </th>
+          <th>
+           Federal ID#
+          </th>
+          <th>
+            Policy#
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            Action
+         </th>
+        </tr>
+        <tr *ngFor="let Employer of EmployerDetailFinal">
+          <td *ngIf="Employer.ID_EmployerAdmin==0">Admin</td>
+          <td *ngIf="Employer.ID_EmployerAdmin!=0">Sub-Admin</td>
+          <td>{{Employer.UserID}}</td>
+          <td>{{Employer.Fedral_TaxIDNumber}}</td>
+          <td>{{Employer.PolicyNumber}}</td>
+          <td>{{Employer.ActiveText}}</td>
+          <td *ngIf="isAdminInActive==1" style="font-style:italic;" ><a [routerLink]="['/employerupdate', Employer.ID_LoginEnc ]">Update User Account</a></td>             
+         
+          
+          <td *ngIf="isAdminInActive==0 && Employer.Flag_Active==0 && Employer.ID_EmployerAdmin==0" style="font-style:italic;" ><a [routerLink]="['/employerupdate', Employer.ID_LoginEnc ]">Update User Account</a></td>    
+         
+          <td *ngIf="isAdminInActive==0 && Employer.Flag_Active==0 && Employer.ID_EmployerAdmin!=0" style="font-style:italic;" >Update User Account</td>    
+         
+        </tr>
+      </table>
+    </div>
+     
+
+      <!--button: close-->
+      <div align="center" class="m-t-15">
+        <button class="btn btn-primary btn btn-default" type="button" [routerLink]="['/employersearch']">Close</button>
+      </div>
+
+    </article>
+  </section>
+</div>

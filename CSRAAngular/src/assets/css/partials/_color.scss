@@ -1,0 +1,84 @@
+
+/*All Colors*/
+$primary-color:#00579c;
+$dark-grey:#202020;
+$color-yellow: #efb935;
+$color-light-purple: #5b52ab;
+$color-purple: #5b52ab;
+$color-orange: #dd7631;
+$color-light-blue: #3d63de;
+$color-green: #289a8b;
+$coor-black: #333333;
+$floro-green:#e2f563;
+$color-white:#fff;
+$color-black:#333;
+$color-light-grey:#8f8f8f;
+$color-dim-gray:#f5f5f5;
+$color-gray: #efefef;
+$color-peach: #faafaf;
+$color-skyblue-light: #b2e4f3;
+$color-purple-light:#d6d1ff;
+$color-orange-light: #ffb786;
+$color-green-light:#b6f5a1;
+$color-grey-light: #b4c8e0;
+$color-purple-light2: #92a5ff;
+$color-orange-dull: #f7de97;
+$color-pista-bright:#b3f3d2;
+
+.green-bg{
+ background-color:$color-green;
+}
+.yellow-bg{
+ background-color:$color-yellow;
+}
+.purple-bg{
+ background-color:$color-purple;
+}
+.orange-bg{
+ background-color:$color-orange;
+}
+.light-blue{
+ background-color:$color-light-blue;
+}
+.floro-green{
+	background-color: $floro-green;
+}
+
+.skyblue-bg-light{
+	background-color: $color-skyblue-light;
+}
+
+.purple-bg-light{
+	background-color: $color-purple-light;
+}
+
+.orange-bg-light{
+	background-color:$color-orange-light;
+   }
+
+.green-bg-light{
+	background-color: $color-green-light;
+}
+.color-grey-light{
+	background-color: $color-grey-light;
+}
+
+.color-purple-light2{
+	background-color:$color-purple-light2;
+}
+
+.peach-shade{
+	background-color: $color-peach;
+}
+.white{
+	color:$color-white;
+}
+.light-gray{
+	color:$color-light-grey;
+}
+.color-orange-dull{
+	background-color: $color-orange-dull;
+}
+.color-pista-bright{
+	background-color: $color-pista-bright;
+}

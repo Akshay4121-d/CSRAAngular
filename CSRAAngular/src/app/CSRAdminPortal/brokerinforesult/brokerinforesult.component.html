@@ -1,0 +1,64 @@
+<head><title>WebUtilities :: Broker Information Search Results</title></head>
+<div *ngIf="norecords">
+  <section class="form-horizontal">
+    <article class="main-heading">
+      <h2>BROKER INFORMATION SEARCH RESULTS</h2>
+    </article>
+    <article class="content-center">
+      <div class="alert alert-danger box-msg" role="alert">
+        <strong>No records found!</strong>
+      </div>
+      <br />
+      <div align="center">
+        <button class="btn btn-primary" type="button" [routerLink]="['/brokerinfosearch']">Back</button>
+      </div>
+    </article>
+  </section>
+</div>
+
+<div *ngIf="records">
+  <section class="form-horizontal">
+    <article class="main-heading">
+      <h2>BROKER INFORMATION SEARCH RESULTS</h2>
+    </article>
+    <article class="content-center">
+      <div class="table-responsive">
+      <table align="center" style="text-align: center;" class="BrokerDetail table table-bordered">
+        <tr>
+          <th style="width: 105px;">
+            Broker #
+          </th>
+          <th>
+           Broker Name
+          </th>
+          <th style="width: 130px;">
+            Phone #
+          </th>
+          <th style="width: 105px;">
+            FEIN #
+          </th>
+          <th style="width: 115px;">
+            Action
+         </th>
+        </tr>
+        <tr *ngFor="let Broker of BrokerDetailFinal">
+          <td>{{Broker.BrokerNumber}}</td>
+          <td>{{Broker.BrokerName}}</td>
+          <td>{{Broker.PhoneNumber}}</td>
+          <td>{{Broker.Fein}}</td>
+          <!-- <td style="font-style:italic;"><a [routerLink]="['/brokerinfodetailed', Broker.ID_BrokerEnc ]">Select Broker</a></td> -->
+          <td style="font-style:italic;"><a [routerLink]="['/brokerinfodetailed', Broker.BrokerNumberEnc ]">Select Broker</a></td>
+
+        </tr>
+      </table>
+    </div>
+     
+
+      <!--button: close-->
+      <div align="center" class="m-t-15">
+        <button class="btn btn-primary btn btn-default" type="button" [routerLink]="['/brokerinfosearch']">Close</button>
+      </div>
+
+    </article>
+  </section>
+</div>

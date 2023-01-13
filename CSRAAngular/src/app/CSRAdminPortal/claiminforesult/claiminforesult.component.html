@@ -1,0 +1,76 @@
+<head>
+    <title>WebUtilities :: Claim Account Search Results</title>
+</head>
+<div *ngIf="norecords">
+    <section class="form-horizontal">
+        <article class="main-heading">
+            <h2>CLAIM ACCOUNT SEARCH RESULTS</h2>
+        </article>
+        <article class="content-center">
+            <div class="alert alert-danger box-msg" role="alert">
+                <strong>No records found!</strong>
+            </div>
+            <br />
+            <div align="center">
+                <!-- <button class="btn btn-primary" type="button" [routerLink]="['/claiminfosearch']">Back</button> -->
+                <button class="btn btn-primary" type="button" (click)="returnSearch()">Back</button>
+            </div>
+        </article>
+    </section>
+</div>
+
+<div *ngIf="records">
+    <section class="form-horizontal">
+        <article class="main-heading">
+            <h2>CLAIM ACCOUNT SEARCH RESULTS</h2>
+        </article>
+        <div class="returnToBack">
+            <button class="btn btn-primary" type="button" (click)="returnSearch()" >Return To Search</button>
+        </div>
+        <article class="content-center">
+            <div class="table-responsive">
+
+                <table matSort (matSortChange)="sortData($event)" align="center" width="100%"
+                    class="ClaimResultDetailFinal table table-bordered table-fixed" border="1" frame="void"
+                    rules="rows">
+                    <thead>
+                        <tr>
+                            <th width="110px" mat-sort-header="Claim">Claim #</th>
+                            <th width="110px" mat-sort-header="FirstName">First Name</th>
+                            <th width="110px" mat-sort-header="LastName">Last Name</th>
+                            <th [hidden]="hideSSN == false" width="110px" mat-sort-header="SSN">SSN</th>
+                            <th [hidden]="hideAddress == false" width="110px" mat-sort-header="Address">Address</th>
+                            <th [hidden]="hideCity == false" width="110px" mat-sort-header="City">City</th>
+                            <th [hidden]="hideState == false" width="110px" mat-sort-header="State">State</th>
+                            <th [hidden]="hideCheckno == false" width="110px" mat-sort-header="Checkno">Check#</th>
+                            <th [hidden]="hideStatus == false" width="110px" mat-sort-header="Status">Status</th>
+                            <th [hidden]="hideDOB == false" width="110px" mat-sort-header="DOB">DOB</th>
+                            <th [hidden]="hidePolicyno == false" width="110px" mat-sort-header="Policyno">Policy#</th>
+                            <th [hidden]="hidePolicyname == false" width="110px" mat-sort-header="Policyname">Policy Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let claim of sortedData" (click)="selectClaim(claim.Claim)">
+                            <td width="110px">{{claim.Claim}}</td>
+                            <td width="110px">{{claim.FirstName}}</td>
+                            <td width="110px">{{claim.LastName}}</td>
+                            <td [hidden]="hideSSN == false" width="110px">{{claim.SSN}}</td>
+                            <td [hidden]="hideAddress == false" width="110px">{{claim.Address}}</td>
+                            <td [hidden]="hideCity == false" width="110px">{{claim.City}}</td>
+                            <td [hidden]="hideState == false" width="110px" >{{claim.State}}</td>
+                            <td [hidden]="hideCheckno == false" width="110px">{{claim.Checkno}}</td>
+                            <td [hidden]="hideStatus == false" width="110px">{{claim.Status}}</td>
+                            <td [hidden]="hideDOB == false" width="110px">{{claim.DOB}}</td>
+                            <td [hidden]="hidePolicyno == false" width="110px" >{{claim.Policyno}}</td>
+                            <td [hidden]="hidePolicyname == false" width="110px" >{{claim.Policyname}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div align="center">
+
+
+            </div>
+        </article>
+    </section>
+</div>

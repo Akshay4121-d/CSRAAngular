@@ -1,0 +1,42 @@
+.table{
+    td, th{
+        padding:.35em!important;
+    }
+}
+
+.spaceBtwBtns{
+    margin-right:7px
+}
+
+.maxwidthDialouge{
+    max-width: 840px;
+}
+
+.popupTheme {td{
+    color: #2f2f2f !important;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    border-right: 1px solid #ddd !important;
+    //line-height: 22px !important;
+    padding-left: 11px !important;
+    padding-right: 11px !important;
+    font-family: sans-serif;
+}
+}
+
+.table-responsive {
+    max-height: 335px;
+    overflow: auto;
+    border: 1px solid #ccc;
+  }
+
+  .noteLink{
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+  }
+
+  .noteLink a:hover {
+    text-decoration: underline;
+    color: #c00;
+}

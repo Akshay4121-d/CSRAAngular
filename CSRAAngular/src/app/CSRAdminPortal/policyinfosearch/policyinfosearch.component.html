@@ -1,0 +1,99 @@
+<head>
+  <title>WebUtilities :: Policy Information Search</title>
+
+  <script src="../../../ng-pattern-restrict.min.js"></script>
+</head>
+<section class="form-horizontal">
+  <article class="main-heading">
+    <h2>SEARCH FOR POLICY</h2>
+  </article>
+  <article class="content-center">
+    <form #userForm="ngForm" (keyup.enter)="getPolicyInfoBySearch()">
+      <div class="alert alert-danger form-group container-fluid" *ngIf="error">Please provide at least one search
+        criteria.</div>
+      <div class="alert alert-danger form-group container-fluid" *ngIf="errorForMainFields">Please provide at least one
+        from the below highlighted.</div>
+        <div class="alert alert-danger form-group container-fluid" *ngIf="BrokernoInvalid">Broker # is not valid.</div>
+      <div class="form-group container-fluid">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-6 p-l-0">
+              <label>Policy #</label>
+              <input type="text" maxlength="9" (keyup)="onKeydown($event)" name="Policyno" maxlength="9" autocomplete="off"
+                [(ngModel)]="Policyno" class="form-control {{dynamicBorder}}"
+                oninput="this.value = this.value.toUpperCase()" />
+            </div>
+            <div class="col-md-6 col-6 p-r-0">
+              <label>Policy Name </label>
+              <input type="text" maxlength="120" (keyup)="onKeydown($event)" name="PolicyName" maxlength="40" autocomplete="off"
+                [(ngModel)]="PolicyName" class="form-control {{dynamicBorder}}"
+                oninput="this.value = this.value.toUpperCase()" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 col-6 p-l-0">
+              <label>Federal ID # </label>
+              <input type="text" maxlength="20" (keyup)="onKeydown($event)" name="Federalid" maxlength="10" autocomplete="off"
+                [(ngModel)]="Federalid" class="form-control {{dynamicBorder}}"
+                oninput="this.value = this.value.toUpperCase()" />
+            </div>
+
+            <div class="col-md-4 col-6">
+              <label>Broker # </label>
+              <input type="text"  name="Brokerno" (keyup)="onKeydown($event)" autocomplete="off"
+              [dropSpecialCharacters]="false"  mask="0000-0000" [(ngModel)]="Brokerno" class="form-control {{dynamicBorderBroker}}"
+              oninput="this.value = this.value.toUpperCase()" />
+            </div>
+
+            <div class="col-md-4 col-6 p-r-0">
+              <label>Status </label>
+              <select class="custom-select form-control"  [(ngModel)]="ddlStatus" name="ddlStatuss">
+                <option value="">--Select--</option>
+                <option value="0">All</option>
+                <option value="A">Active</option>
+                <option value="D">Terminated</option>
+                <option value="P">Pending Cancellation</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 col-6 p-l-0">
+              <label>Address </label>
+              <input type="text" name="Address" maxlength="40" autocomplete="off" [(ngModel)]="Address"
+                class="form-control" oninput="this.value = this.value.toUpperCase()" />
+            </div>
+            <div class="col-md-4 col-6">
+              <label>City </label>
+              <input type="text" name="City" maxlength="25" autocomplete="off" [(ngModel)]="City" class="form-control"
+                oninput="this.value = this.value.toUpperCase()" />
+            </div>
+            <div class="col-md-4 col-6 p-r-0">
+              <label>State </label>
+              <select class="custom-select form-control" [(ngModel)]="ddlState" name="ddlStatee">
+                <option value="">--Select--</option>
+                <option *ngFor="let state of StatesDetailFinal">{{ state.statecode }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div align="center" class="Exact_txt">
+          <input type="checkbox" id="id_Exact" name="Exact" [checked]="CheckBoxvalue" (click)="onCheckBoxClick()">
+          Exact Match
+        </div>
+        <div class="clearfix"></div>
+        <div align="center">
+          <button id="Clear" class="btn btn-primary" type="button" (click)="clearPolicyInfo()"
+            style='margin-right:16px'>Clear</button>
+          <button id="Search" class="btn btn-primary" type="button"
+            (click)="getPolicyInfoBySearch()">Search</button><br />
+        </div>
+      </div>
+    </form>
+  </article>
+</section>

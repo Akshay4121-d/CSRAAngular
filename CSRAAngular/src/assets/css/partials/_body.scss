@@ -1,0 +1,17 @@
+
+$font-family: 'Open Sans', sans-serif;
+
+
+body{
+    font-family: $font-family;
+    font-size:0.9rem;
+}
+
+.body-content:after{
+clear: both;
+}
+
+.body-content{
+clear: both;
+}
+

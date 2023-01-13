@@ -1,0 +1,19 @@
+
+$primary-color:#00579c;
+
+    table{
+        th{
+        padding: .35em;
+        background:#666666;
+        color:#fff;
+        }
+
+        td{
+        padding: .35em!important;
+        }
+        
+    }
+
+    .topHeading{
+        color: $primary-color;
+    }

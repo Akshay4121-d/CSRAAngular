@@ -1,0 +1,64 @@
+<head>
+  <title>WebUtilities :: Policy Search Results</title>
+</head>
+<div *ngIf="norecords">
+  <section class="form-horizontal">
+      <article class="main-heading">
+          <h2>POLICY SEARCH RESULTS</h2>
+      </article>
+      <article class="content-center">
+          <div class="alert alert-danger box-msg" role="alert">
+              <strong>No records found!</strong>
+          </div>
+          <br />
+          <div align="center">
+              <!-- <button class="btn btn-primary" type="button" [routerLink]="['/claiminfosearch']">Back</button> -->
+              <button class="btn btn-primary" type="button" (click)="returnSearch()">Back</button>
+          </div>
+      </article>
+  </section>
+</div>
+
+<div *ngIf="records">
+  <section class="form-horizontal">
+      <article class="main-heading">
+          <h2>POLICY SEARCH RESULTS</h2>
+      </article>
+      <div class="returnToBack">
+          <button class="btn btn-primary" type="button" (click)="returnSearch()" >Return To Search</button>
+      </div>
+      <article class="content-center">
+          <div class="table-responsive">
+
+              <table matSort (matSortChange)="sortData($event)" align="center" width="100%"
+                  class="PolicyResultDetailFinal table table-bordered table-fixed" border="1" frame="void"
+                  rules="rows">
+                  <thead>
+                      <tr>
+                          <th width="110px" mat-sort-header="Policyno">Policy #</th>
+                          <th width="110px" mat-sort-header="Policyname">Policy Name</th>
+                          <th width="110px" mat-sort-header="FederalId">Federal ID #</th>
+                          <th [hidden]="hideBrokerno == false" width="110px" mat-sort-header="BrokerNo">Broker #</th>
+                          <th [hidden]="hideStatus == false" width="110px" mat-sort-header="Status">Status</th>
+                          <th [hidden]="hideAddress == false" width="110px" mat-sort-header="Address">Address</th>
+                          <th [hidden]="hideCity == false" width="110px" mat-sort-header="City">City</th>
+                          <th [hidden]="hideState == false" width="110px" mat-sort-header="State">State</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let policy of sortedData" (click)="selectPolicy(policy.Policyno)">
+                          <td width="110px">{{policy.Policyno}}</td>
+                          <td width="110px">{{policy.Policyname}}</td>
+                          <td width="110px">{{policy.FederalId}}</td>
+                          <td [hidden]="hideBrokerno == false" width="110px">{{policy.BrokerNo}}</td>
+                          <td [hidden]="hideStatus == false" width="110px">{{policy.Status}}</td>
+                          <td [hidden]="hideAddress == false" width="110px">{{policy.Address}}</td>
+                          <td [hidden]="hideCity == false" width="110px">{{policy.City}}</td>
+                          <td [hidden]="hideState == false" width="110px" >{{policy.State}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </article>
+  </section>
+</div>

@@ -1,0 +1,440 @@
+<head>
+  <title>WebUtilities :: Update Member Account</title>
+</head>
+<section class="form-horizontal">
+  <article class="main-heading">
+    <h2>Update Member Account</h2>
+  </article>
+  <article class="content-center">
+    <p style="text-align:center" [ngStyle]="{color: '#00579c'}">
+      Updating Member ID: <strong>{{ EmailId }}</strong>
+    </p>
+    <!-- Employer's Details -->
+    <div class="row">
+      <div class="col-md-6 col-6">
+        <div><strong class="labelStrong">Member ID:</strong> {{ EmailId }}</div>
+        <div><strong class="labelStrong"> Account Locked Out:</strong> {{ AccountLockedOut_Text }}</div>
+        <div><strong class="labelStrong"> Last Login Date: </strong>{{ LastLoginDate }}</div>
+      </div>
+
+      <div class="col-md-6 col-6">
+        <div><strong class="labelStrong">Social Security Number (last 4): </strong> {{ SocialSecurityNo }}</div>
+        <div><strong class="labelStrong">Password Expiration Date: </strong>{{ PasswordExpirationDate }}</div>
+        <div><strong class="labelStrong">Account Created:</strong> {{ AccountCreated }}</div>
+      </div>
+
+    </div>
+
+    <br />
+
+    <div [ngStyle]="{color: '#00579c'}"><strong>Claim Status:</strong></div>
+    <!-- <strong style="color:red"> {{MemberDetail.StatusText2}}</strong> -->
+    <table class="table table-bordered">
+      <tr>
+        <th style="width: 140px;">
+          Claim Number
+        </th>
+        <th>
+          Status
+        </th>
+        <th style="width: 130px;text-align: center;">
+          Claim Notes
+        </th>
+      </tr>
+      <tr *ngFor="let Claim of ClaimWithStatus">
+        <td>
+          {{Claim.ClaimNumber}}
+        </td>
+        <td>
+          {{Claim.Status}}
+        </td>
+        <td class="noteLink" align="center"> 
+          <!-- <a href="www.google.com">show</a> -->
+          <a data-toggle="modal" data-target="#claimNotesModal" (click)="GetClaimNotes(Claim.ClaimNumber)">View/Add</a>
+        </td>
+      </tr>
+    </table>
+    <br />
+
+    <!-- Buttons -->
+    <div align="center" class="memberUpdateBtn">
+      <!-- <button data-toggle="modal" data-target="#claimNotesModal"  class="btn btn-primary spaceBtwBtns"
+        type="button" data-backdrop="static" data-keyboard="false" (click)="GetClaimNotes()">Claim Notes</button> -->
+      <button data-toggle="modal" data-target="#updateEmailModal"  class="btn btn-primary spaceBtwBtns"
+        (click)="model1=true;" type="button">Update Email</button>
+      <button data-toggle="modal" data-target="#sendPasswordResetLinkModal" 
+        class="btn btn-primary spaceBtwBtns" type="button" data-backdrop="static" data-keyboard="false">Reset Password</button>
+
+      <!-- <button *ngIf="AccountLockedOut_Text=='No'" data-toggle="modal" data-target="#accountLockUnlockModal" 
+        class="btn btn-primary spaceBtwBtns" type="button">Lock User</button> -->
+
+      <button *ngIf="AccountLockedOut_Text=='Yes'" data-toggle="modal" data-target="#accountLockUnlockModal"
+         class="btn btn-primary spaceBtwBtns" type="button">Unlock User</button>
+
+      <button *ngIf="AccountActiveStatus_Text=='Yes'" data-toggle="modal" data-target="#accountDisableModal"
+         class="btn btn-primary spaceBtwBtns" type="button">Disable User</button>
+      <button *ngIf="AccountActiveStatus_Text=='No'" data-toggle="modal" data-target="#accountDisableModal"
+         class="btn btn-primary spaceBtwBtns" type="button">Enable User</button>
+
+      <button class="btn btn-primary" type="button" (click)="CloseDetails()">Close</button>
+    </div>
+
+    <!-- Update Email starts - Modal -->
+    <!-- Email updating -->
+
+    <button id="openEmailModalButton" [hidden]="true" data-toggle="modal"
+      data-target="#afterConfirmationModal"></button>
+
+    <div class="modal fade" id="updateEmailModal" role="dialog" aria-labelledby="updateEmailModalTitle"
+      aria-hidden="true" *ngIf="model1">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit Email</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #userForm="ngForm">
+              <div class="form-group container-fluid" [class.has-error]="Email.touched && Email.invalid">
+                <small><label *ngIf="EmailExists==0" class="text-danger">The email you have entered is currently taken
+                    by
+                    another user.</label></small>
+                <label>New email address</label>
+                <input type="text" name="Email" class="form-control" required #Email="ngModel" maxlength="50"
+                  autocomplete="off" [(ngModel)]="newEmail" placeholder="info@example.com" autofocus email="" />
+                <small>
+                  <span class="text-danger" dynamic *ngIf="Email.errors?.required && Email.touched">Required</span>
+                  <span class="text-danger" *ngIf="Email.errors?.email && Email.touched">Invalid</span>
+                  <label class="text-danger">*Please note that changing email will update user ID / account ID for
+                    logging into the site.</label>
+                </small>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal" id="EmailClose">Close</button>
+            <button type="button" [disabled]="!Email.valid" class="btn btn-primary" (click)="UpdateMemberEmail()">Save
+              changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Email Confirmation -->
+    <!-- <div class="modal fade" id="emailConfirmationModal" role="dialog" aria-labelledby="emailConfirmationModalTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #userForm="ngForm">
+              <div class="form-group container-fluid">
+                Are you sure you want to change email address ?<br />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="UpdateEmployerEmail()">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#afterConfirmationModal"
+      data-backdrop="static" data-keyboard="false"></button>
+
+    <!-- After Confirmation -->
+    <div class="modal fade" id="afterConfirmationModal" role="dialog" aria-labelledby="afterConfirmationModalTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Message</h5>
+          </div>
+          <div class="modal-body">
+            <form #userForm="ngForm">
+              <div class="form-group container-fluid">
+                Email (User ID) updated successfully! New Email address (User ID) for this account is
+                <strong>{{newEmail}}</strong><br />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="AfterConfirmation()">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Update Email close -->
+
+    <!-- Reset Password Confirmation - start-->
+    <div class="modal fade" id="sendPasswordResetLinkModal" role="dialog" aria-labelledby="sendPasswordResetLinkModalTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 *ngIf="AccountActiveStatus_Text=='Yes'" class="modal-title">Confirmation</h5>
+            <h5 *ngIf="AccountActiveStatus_Text=='No'" class="modal-title">Message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #userForm="ngForm">
+              <div *ngIf="AccountActiveStatus_Text=='Yes'" class="form-group container-fluid">
+                Are you sure you want to reset password? The reset password link will sent to <strong>{{ EmailId }}</strong><br />
+              </div>
+              <div *ngIf="AccountActiveStatus_Text=='No'" class="form-group container-fluid">
+                This account is currently disabled. Please enable the account first then Reset Password.
+              </div>
+            </form>
+          </div>
+          <div *ngIf="AccountActiveStatus_Text=='Yes'" class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="SendResetPasswordLink()"
+              data-toggle="modal" data-target="#sendPasswordOkModal" data-backdrop="static"
+              data-keyboard="false">Yes</button>
+          </div>
+          <div *ngIf="AccountActiveStatus_Text=='No'" class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Reset Password Confirmation - close-->
+
+    <!-- Send Reset Password Link start - Modal-->
+    <div class="modal fade" id="sendPasswordOkModal" role="dialog" aria-labelledby="sendPasswordOkModalTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Message</h5>
+          </div>
+          <div class="modal-body">
+            <form #userForm="ngForm">
+              <div class="form-group container-fluid">
+                <!-- We've sent an email for resetting your password! -->
+                Password reset link sent successfully!<br />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" >OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Send Reset Password Link  close-->
+
+
+    <!-- Member Account Lock/Unlock start - Modal-->
+    <!-- Account Lock/Unlock confirmation-->
+    <div class="modal fade" id="accountLockUnlockModal" role="dialog" aria-labelledby="accountLockUnlockModalTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #userForm="ngForm">
+              <!-- <div *ngIf="AccountLockedOut_Text=='No'" class="form-group container-fluid">
+                Are you sure you want to lock the account ?<br />
+              </div> -->
+              <div *ngIf="AccountLockedOut_Text=='Yes'" class="form-group container-fluid">
+                Are you sure you want to unlock the account ?<br />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal"
+              data-target="#afterConfirmLockUnlockModal" (click)="LockUnlockAccount()" data-toggle="modal"
+              data-backdrop="static" data-keyboard="false">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- after confirm to disable/enable-->
+    <div class="modal fade" id="afterConfirmLockUnlockModal" role="dialog"
+      aria-labelledby="afterConfirmLockUnlockModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Message</h5>
+          </div>
+          <div class="modal-body">
+            <form #userForm="ngForm">
+
+              <!-- <div *ngIf="AccountLockedOut_Text=='No'" class="form-group container-fluid">
+                Account locked successfully!<br />
+              </div> -->
+
+              <div *ngIf="AccountLockedOut_Text=='Yes'" class="form-group container-fluid">
+                Account unlocked successfully!<br />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="AfterConfirmation()">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Member disable/enable close-->
+
+
+    <!-- Member disable/enable start - Modal-->
+    <!-- Account disable/enable confirmation-->
+    <div class="modal fade" id="accountDisableModal" role="dialog" aria-labelledby="accountDisableModalTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #userForm="ngForm">
+              <div *ngIf="AccountActiveStatus_Text=='Yes'" class="form-group container-fluid">
+                Are you sure you want to disable member ?<br />
+              </div>
+              <div *ngIf="AccountActiveStatus_Text=='No'" class="form-group container-fluid">
+                Are you sure you want to enable member ?<br />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" data-target="#afterConfirmDisableModal"
+              (click)="EnableDisableAccount()" data-toggle="modal" data-backdrop="static"
+              data-keyboard="false">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- after confirm to disable/enable-->
+    <div class="modal fade" id="afterConfirmDisableModal" role="dialog" aria-labelledby="afterConfirmDisableModalTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Message</h5>
+          </div>
+          <div class="modal-body">
+            <form #userForm="ngForm">
+              <div *ngIf="AccountActiveStatus_Text=='Yes'" class="form-group container-fluid">
+                Account disabled successfully!<br />
+              </div>
+              <div *ngIf="AccountActiveStatus_Text=='No'" class="form-group container-fluid">
+                Account enabled successfully!<br />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="AfterConfirmation()">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Member disable/enable close-->
+
+    <!-- Claim Notes Popup start -->
+    <div class="modal fade" id="claimNotesModal" role="dialog" aria-labelledby="ViewClaimNotesTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Claim Notes - {{notes_ClaimNumber}}</h5>
+          </div>
+          <div class="modal-body table-responsive">
+            <table width="100%" class="table table-bordered popupTheme" border="1" frame="void" rules="rows">
+              <tr *ngFor="let obj of ClaimNotesFinal">
+                <td>{{obj.ClaimNote}}</td>
+              </tr>
+              <tr *ngIf="isBadData">
+                <td style="color: red;"><strong>*There is some bad data in claim notes, for more help please contact to
+                    IT.</strong></td>
+              </tr>
+              <tr *ngIf="!records" class="text-center">
+                <td>No Records Available.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button id="btnAddNew" class="btn btn-primary" data-toggle="modal" data-target="#ViewAddNew"
+            data-backdrop="static" style="float:right;margin-right:0px;" data-keyboard="true" data-dismiss="modal"
+            (click)="ResetNotesPopup()">Add New</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="needs-validation" novalidate>
+      <div class="modal fade" id="ViewAddNew" role="dialog" aria-labelledby="ViewAddNewTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add New Claim Note</h5>
+            </div>
+            <!-- <form [formGroup]="myForm" (ngSubmit)="submitForm()"> -->
+            <div class="modal-body">
+              <!-- <form id="Form"> -->
+              <table style="width: 100%;">
+                <tr>
+                  <td>
+                    <span style="margin-top: 6px; text-align: left;"><strong>Claim# : </strong></span>
+                    <span>{{notes_ClaimNumber}}</span>
+                  </td>
+                </tr>
+                  <tr>
+                  <td>
+                    <span style="margin-top: 6px; text-align: left;"><strong>User ID : </strong></span>
+                    <span>{{this.ClaimWithStatus[0].EmailId}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <textarea id="txtMemNotes" rows="4" style="min-width: 100%;" #validate="ngModel" [(ngModel)]="ngNote"
+                      name="txtMemNotes" required="required" #box (keyup)="onKeyUp(box)" maxlength="255"></textarea>
+                    <label *ngIf="error" class="text-danger">*Required</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <input type="test" value={{varlength}} style="width:50px;height:25px;" disabled> characters left
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="modal-footer">
+              <button id="SaveNotes" type="button" class="btn btn-primary"
+                (click)="callAddNewNote(box.value)"
+                (keydown.enter)="!validate.invalid">Save</button>
+              <button type="button" id="btnCloseAddNew" class="btn btn-primary" data-toggle="modal" data-target="#claimNotesModal"
+                data-dismiss="modal">Close</button>
+            </div>
+            <!-- </form> -->
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- Claim Notes Popup end-->
+  </article>
+</section>

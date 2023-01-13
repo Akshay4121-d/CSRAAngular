@@ -1,0 +1,25 @@
+
+thead{
+    font-weight: 500;
+   
+}
+
+.table td, .table th {
+    padding: 0.25rem;
+    margin: 0%;
+    font-size: 12px;  
+    text-align: left;
+    color: #666666;
+    background-color: #efefef;
+
+}
+ .table{
+    table-layout: fixed;
+    
+} 
+li{
+    font-size: 11px;
+}
+.table-bordered td, .table-bordered th {
+border: 1px solid #dee2e6;
+}

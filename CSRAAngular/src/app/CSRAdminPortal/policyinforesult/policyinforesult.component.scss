@@ -1,0 +1,54 @@
+  .mat-sort-header-container {
+    align-items: center;
+  }
+
+  /* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  
+  -webkit-font-smoothing: antialiased;
+}
+.table-responsive {
+  height: 440px;
+  overflow: auto;
+  border: 1px solid #ccc;
+}
+
+// .row {
+//   background-color: #a9f0ff !important;
+//   font-weight: bold;
+// }
+.rowCursor{
+  cursor: pointer; width: 20vw; min-width: 150px; text-align: left
+}
+.PolicyResultDetailFinal tbody tr:hover {
+  background: #ccc;
+  cursor: pointer;
+}
+
+.returnToBack{
+    width: 800px;
+    text-align: right;
+    margin: 20px auto 0px;}
+
+.content-center{
+  margin: 10px auto 0 auto !important;
+}

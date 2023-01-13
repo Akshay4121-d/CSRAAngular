@@ -1,0 +1,185 @@
+
+#list-panel{
+  position: relative;
+
+  #ExportToExcel{
+    position: absolute;
+    right:10px;
+    top:15px;
+    color: $primary-color;
+    font-weight: bold;
+  }
+}
+
+.commonTable{  
+  font-size: .8rem; 
+  line-height: 1.5;
+  border-bottom: 1px solid #d0d0d0;
+
+    th{ 
+      background-color: #6c757d;
+      color:$color-white;      
+      padding: 0.5em;
+      word-break: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+     align-items: center;
+     justify-content: left;
+     min-width: 0px;
+      white-space: normal;
+      border-bottom: 1px solid #d0d0d0;
+         
+    }   
+    tr{
+        width: 100%;
+          
+    }
+
+
+    td {        
+      padding: 0.5em;
+      word-break: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0px;
+      white-space: normal;
+      border-bottom: 1px solid #d0d0d0;
+    }
+}
+
+#Profiles-data-table_wrapper div:nth-child(3){
+	margin: 0 auto;	
+	overflow:hidden;
+	text-align: center;
+}
+
+#Profiles-data-table_wrapper div:nth-child(3){
+  .col-sm-5{
+    display: none;
+  }
+}
+
+#Profiles-data-table_wrapper .row{		
+  position: relative;
+	 .input-sm{     
+      margin-left:10px;     
+   }	
+
+   label{
+    justify-content: left;
+   }
+}
+
+.pagination {
+    display: flex;
+    margin: 0 auto;
+      
+       li.active{
+                 background-color: #1197d5;
+                color: white;
+                border: 1px solid #1197d5;
+
+                a{
+                  color:#fff;
+                }
+        }            
+
+        li a{
+
+            color: #333;
+            float: left;
+            padding: 5px 15px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+}
+
+table th{
+padding: .35em;
+background: #666666;
+color: #fff;
+}
+
+
+
+/*Change Email ID*/
+#tablProfiles{
+  max-height: 220px;
+  overflow-y: scroll;
+}
+
+.profileTble{
+    h6{
+    font-size: 0.9rem;
+  }
+}
+
+#tablProfiles table{
+  background-color: #fff;
+  margin-bottom: 15px;
+  font-size:0.8rem;
+  padding:0.6rem;
+
+  th{
+    background-color: #6c757d;
+    color:#fff;
+  }
+
+}
+
+@media all and (-ms-high-contrast:none)
+     {
+     .dataTables_wrapper .row { display:block !important }
+     *::-ms-backdrop, .dataTables_wrapper .row { display:block !important; }
+     }
+
+@media all and (-ms-high-contrast:none)
+     {
+     #Profiles-data-table_wrapper .row label { float:left;}
+     *::-ms-backdrop, #Profiles-data-table_wrapper .row label { float:left;}
+     }
+
+@media all and (-ms-high-contrast:none)
+     {
+     .flx-center { display: block!important;}
+     *::-ms-backdrop, .flx-center { display: block!important;}
+     }
+
+@media all and (-ms-high-contrast:none)
+     {
+     .dataTables_paginate.paging_simple_numbers { height: 65px!important;}
+     *::-ms-backdrop, .dataTables_paginate.paging_simple_numbers { height: 65px!important;}
+     }
+
+     @media all and (-ms-high-contrast:none)
+     {
+     .precharge-review .m-t-35 { margin:0; }
+     *::-ms-backdrop, .precharge-review .m-t-35 { margin:0; }
+     }
+
+     @media all and (-ms-high-contrast:none)
+     {
+     .dataTables_length{ float:left; }
+     *::-ms-backdrop, .dataTables_length{ float:left; }
+     }
+
+     
+.datepicker td, .datepicker th{
+  padding:5px 10px;
+}
+
+.dataTables_length{
+  float: left;
+}
+
+.custom_date table th{
+  background: #ffffff !important;
+  color: rgba(0, 0, 0, 0.38) !important;
+}
+
+.mat-calendar-table-header th {
+  background: none !important;
+  color: #333 !important;
+}

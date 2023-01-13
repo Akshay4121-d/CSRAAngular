@@ -1,0 +1,61 @@
+<head>
+    <title>WebUtilities :: Duplicate Bill Request</title>
+  
+    <script src="../../../ng-pattern-restrict.min.js"></script>
+  </head>
+  <section class="form-horizontal">
+    <article class="main-heading">
+      <h2>Duplicate Bill Request: DBL/PFL, TDB, PFML and Baseline Insurance</h2>
+    </article>
+    <article class="content-center">
+      <form #userForm="ngForm" name="form" (keyup.enter)="validatePolicyInfoBySearch()" 
+      novalidate>
+      <div class="alert alert-danger form-group container-fluid" *ngIf="error">Please provide at least one search
+        criteria.</div>
+      <div class="form-group container-fluid">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-6 p-l-0">
+              <div class="form-group">
+                <label>Policy #</label>
+                <input type="text" #PolicynoControl="ngModel" name="Policyno"
+                  autocomplete="off" [(ngModel)]="Policyno" class="form-control {{dynamicBorder}}"
+                  oninput="this.value = this.value.toUpperCase()" required minlength="4" />
+                    <span class="text-danger" dynamic 
+                      *ngIf="PolicynoControl.errors?.required && (PolicynoControl.touched || PolicynoControl.dirty)">REQUIRED</span>
+                    <span class="text-danger" *ngIf="PolicynoControl.errors?.minlength &&(PolicynoControl.touched || PolicynoControl.dirty)">Invalid</span>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-6 p-r-0">
+              <div class="form-group">
+                <label>Zip Code</label>
+                <input type="number" #ZipCodeControl="ngModel" id="ZipCode" pattern="^[0-9]{5}$" name="ZipCode" maxlength="5"
+                  autocomplete="off" [(ngModel)]="ZipCode" class="form-control {{dynamicBorder}}" required />
+                <div>
+                  <span class="text-danger" dynamic 
+                      *ngIf="ZipCodeControl.errors?.required && (ZipCodeControl.touched || ZipCodeControl.dirty)">REQUIRED
+                  </span>
+                  <span class="text-danger" *ngIf="ZipCodeControl.errors?.pattern">Zipcode should be 5 numbers</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="clearfix"></div>
+        <div align="center">
+          <button id="Clear" class="btn btn-primary" type="button" (click)="clearPolicyInfo()"
+            style='margin-right:16px'>Clear</button>
+          <button id="Search" class="btn btn-primary" type="button" (click)="validatePolicyInfoBySearch()"
+            [disabled]="!(userForm.valid)">Submit</button><br />
+        </div>
+        <div class="alert alert-danger box-msg mt-3" role="alert" *ngIf="norecords">
+          <!-- <strong>The policy and zip code combination you have entered is not valid. Please try again.</strong> -->
+          <strong>{{l_message}}</strong>
+        </div>
+      </div>
+    </form>
+
+    </article>
+  </section>

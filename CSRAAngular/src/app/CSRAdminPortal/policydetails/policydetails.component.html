@@ -1,0 +1,1107 @@
+<head>
+  <title>WebUtilities :: Policy Details</title>
+</head>
+<div *ngIf="bind" ng-controller="AccordionDemoCtrl">
+  <section class="form-horizontal">
+    <article class="main-heading ">
+      <h2><strong>{{PolicyDetailFinal[0].policynumber}} | {{PolicyDetailFinal[0].policyname}}</strong></h2>
+    </article>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-6 p-l-0">
+          <button class="btn btn-primary ReturnToSearch" type="button" (click)="returnSearch()">Return To
+            Search</button>
+        </div>
+      </div>
+    </div>
+
+    <article class=" sepscView">
+      <div class="container container_section" style="overflow: hidden;">
+        <div class="row fontsize">
+          <!-- Employer Information -->
+          <div class="col-md-3 rightBr">
+            <h5 class="heading_text" [ngStyle]="{color: '#00579c'}">
+              <strong>Employer Info</strong>
+            </h5>
+            <label [hidden]="PolicyDetailFinal[0].policynumber == 'hideMe'"><b>Policy #:
+              </b>{{PolicyDetailFinal[0].policynumber}}</label><br
+              [hidden]="PolicyDetailFinal[0].policynumber == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].policyname == 'hideMe'">
+              {{PolicyDetailFinal[0].policyname}}</label><br [hidden]="PolicyDetailFinal[0].policyname == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].policyaddress == 'hideMe'">
+              {{PolicyDetailFinal[0].policyaddress}}</label><br
+              [hidden]="PolicyDetailFinal[0].policyaddress == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].fedid == 'hideMe'"><b>Fed ID #:
+              </b>{{PolicyDetailFinal[0].fedid}}</label><br [hidden]="PolicyDetailFinal[0].fedid == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].policyphoneno == 'hideMe'"><b>Phone #:
+              </b>{{PolicyDetailFinal[0].policyphoneno}}</label>
+            <br [hidden]="PolicyDetailFinal[0].policyphoneno == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].policyfax == 'hideMe'"><b>Fax #: </b>
+              {{PolicyDetailFinal[0].policyfax}}</label>
+            <br [hidden]="PolicyDetailFinal[0].policyfax == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].carrier == 'hideMe'"><b>Carrier:
+              </b>{{PolicyDetailFinal[0].carrier}}</label><br [hidden]="PolicyDetailFinal[0].carrier == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].policyeffectivedate == 'hideMe'"><b>Eff Date:
+              </b>{{PolicyDetailFinal[0].policyeffectivedate}}</label><br
+              [hidden]="PolicyDetailFinal[0].policyeffectivedate == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].policytype == 'hideMe'">{{PolicyDetailFinal[0].policytype}}</label>
+            <label
+              [hidden]="PolicyDetailFinal[0].policytype == 'hideMe' || PolicyDetailFinal[0].rosternonroster == 'hideMe'">&nbsp;-&nbsp;</label>
+            <label
+              [hidden]="PolicyDetailFinal[0].rosternonroster == 'hideMe'">{{PolicyDetailFinal[0].rosternonroster}}</label><br
+              [hidden]="PolicyDetailFinal[0].rosternonroster == 'hideMe' && PolicyDetailFinal[0].policytype == 'hideMe'">
+
+            <label><b>Email:&nbsp;</b></label>
+            <u><a href="{{url_searcheditemail}}" target="_blank" style='margin-right:16px;color:deepskyblue;'
+                data-backdrop="static" data-keyboard="false"><strong>Update</strong></a></u>
+          </div>
+          <!-- Policy Information -->
+          <div class="col-md-3 rightBr">
+            <h5 class="heading_text" [ngStyle]="{color: '#00579c'}">
+              <strong> Policy Info </strong>
+              <label *ngIf="PolicyStatus_Header == 'ACTIVE'" style="color: #56ad00; font-size: 18px;">
+                Active</label>
+              <label *ngIf="PolicyStatus_Header == 'TERMINATED'" style="color: red; font-size: 18px">
+                Terminated</label>
+            </h5>
+
+            <label [hidden]="PolicyDetailFinal[0].billmode == 'hideMe'"><b>Bill Mode:
+              </b>{{PolicyDetailFinal[0].billmode}}</label><br [hidden]="PolicyDetailFinal[0].billmode == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].malecount == 'hideMe'"><b>Males #:
+              </b>{{PolicyDetailFinal[0].malecount}}</label><br [hidden]="PolicyDetailFinal[0].malecount == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].femalecount == 'hideMe'"><b>Females #:
+              </b>{{PolicyDetailFinal[0].femalecount}}</label><br
+              [hidden]="PolicyDetailFinal[0].femalecount == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].total == 'hideMe'"><b>Total:
+              </b>{{PolicyDetailFinal[0].total}}</label><br [hidden]="PolicyDetailFinal[0].total == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].malerate == 'hideMe'"><b>Male Rate:
+              </b>{{PolicyDetailFinal[0].malerate}}</label><br [hidden]="PolicyDetailFinal[0].malerate == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].femalerate == 'hideMe'"><b>Female Rate:
+              </b>{{PolicyDetailFinal[0].femalerate}}</label><br [hidden]="PolicyDetailFinal[0].femalerate == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].census == 'hideMe'"><b>Census Rate:
+              </b>{{PolicyDetailFinal[0].census}}</label><br [hidden]="PolicyDetailFinal[0].census == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].wcbdate == 'hideMe'"><b>WCB Date:
+              </b>{{PolicyDetailFinal[0].wcbdate}}</label><br [hidden]="PolicyDetailFinal[0].wcbdate == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].wcbemployer == 'hideMe'"><b>WCB Employer #:
+              </b>{{PolicyDetailFinal[0].wcbemployer}}</label><br
+              [hidden]="PolicyDetailFinal[0].wcbemployer == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].uier == 'hideMe'"><b>UIER:
+              </b>{{PolicyDetailFinal[0].uier}}</label><br [hidden]="PolicyDetailFinal[0].uier == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].payrollfactor == 'hideMe'"><b>Payroll Factor:
+              </b>{{PolicyDetailFinal[0].payrollfactor}}</label><br
+              [hidden]="PolicyDetailFinal[0].payrollfactor == 'hideMe'">
+
+              <label [hidden]="PolicyDetailFinal[0].policystatus == 'hideMe'"><b>Status:
+              </b><span *ngIf="PolicyStatus_Header == 'ACTIVE'" style="color: #56ad00;">{{PolicyDetailFinal[0].policystatus}}</span>
+              <span *ngIf="!(PolicyStatus_Header == 'ACTIVE')" style="color: red;">{{PolicyDetailFinal[0].policystatus}}</span></label><br
+              [hidden]="PolicyDetailFinal[0].policystatus == 'hideMe'">
+
+            <u><a data-toggle="modal" data-target="#ViewRatesHistory" style='color:deepskyblue;' data-backdrop="static"
+                data-keyboard="false" (click)="getRateHistory()"><strong>Rates</strong></a></u>
+          </div>
+          <!-- Benefit Details -->
+          <div class="col-md-3 rightBr">
+            <h5 class="heading_text" [ngStyle]="{color: '#00579c'}">
+              <strong>Benefit Details</strong>
+            </h5>
+            <label [hidden]="PolicyDetailFinal[0].benefitlevel == 'hideMe'"><b>Benefit Level:
+              </b>{{PolicyDetailFinal[0].benefitlevel}}</label>
+              <input [hidden]="PolicyDetailFinal[0].benefitlevel == 'hideMe'" *ngIf="iAmendedBenefit" matTooltip="{{iAmendedBenefitText}}" data-toggle="modal" data-target="#AmendedBenefit" data-backdrop="static" data-keyboard="false"
+               height="14px" style="vertical-align: bottom;margin-bottom: 5px;margin-left: 7px;" type="image"
+               src="../../../WebUtilities/assets/Images/Information.png" >
+              <br
+              [hidden]="PolicyDetailFinal[0].benefitlevel == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].beneftieffectivedate == 'hideMe'"><b>Benefit Eff Date:
+              </b>{{PolicyDetailFinal[0].beneftieffectivedate}}</label><br
+              [hidden]="PolicyDetailFinal[0].beneftieffectivedate == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].inhospitalrider == 'hideMe'"><b>In-Hospital Rider:
+              </b>{{PolicyDetailFinal[0].inhospitalrider}}</label><br
+              [hidden]="PolicyDetailFinal[0].inhospitalrider == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].inhospitaleffectivedate == 'hideMe'"><b>In-Hosp Eff Date:
+              </b>{{PolicyDetailFinal[0].inhospitaleffectivedate}}</label><br
+              [hidden]="PolicyDetailFinal[0].inhospitaleffectivedate == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].pflrider == 'hideMe'"><b>PFL Rider:
+              </b>{{PolicyDetailFinal[0].pflrider}}</label><br [hidden]="PolicyDetailFinal[0].pflrider == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].pfleffectivedate == 'hideMe'"><b>PFL Eff Date:
+              </b>{{PolicyDetailFinal[0].pfleffectivedate}}</label><br
+              [hidden]="PolicyDetailFinal[0].pfleffectivedate == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].wservice == 'hideMe'"><b>W2 Service:
+              </b>{{PolicyDetailFinal[0].wservice}}</label><br [hidden]="PolicyDetailFinal[0].wservice == 'hideMe'">
+
+            <u><a data-toggle="modal" data-target="#ViewAdditionalCoverageDetails"
+                style='margin-right:16px;color:deepskyblue;' data-backdrop="static" data-keyboard="false"
+                (click)="showAdditionalCoverageDetails()"><strong>View Additional Coverage Details</strong></a></u>
+          </div>
+          <!-- Broker Information -->
+          <div class="col-md-3">
+            <h5 style="text-align:left" [ngStyle]="{color: '#00579c'}">
+              <strong> Broker Info </strong>
+              <label *ngIf="PolicyDetailFinal[0].brokertermdate == 'ACTIVE'" style="color: #56ad00; font-size: 18px">
+                Active</label>
+              <label *ngIf="PolicyDetailFinal[0].brokertermdate == 'TERMINATED'" style="color: red; font-size: 18px">
+                Terminated </label>
+            </h5>
+
+            <label [hidden]="PolicyDetailFinal[0].brokerno == 'hideMe'"><b>Broker #:
+              </b>{{PolicyDetailFinal[0].brokerno}}</label><br [hidden]="PolicyDetailFinal[0].brokerno == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].brokername == 'hideMe'">{{PolicyDetailFinal[0].brokername}}</label><br
+              [hidden]="PolicyDetailFinal[0].brokername == 'hideMe'">
+
+            <label
+              [hidden]="PolicyDetailFinal[0].borkeraddress == 'hideMe'">{{PolicyDetailFinal[0].borkeraddress}}</label><br
+              [hidden]="PolicyDetailFinal[0].borkeraddress == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].salesrep == 'hideMe'"><b>Sales Rep:
+              </b>{{PolicyDetailFinal[0].salesrep}}</label><br [hidden]="PolicyDetailFinal[0].salesrep == 'hideMe'">
+
+            <label [hidden]="PolicyDetailFinal[0].brokerphonenumber == 'hideMe'"><b>Phone #:
+              </b>{{PolicyDetailFinal[0].brokerphonenumber}}</label>
+
+          </div>
+        </div>
+        <br>
+        <!-- Premium Information -->
+        <div class="row">
+          <div class="col-md-12">
+            <h5 style="text-align:left;color: #00579c;">
+              <strong>Premium Information</strong>
+            </h5>
+            <div class="policyInfoGrid">
+              <div class="dbGridWrapper" style="background: white;">
+                <div>
+                  <div>
+                    <ag-grid-angular style="width: 100%;" class="ag-theme-balham {{premInfoGridSize}}"
+                      [rowData]="rowPremiumInfo" [suppressHorizontalScroll]=true [columnDefs]="columnPremiumInfo"
+                      [getRowHeight]="getRowHeightPremiumInfo" [overlayLoadingTemplate]="loadingTemplate"
+                      [overlayNoRowsTemplate]="noRowsTemplate" (gridReady)="onGridReady_Global($event)"
+                      [defaultColDef]="defaultColDef">
+                    </ag-grid-angular>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: -10px;">
+              <!-- <label class="float-left" [hidden]="PolicyDetailFinal[0].brokerphonenumber == 'hideMe'">
+                  TOTALS FOR: {{totalperiod}}</label> -->
+              <label class="float-right" [hidden]="totalperiod == 'hideMe'">
+                TOTALS FOR: {{totalperiod}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PREMIUM:
+                {{totalpremium | currency}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FEES: {{totalfees | currency}}</label>
+            </div>
+            <div>
+              <table>
+                <tr *ngIf="trBalanceDue">
+                  <td colspan="2" style="font-size: 13px; color: red;">
+                    Alert: This policy has a pending balance due of
+                    <u><a data-toggle="modal" data-target="#mpeBalanceDue" data-backdrop="static"
+                        data-keyboard="true">{{lbtnBalanceDue}}</a></u>.
+                    Click <u><a style="color: red" href="{{VTUrl}}" target='_blank' runat="server">here</a></u> to make
+                    a
+                    payment.
+                  </td>
+                </tr>
+                <tr *ngIf="trBalanceDueManual">
+                  <td colspan="2" style="font-size: 13px; color: red;">Alert: This is a manually generated balance due,
+                    please contact Billing Department for additional information.
+                  </td>
+                </tr>
+                <tr *ngIf="trMissingInfo">
+                  <td colspan="2" style="font-size: 13px; color: red;">Alert: Premium split could not be performed due to 
+                    <u><a data-toggle="modal" data-target="#mpeMissingInfo" data-backdrop="static"
+                      data-keyboard="true">missing information/invoice</a></u> for this policy.                                                                            
+                  </td>
+              </tr>
+                <tr *ngIf="trQuestionableWages">
+                  <td colspan="2" style="font-size: 13px; color: red;">Alert: Policy contains
+                    <u><a data-toggle="modal" data-target="#mpeQuestionableWages" data-backdrop="static"
+                        data-keyboard="true">questionable wages</a></u>.
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <br [hidden]="totalperiod != 'hideMe'">
+
+        <!--Policy Notes - Existing -->
+        <div class="row">
+          <div class="col-md-12">
+            <h5 style="text-align:left;color: #00579c;">
+              <strong>Policy Notes</strong>
+            </h5>
+            <div class="policyInfoGrid">
+              <div class="dbGridWrapper" style="background: white;">
+                <div>
+                  <div>
+                    <ag-grid-angular style="width: 100%;" class="ag-theme-balham {{policyNotesGridSize}}"
+                      [rowData]="rowPolicyNotes" [suppressHorizontalScroll]=true [columnDefs]="columnPolicyNotes"
+                      [getRowHeight]="getRowHeightPolicyNotes" [overlayLoadingTemplate]="loadingTemplate"
+                      [overlayNoRowsTemplate]="noRowsTemplate" (gridReady)="onGridReady_Global($event)"
+                      [defaultColDef]="defaultColDef">
+                    </ag-grid-angular>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div>
+              <a style='margin-right:16px;color:deepskyblue;float:right;' data-toggle="modal" data-target="#ViewAddNew"
+                data-backdrop="static" data-keyboard="true" (click)="ResetPolicyNotesPopup()">
+                <strong>Add New</strong></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Received and CSR Features -->
+        <div class="row">
+          <div class="col-md-6">
+            <h5 style="text-align:left;color: #00579c;">
+              <strong>Form Received</strong>
+            </h5>
+            <div class="policyInfoGrid">
+              <div class="dbGridWrapper" style="background: white;">
+                <ag-grid-angular style="width: 100%;" class="ag-theme-balham {{FormsGridSize}}"
+                  [rowData]="rowFromRecieved" [columnDefs]="columnFromRecieved"
+                  [overlayLoadingTemplate]="loadingTemplate" [getRowHeight]="getRowHeightFormRece"
+                  [overlayNoRowsTemplate]="noRowsTemplate" (gridReady)="onGridReady_Global($event)"
+                  [defaultColDef]="defaultColDef">
+                </ag-grid-angular>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h5 style="text-align:left;color: #00579c;">
+              <strong>CSR Feature</strong>
+            </h5>
+            <div class="policyInfoGrid">
+              <div class="dbGridWrapper" style="background: white;height: 150px;overflow-x: hidden; border: solid 1px #eaeaea;">
+                <table class="dbGridTable" style="border-style:None;width:100%;border-collapse:collapse;" border="1"
+                  cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td><a href="{{url_callLog}}" target="_blank">Add new Call Log Note</a></td>
+                  </tr>
+                  <tr>
+                    <td class="links">
+                      <a (click)="AddBillModeChangeRequest()">Add Bill Mode Change Request</a>
+                    </td>
+                  </tr>
+                  <!-- <asp:LinkButton ID="lnkbtnAddBillModeChgRequest" ForeColor="Blue" Text="Add Bill Mode Change Request" OnClick="lnkbtnAddBillModeChgRequest_Click"
+                           Enabled="true" runat="server" Font-Underline="true"></asp:LinkButton> -->
+                  <tr *ngIf="policyisActive">
+                    <td><a href="{{url_certiofinsurance}}" target="_blank">Generate Certificate of Insurance</a></td>
+                  </tr>
+                  <tr *ngIf="!policyisActive">
+                    <td class="links">
+                      <a data-toggle="modal" data-target="#ViewCancelPolicy" data-backdrop="static"
+                        data-keyboard="true">Generate Certificate of Insurance</a>
+                    </td>
+                  </tr>
+                  <tr *ngIf="policyisActive">
+                    <td><a href="{{url_postingnotice}}" target="_blank">Generate Posting Notice</a></td>
+                  </tr>
+                  <tr *ngIf="!policyisActive">
+                    <td class="links">
+                      <a data-toggle="modal" data-target="#ViewCancelPolicy" data-backdrop="static"
+                        data-keyboard="true">Generate Posting Notice</a>
+                    </td>
+                  </tr>
+                  <tr *ngIf="lbtnReqDuplicateBill">
+                    <td><a href="{{url_duplicatebill}}">Request Duplicate Bill</a></td>
+                  </tr>
+                  <tr *ngIf="lbtnReqDuplicatePolicy">
+                    <td><a href="{{url_duplicatepolicy}}">Request Duplicate Policy</a></td>
+                  </tr>
+                  <tr *ngIf="lbtnRemovePFLRider">
+                    <td class="links">
+                      <a data-toggle="modal" data-target="#mpeRemovePFLRider" data-backdrop="static"
+                        data-keyboard="true" (click)="lbtnRemovePFLRider_Click()">Remove PFL Rider</a>
+                    </td>
+                  </tr>
+
+                  <!-- <tr>
+                    <td><a href="#" target="_blank">Request Duplicate Policy</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" target="_blank">Request Duplicate Policy</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" target="_blank">Request Duplicate Policy</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" target="_blank">Request Duplicate Policy</a></td>
+                  </tr> -->
+                  <!-- <asp:LinkButton ID="lbtnRemovePFLRider" ForeColor="Blue" Text="Remove PFL Rider"
+                              Enabled="true" runat="server" Font-Underline="true" OnClick="lbtnRemovePFLRider_Click"></asp:LinkButton>
+                          <br /> -->
+
+                  <!-- <a data-toggle="modal" data-target="#ViewAddNew"
+                           data-backdrop="static" data-keyboard="true" (click)="ResetPolicyNotesPopup()">
+                           <strong>Generate Certificate of Insurance</strong></a> -->
+
+                  <!-- <asp:LinkButton ID="lbtnAddNewCallLogNote" ForeColor="Blue" Text="Add new Call Log Note" OnClientClick="openWindow('calllog');"
+                              Enabled="true" runat="server" Font-Underline="true"></asp:LinkButton> -->
+                  <!-- <br /> -->
+                  <!-- <asp:LinkButton ID="lnkbtnAddBillModeChgRequest" ForeColor="Blue" Text="Add Bill Mode Change Request" OnClick="lnkbtnAddBillModeChgRequest_Click"
+                              Enabled="true" runat="server" Font-Underline="true"></asp:LinkButton>
+                          <br /> -->
+                  <!-- <asp:LinkButton ID="lbtnCertiofInsurance" ForeColor="Blue" Text="Generate Certificate of Insurance" OnClientClick="return openWindow('certiofinsurance');"
+                              Enabled="true" runat="server" Font-Underline="true"></asp:LinkButton>
+                          <br />
+                          <asp:LinkButton ID="lbtnGeneratePostingNotice" ForeColor="Blue" Text="Generate Posting Notice" OnClientClick="return openWindow('postingnotice');"
+                              Enabled="true" runat="server" Font-Underline="true"></asp:LinkButton>
+                          <br /> -->
+                  <!-- <asp:LinkButton ID="lbtnReqDuplicateBill" ForeColor="Blue" Text="Request Duplicate Bill" OnClientClick="openWindow('duplicatebill');"
+                              Enabled="true" runat="server" Font-Underline="true"></asp:LinkButton>
+                          <br />
+                          <asp:LinkButton ID="lbtnReqDuplicatePolicy" ForeColor="Blue" Text="Request Duplicate Policy" OnClientClick="openWindow('duplicatepolicy');"
+                              Enabled="true" runat="server" Font-Underline="true"></asp:LinkButton>
+                          <br /> -->
+                  <!-- <asp:LinkButton ID="lbtnRemovePFLRider" ForeColor="Blue" Text="Remove PFL Rider"
+                              Enabled="true" runat="server" Font-Underline="true" OnClick="lbtnRemovePFLRider_Click"></asp:LinkButton>
+                          <br /> -->
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member Information -->
+        <div *ngIf="MemberInformationSection" class="row">
+          <div class="col-md-6">
+            <h5 style="text-align:left;color: #00579c;">
+              <strong>Member Information</strong>
+            </h5>
+            <div style="background-color: white; border: solid 1px #eaeaea;">
+              <table width="100%" cellpadding="0" cellspacing="0" class="form-search" border="0">
+                <tr>
+                  <td width="100%" align="left">
+                    <div style="position: relative;">
+                      <div class="highlight-box tabBox">
+                        <div id="dvActiveMembers" class="col-md-6 {{active}} tabSection"
+                          (click)="shiftToActiveInactive(1)">
+                          <span class="border-abs" id="spnActiveMembers"></span>Active Members
+                        </div>
+
+                        <div id="dvInactiveMembers" class="col-md-6 {{inactive}} tabSection"
+                          (click)="shiftToActiveInactive(2)">
+                          <span class="border-abs" id="spnInactiveMembers"></span>Inactive Members
+                        </div>
+                      </div>
+                      <div class="clear"></div>
+                      <div id="manageEnroll" class="highlightHeader {{memberGridSize}}">
+                        <div *ngIf="pnlActiveMember">
+                          <div style="padding: 0 2px;">
+                            <div style="text-align: center;padding: 5px 0px 2px 0px">
+                              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                  <td>
+                                    <span style="font-size: 14px; font-weight: 600;">Employees: </span>
+                                    <span>{{lblActiveEmployeesCount}}</span>
+                                  </td>
+                                  <td>
+                                    <span style="font-size: 14px; font-weight: 600;">Dependents: </span>
+                                    <span>{{lblActiveDependentsCount}}</span>
+                                  </td>
+                                  <td>
+                                    <span style="font-size: 14px; font-weight: 600;">Waiting Period: </span>
+                                    <span>{{lblActiveWaitingPeriod}}</span>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                            <table matSort (matSortChange)="sortData_Active($event)" class="memberTable" border="0" width="100%" frame="void">
+                              <thead>
+                                <tr style="text-align: center;">
+                                  <th style="width: 40%; padding-left: 5px;" mat-sort-header="LASTNAME">Last Name, First Name</th>
+                                  <th style="width: 5%; padding-left: 5px;">Gender</th>
+                                  <th style="width: 20%; padding-left: 5px;">Coverage Type</th>
+                                  <th style="width: 20%; padding-left: 5px;" mat-sort-header="SNAPFROMDT">Coverage Start</th>
+                                  <th>Coverage End</th>
+                                </tr>
+                              </thead>
+                              <ng-container *ngIf="!errorActive">
+                                <tbody *ngFor="let enroll of RptActiveEnrollList">
+                                  <tr class="parent">
+                                    <td class="firstParenttd">{{enroll.LASTNAME}}, {{enroll.FIRSTNAME}}
+                                      <input align="right" id="{{enroll.EMPNO + '_button'}}" class={{arrowButton}}
+                                        *ngIf="enroll.TYPO == 'parent'" type="image"
+                                        src="../../../WebUtilities/assets/Images/blu-down-arrow.png"
+                                        (click)="arrowButtonClick(enroll.EMPNO)">
+                                    </td>
+                                    <td style="padding-left: 5px;">{{enroll.GENDER}}</td>
+                                    <td style="padding-left: 5px;">{{enroll.GROUP}}</td>
+                                    <td style="padding-left: 5px;">{{enroll.SNAPFROMDT}}</td>
+                                    <td style="padding-left: 5px;">{{enroll.SNAPTHRUDT}}</td>
+                                  </tr>
+                                  <tr class="child {{enroll.EMPNO}}" style="display:none;"
+                                    *ngFor="let child of dependents(enroll.EMPNO)">
+                                    <td class="firstChildtd">{{child.LASTNAME}}, {{child.FIRSTNAME}}</td>
+                                    <td>{{child.GENDER}}</td>
+                                    <td>{{child.GROUP}}</td>
+                                    <td>{{child.SNAPFROMDT}}</td>
+                                    <td style="color: red;">{{child.SNAPTHRUDT}}</td>
+                                  </tr>
+                                </tbody>
+                              </ng-container>
+                              <tbody *ngIf="errorActive">
+                                <tr>
+                                  <td colspan="5" style="text-align: center;">
+                                    No results found.
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                          </div>
+                        </div>
+
+                        <div *ngIf="pnlInactiveMember">
+                          <div style="padding: 0 2px;">
+                            <div style="text-align: center;padding: 5px 0px 2px 0px">
+                              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                  <td>
+                                    <span style="font-size: 14px; font-weight: 600;">Employees: </span>
+                                    <span>{{lblInactiveEmployeesCount}}</span>
+                                  </td>
+                                  <td>
+                                    <span style="font-size: 14px; font-weight: 600;">Dependents: </span>
+                                    <span>{{lblInactiveDependentsCount}}</span>
+                                  </td>
+                                  <td>
+                                    <span style="font-size: 14px; font-weight: 600;">Waiting Period: </span>
+                                    <span>{{lblInactiveWaitingPeriod}}</span>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                            <table matSort (matSortChange)="sortData_Inactive($event)" class="memberTable" border="0" width="100%" frame="void">
+                              <thead>
+                                <tr style="text-align: center;">
+                                  <th style="width: 40%; padding-left: 5px;" mat-sort-header="LASTNAME">Last Name, First Name</th>
+                                  <th style="width: 5%; padding-left: 5px;">Gender</th>
+                                  <th style="width: 20%; padding-left: 5px;">Coverage Type</th>
+                                  <th style="width: 20%; padding-left: 5px;" mat-sort-header="SNAPFROMDT">Coverage Start</th>
+                                  <th>Coverage End</th>
+                                </tr>
+                              </thead>
+                              <ng-container *ngIf="!errorInactive">
+                                <tbody *ngFor="let enroll of RptInactiveEnrollList">
+                                  <tr class="parent">
+                                    <td class="firstParenttd">{{enroll.LASTNAME}}, {{enroll.FIRSTNAME}}
+                                      <input align="right" id="{{enroll.EMPNO + '_button'}}" class={{arrowButton}}
+                                        *ngIf="enroll.TYPO == 'parent'" type="image"
+                                        src="../../../WebUtilities/assets/Images/blu-down-arrow.png"
+                                        (click)="arrowButtonClick(enroll.EMPNO)">
+                                    </td>
+                                    <td>{{enroll.GENDER}}</td>
+                                    <td>{{enroll.GROUP}}</td>
+                                    <td>{{enroll.SNAPFROMDT}}</td>
+                                    <td style="color: red;">{{enroll.SNAPTHRUDT}}</td>
+                                  </tr>
+                                  <tr class="child {{enroll.EMPNO}}" style="display:none;"
+                                    *ngFor="let child of dependents(enroll.EMPNO)">
+                                    <td class="firstChildtd">{{child.LASTNAME}}, {{child.FIRSTNAME}}</td>
+                                    <td>{{child.GENDER}}</td>
+                                    <td>{{child.GROUP}}</td>
+                                    <td>{{child.SNAPFROMDT}}</td>
+                                    <td style="color: red;">{{child.SNAPTHRUDT}}</td>
+                                  </tr>
+                                </tbody>
+                              </ng-container>
+                              <tbody *ngIf="errorInactive">
+                                <tr>
+                                  <td colspan="5" style="text-align: center;">
+                                    No results found.
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <!-- <tbody>
+                              <tr *ngFor="let enroll of RptInactiveEnrollList">
+                                <td>{{enroll.LASTNAME}}, {{enroll.FIRSTNAME}}</td>
+                                <td>{{enroll.GENDER}}</td>
+                                <td>{{enroll.GROUP}}</td>
+                                <td>{{enroll.SNAPFROMDT}}</td>
+                                <td>{{enroll.SNAPTHRUDT}}</td>
+                              </tr>
+                            </tbody> -->
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <!-- </div> -->
+          <div class="col-md-6">
+
+          </div>
+
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Code for popups -->
+
+<!-- Custom benefits start-->
+<div class="modal fade" id="AmendedBenefit" role="dialog" aria-labelledby="AmendedBenefitTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Custom Benefits</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group container-fluid">
+            {{iAmendedBenefitText}}<br />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Custom benefits close-->
+
+  <!-- Rate History start-->
+  <div class="modal fade" id="ViewRatesHistory" role="dialog" aria-labelledby="ViewRatesHistoryTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Rates History For {{PolicyDetailFinal[0].policynumber}}</h5>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-1">
+            <div class="col-3"></div>
+            <div class="col-12 mt-2">
+              <!-- <ag-grid-angular style="width: 100%;" class="ag-theme-balham {{rateHistoryGridSize}}"
+                          [rowData]="rowRatesHistory_onPopUp" [suppressHorizontalScroll]=true
+                          [domLayout]="autoHeight" [overlayLoadingTemplate]="loadingTemplate"
+                          (gridReady)="onGridReady_Popup($event)"
+                          [overlayNoRowsTemplate]="noRowsTemplate" 
+                          [columnDefs]="columnRatesHistory_onPopUp" >
+                      </ag-grid-angular> -->
+              <ag-grid-angular style="width: 100%;" class="ag-theme-balham {{rateHistoryGridSize}}"
+                [rowData]="rowRatesHistory_onPopUp" [suppressHorizontalScroll]=true
+                [columnDefs]="columnRatesHistory_onPopUp" [overlayLoadingTemplate]="loadingTemplate"
+                [overlayNoRowsTemplate]="noRowsTemplate" (gridReady)="onGridReady_Global($event)"
+                [defaultColDef]="defaultColDef">
+              </ag-grid-angular>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Rate History close-->
+
+  <!-- Add New Policy Note Popup start-->
+  <!-- <form id="Form" class="form-horizontal"> -->
+  <form class="needs-validation" novalidate>
+    <div class="modal fade" id="ViewAddNew" role="dialog" aria-labelledby="ViewAddNewTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Policy Note</h5>
+          </div>
+          <!-- <form [formGroup]="myForm" (ngSubmit)="submitForm()"> -->
+          <div class="modal-body">
+            <!-- <form id="Form"> -->
+            <table style="width: 100%;">
+              <tr>
+                <td>
+                  <span style="margin-top: 6px; text-align: left;"><strong>Policy # : </strong></span>
+                  <span>{{PolicyNo_Dec}}</span>
+                </td>
+                <td>
+                  <span style="margin-top: 6px; text-align: left;"><strong>User : </strong></span>
+                  <span>{{UserName}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <textarea id="txtClaimNotes" rows="4" style="min-width: 100%;" [(ngModel)]="txtNewNote"
+                    name="txtClaimNotes" required="required" #box (keyup)="onKeyUp(box)" maxlength="255"></textarea>
+                  <label *ngIf="error" class="text-danger">*Required</label>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input type="text" value={{varlength}} style="width:50px;height:25px;" disabled> characters left
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="modal-footer">
+            <button id="SaveNotes" type="button" class="btn btn-primary"
+              (click)="txtNewNote == '' ? checkComment() : callAddNewNote(box.value)"
+              (keydown.enter)="!validate.invalid">Save</button>
+            <button type="button" id="btnCloseAddNew" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- Add New Claim Note Popup end-->
+
+  <!-- Additional Coverage Details Start-->
+  <div class="modal fade" id="ViewAdditionalCoverageDetails" role="dialog"
+    aria-labelledby="ViewAdditionalCoverageDetailsTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+      <div class="modal-content" style="max-height: 550px;">
+        <div class="modal-header">
+          <h5 class="modal-title">Additional Coverage Details For Policy {{PolicyDetailFinal[0].policynumber}}</h5>
+        </div>
+
+        <div style="overflow-x: hidden;">
+          <!-- 1 -->
+          <div class="modal-body">
+            <div class="title">
+              <h4> Locations / Insureds</h4>
+            </div>
+            <div class="policyInfoGrid">
+              <div class="dbGridWrapper" style="background: white;" class="{{locationInsuredGridSize}}">
+                <ag-grid-angular style="width: 100%;" class="ag-theme-balham {{locationInsuredGridSize}}"
+                  [rowData]="rowLocationInsured_onPopUp" [overlayLoadingTemplate]="loadingTemplate"
+                  [overlayNoRowsTemplate]="noRowsTemplate" [columnDefs]="columnLocationInsured_onPopUp"
+                  [getRowHeight]="getRowHeightLocation" (gridReady)="onGridReady_Global($event)"
+                  [defaultColDef]="defaultColDef">
+                </ag-grid-angular>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2 -->
+          <div class="p-l-15 p-r-15 ">
+            <div>
+              <div class="row">
+                <div class="col-md-6" [hidden]="varLinkedProducts == 'hideMe'">
+                  <b [hidden]="varLinkedProducts == 'hideMe'">Linked Products</b>
+                  <ag-grid-angular style="width: 100%;height: 100px;" class="ag-theme-balham"
+                    [suppressHorizontalScroll]=true [rowData]="rowLinkedProducts_onPopUp"
+                    [columnDefs]="columnLinkedProducts_onPopUp" [overlayLoadingTemplate]="loadingTemplate"
+                    [overlayNoRowsTemplate]="noRowsTemplate" (gridReady)="onGridReady_Global($event)"
+                    [defaultColDef]="defaultColDef">
+                  </ag-grid-angular>
+                </div>
+
+                <div class="col-md-6" [hidden]="varProprietorPartner == 'hideMe'">
+                  <b [hidden]="varProprietorPartner == 'hideMe'">Proprietor/Partner Coverage</b>
+                  <ag-grid-angular style="width: 100%;height: 100px;" class="ag-theme-balham"
+                    [suppressHorizontalScroll]=true [rowData]="rowProprietorPartner_onPopUp"
+                    [columnDefs]="columnProprietorPartner_onPopUp" [overlayLoadingTemplate]="loadingTemplate"
+                    [overlayNoRowsTemplate]="noRowsTemplate" (gridReady)="onGridReady_Global($event)"
+                    [defaultColDef]="defaultColDef">
+                  </ag-grid-angular>
+                </div>
+              </div>
+
+              <br>
+              <!-- 3 -->
+              <div class="row">
+                <div class="col-md-6">
+                  <b [hidden]="varOutOfStateCoverage == 'hideMe'">Out of state coverage</b>
+                  <textarea disabled [hidden]="varOutOfStateCoverage == 'hideMe'"
+                    style="width:100%;height:90px;">{{varOutOfStateCoverage}}</textarea>
+                  <input type="checkbox" [checked]="variNonStat" [hidden]="varOutOfStateCoverage == 'hideMe'"
+                    disabled><label [hidden]="varOutOfStateCoverage == 'hideMe'">All non-stat States</label>
+                </div>
+
+                <div class="col-md-6">
+                  <b [hidden]="varVoluntaryCoverage == 'hideMe'">Voluntary Coverage</b>
+                  <textarea [hidden]="varVoluntaryCoverage == 'hideMe'" style="width:100%;height:90px;"
+                    disabled>{{varVoluntaryCoverage}} </textarea>
+                </div>
+
+              </div>
+
+              <br>
+              <!-- 4 -->
+              <div class="row">
+                <div class="col-md-6">
+                  <b [hidden]="varExclusionsCoverage == 'hideMe'">Exclusions</b>
+                  <textarea [hidden]="varExclusionsCoverage == 'hideMe'" style="width:100%;height:90px;"
+                    disabled>{{varExclusionsCoverage}}</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Additional Coverage Details End -->
+
+  <!-- Balance Due start-->
+  <div class="modal fade" id="mpeBalanceDue" role="dialog" aria-labelledby="ViewmpeBalanceDue" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Balance Due</h5>
+        </div>
+        <div class="modal-body">
+          <form #userForm="ngForm">
+            <div class="form-group container-fluid">
+              <table class="dbGridTable" style="border-style:None;width:100%;border-collapse:collapse;" border="1"
+                cellspacing="0" cellpadding="0">
+                <tr>
+                  <th>LOB</th>
+                  <th>Period From</th>
+                  <th>Period To</th>
+                  <th>Amount</th>
+                </tr>
+
+                <ng-container *ngFor="let due of gvBalanceDue">
+                  <tr *ngIf="!noRecords_inBalDue">
+                    <td>
+                      {{due.balancecategory}}
+                    </td>
+                    <td>
+                      {{due.periodf}}
+                    </td>
+                    <td>
+                      {{due.periodt}}
+                    </td>
+                    <td style="text-align: right;">
+                      {{due.balanceamount | currency}}
+                    </td>
+                  </tr>
+                </ng-container>
+                <tr *ngIf="!noRecords_inBalDue">
+                  <td colspan="2"></td>
+                  <td><strong>Total</strong></td>
+                  <td style="text-align: right;"><strong>{{total_inBalDueGrid | currency}}</strong></td>
+                </tr>
+                <tr *ngIf="noRecords_inBalDue">
+                  <td colspan="4">No Records Available</td>
+                </tr>
+              </table>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Balace Due End-->
+
+  <!-- Missing Info start-->
+  <div class="modal fade" id="mpeMissingInfo" role="dialog" aria-labelledby="ViewmpeMissingInfo"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Missing Information - Reasons</h5>
+        </div>
+        <div class="modal-body">
+          <form #userForm="ngForm">
+            <div [innerHTML]="lblMissingInfoReasons" class="form-group container-fluid">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Missing Info End-->
+
+  <!-- Questionable Wages start-->
+  <div class="modal fade" id="mpeQuestionableWages" role="dialog" aria-labelledby="ViewmpeQuestionableWages"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Questionable Wages - Reasons</h5>
+        </div>
+        <div class="modal-body">
+          <form #userForm="ngForm">
+            <div [innerHTML]="lblQuestionableWagesReasons" class="form-group container-fluid">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Questionable Wages End-->
+
+  <!-- Cancel Policy start-->
+  <div class="modal fade" id="ViewCancelPolicy" role="dialog" aria-labelledby="ViewCancelPolicyTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">User Information</h5>
+        </div>
+        <div class="modal-body">
+          <form #userForm="ngForm">
+            <div class="form-group container-fluid">
+              This option is not available as the selected policy is currently cancelled.<br />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Cancel Policy close-->
+
+  <!-- Remove PFL Rider start-->
+  <div class="modal fade" id="mpeRemovePFLRider" role="dialog" aria-labelledby="mpeRemovePFLRiderTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="divPFLPolicyValidation" class="modal-title">Remove PFL Rider</h5>
+          <h5 *ngIf="divPFLBalanceDueValidation" class="modal-title">PFL Balance Due Notification!</h5>
+        </div>
+        <div class="modal-body">
+          <form #userForm="ngForm">
+            <div *ngIf="divPFLPolicyValidation" class="form-group container-fluid">
+              <table width="99%" cellpadding="0" cellspacing="0" class="form-search"
+                        style="background-color: White !important;">
+                        <tr>
+                          <td style="color: red; font-size: 13px; vertical-align: top;">*
+                          </td>
+                          <td style="text-align: left !important; color: red; font-size: 13px;">To remove the PFL rider from this policy, please confirm by entering the policy number below and clicking submit.
+                              
+                          </td>
+                      </tr>
+                      <tr style="min-height: 20px;">
+                        <td colspan="2"><br></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="text-align: center; font-size: 13px !important; text-align: left; padding-left: 6px;">
+                        <div>
+                        <label ID="lblPolicyNumberToRemovePFLRider">Enter Policy Number:</label>
+                        <input type="text" name="txtPolicyNumberToRemovePFLRider" maxlength="10" autocomplete="off" [(ngModel)]="txtPolicyNumberToRemovePFLRider"
+                            class="form-control {{removepflBorder}}" oninput="this.value = this.value.toUpperCase()" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="text-align: center;">
+                        <label style="font-size: 13px; color: red;">{{lblErrorMsgToRemovePFLRider}}</label>
+                      </td>
+                  </tr>
+              </table>
+            </div>
+
+            <div *ngIf="divPFLBalanceDueValidation" class="form-group container-fluid">
+              <table width="99%" cellpadding="0" cellspacing="0" class="form-search"
+                        style="background-color: White !important;">
+                        <tr>
+                          <td colspan="2" style="text-align: center;">
+                              <div>
+                                <label style="font-size: 13px; color: red;">{{lblBalanceDueMessage}}</label>
+                              </div>
+                          </td>
+                      </tr>
+              </table>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="divPFLPolicyValidation" class="modal-footer">
+          <button id="closeRemovePfl"type="button" class="btn btn-primary" data-dismiss="modal" >Close</button>
+          <button id="SaveNotes" type="button" class="btn btn-primary"
+              (click)="SubmitToRemovePFLRider()">Submit</button>
+        </div>
+        <div *ngIf="divPFLBalanceDueValidation" class="modal-footer">
+          <button id="SaveNotes" type="button" class="btn btn-primary"
+              (click)="PayBalanceDue()">Pay Balance</button>
+          <button id="SaveNotes" type="button" class="btn btn-primary"
+              (click)="ContinueandCancelPFLPolicy()">Continue and Cancel PFL Rider</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Remove PFL Rider close-->
+
+  <!-- Bill Mode Change Request start-->
+  <button id="openBillModeChangeRequest" [hidden]="true" data-toggle="modal"
+    data-target="#BillModeChangeRequest">OPEN</button>
+  <div class="modal fade" id="BillModeChangeRequest" role="dialog" aria-labelledby="BillModeChangeRequestTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="pnlAddBillModeWarning" class="modal-title">Missing Information - Reasons</h5>
+          <h5 *ngIf="pnlAddBillModeExistingRequest" class="modal-title">Bill Mode Change Popup</h5>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-1">
+            <div class="col-3"></div>
+            <div class="col-12 mt-2">
+
+              <div *ngIf="pnlAddBillModeWarning">
+                <table width="99%" cellpadding="0" cellspacing="0" class="form-search"
+                  style="background-color: White !important;">
+                  <tr>
+                    <td colspan="2">
+                      <label *ngIf="BillModeWrng_lblBillMode">This is not an annually billed policy. Contact Manager to
+                        process.</label>
+                      <br *ngIf="BillModeWrng_lblBillMode"/>
+                      <label *ngIf="BillModeWrng_lblPolicyStatus">This is not an active policy. Contact Manager to
+                        process.</label>
+                      <br *ngIf="BillModeWrng_lblPolicyStatus">
+                      <label *ngIf="BillModeWrng_lblInActiveNotAnnual">This is not an annually billed
+                        policy and not an active policy. Contact Manager to process.</label>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div *ngIf="pnlAddBillModeExistingRequest">
+                <table width="99%" cellpadding="0" cellspacing="0" class="form-search"
+                  style="background-color: White !important;">
+                  <tr>
+                    <td colspan="2">
+                      <table width="99%" cellpadding="0" cellspacing="0" class="form-search"
+                        style="background-color: White !important;">
+                        <tr>
+                          <td colspan="2" style="color: red">This has an existing Bill Mode Change request. Contact
+                            Manager to process.
+                          </td>
+                        </tr>
+                        <br>
+                        <tr>
+                          <td>
+                            <span>Request Date:</span>
+                          </td>
+                          <td>
+                            <input type="text" name="ReqExist_TxtRequestDt" disabled
+                              [(ngModel)]="ReqExist_TxtRequestDt" />
+                            <!-- <asp:TextBox runat="server" ID="ReqExist_TxtRequestDt" CssClass="ReadOnlyBGColor" ReadOnly="true" Width="150"></asp:TextBox> -->
+                          </td>
+                        </tr>
+                        <br>
+                        <tr>
+                          <td>
+                            <span>Request Status:</span>
+                          </td>
+                          <td>
+                            <select class="custom-select form-control" disabled [(ngModel)]="ReqExist_DdlReqStatus"
+                              name="ReqExist_DdlReqStatus">
+                              <option value="--Select--">--Select--</option>
+                              <option value="Cancelled">Cancelled</option>
+                              <option value="Complete">Complete</option>
+                              <option value="Declined">Declined</option>
+                              <option value="In Progress">In Progress</option>
+                              <option value="New">New</option>
+                            </select>
+                          </td>
+                        </tr>
+                        <br>
+                        <tr>
+                          <td>
+                            <span>Request No:</span>
+                          </td>
+                          <td>
+                            <input type="text" name="ReqExist_TxtRequestNo" disabled
+                              [(ngModel)]="ReqExist_TxtRequestNo" />
+                            <!-- <asp:TextBox runat="server" ID="ReqExist_TxtRequestNo" ReadOnly="true" CssClass="ReadOnlyBGColor" Width="150"></asp:TextBox> -->
+                          </td>
+                        </tr>
+                        <br>
+                        <tr>
+                          <td>
+                            <span>Assigned To:</span>
+                          </td>
+                          <td>
+                            <select class="custom-select form-control" disabled [(ngModel)]="ddlRequestAssgnTo"
+                              name="ddlRequestAssgnToo">
+                              <option value="0">--Select--</option> -->
+                              <option *ngFor="let req of ReqExist_DdlRequestAssgnTo">{{ req.statecode }}</option>
+                            </select>
+
+                            <!-- <asp:DropDownList runat="server" ID="ReqExist_DdlRequestAssgnTo" ReadOnly="true" CssClass="ReadOnlyBGColor" Enabled="False" Width="151">
+                                            </asp:DropDownList> -->
+                          </td>
+                        </tr>
+                        <br>
+                        <tr>
+                          <td>
+                            <span>Comments:</span>
+                          </td>
+                          <td>
+                            <!-- <input type="text" name="ReqExist_TxtRequestCmnt" disabled [(ngModel)]="ReqExist_TxtRequestCmnt" /> -->
+                            <textarea rows="3" style="min-width: 100%" [(ngModel)]="ReqExist_TxtRequestCmnt" disabled
+                              name="ReqExist_TxtRequestCmnt"></textarea>
+                            <!-- <asp:TextBox TextMode="MultiLine" runat="server" ID="ReqExist_TxtRequestCmnt" CssClass="ReadOnlyBGColor" ReadOnly="true" Height="80" Width="99%"></asp:TextBox> -->
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="pnlAddBillModeWarning" class="modal-footer">
+          <button type="button" ID="btnBillModeRequestWrngOk" class="btn btn-primary" data-dismiss="modal">Ok</button>
+        </div>
+        <div *ngIf="pnlAddBillModeExistingRequest" class="modal-footer">
+          <button type="button" ID="btnBillModeRequestReturn" class="btn btn-primary"
+            data-dismiss="modal">Return</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bill Mode Change Request close-->
+  <!-- Code for popups end -->
+
+</div>

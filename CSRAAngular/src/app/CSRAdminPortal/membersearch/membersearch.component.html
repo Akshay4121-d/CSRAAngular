@@ -1,0 +1,43 @@
+<head>
+    <title>WebUtilities :: Search Member Accounts</title>
+</head>
+<section class="form-horizontal">
+    <article class="main-heading">
+        <h2>SEARCH MEMBER ACCOUNTS</h2>
+    </article>
+    <article class="content-center">
+        <form #userForm="ngForm" (keyup.enter)="searchInput()">
+            <div class="alert alert-danger form-group container-fluid" *ngIf="error">Please provide at least one
+                search criteria.</div>
+            <div class="form-group container-fluid p-l-0 p-r-0" [class.has-error]="Email.touched && Email.invalid">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-control" name="Email" #Email="ngModel" maxlength="50" autocomplete="off"
+                        [(ngModel)]="EmailID" placeholder="info@example.com" email="" autofocus (keydown)="OnKeyPress($event)" />
+                    <small>
+                        <span class="text-danger" *ngIf="InvalidEmail && Email.errors?.email">Invalid</span>
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label>Claim Number</label>
+                    <input type="text" class="form-control" name="ClaimNo" #ClaimNo="ngModel" maxlength="10"
+                        autocomplete="off" [(ngModel)]="ClaimNumber" />
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" name="Lname" #Lname="ngModel" autocomplete="off"
+                        [(ngModel)]="LastName" />
+                </div>
+
+                <!-- col-md-12 text-center m-t-10 -->
+                <div align="center">
+                    <button class="btn btn-primary btn btn-default" style='margin-right:16px' type="button"
+                        [routerLink]="['/selectuser']">Back</button>
+                    <button id="Search" class="btn btn-primary" type="button" (click)="(EmailID=='' && ClaimNumber=='' && LastName=='') ||(EmailID!='' && Email.errors?.email) ? searchInput() : getClaimBySearch()">Search</button>
+                </div>
+            </div>
+        </form>
+    </article>
+</section>

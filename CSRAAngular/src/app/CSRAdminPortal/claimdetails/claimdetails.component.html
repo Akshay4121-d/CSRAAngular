@@ -1,0 +1,1580 @@
+<head>
+  <title>WebUtilities :: Claim Details</title>
+</head>
+<div *ngIf="bind">
+  <section class="form-horizontal">
+    <article class="main-heading ">
+      <h2><strong>{{varHeadClaimNo}} | {{ClaimDetailFinal[0].FullName}}</strong></h2>
+    </article>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-6 p-l-0">
+          <button class="btn btn-primary ReturnToSearch" type="button" (click)="returnSearch()">Return To
+            Search</button>
+        </div>
+
+        <div class="col-md-6 p-r-0">
+          <select class="float-right" [(ngModel)]="claimFont" id="drpClaim"
+            (change)="filterForLinkedClaim($event.target.value)">
+            <option *ngFor="let LinkedClaim of lstLinkedClaim" [value]="LinkedClaim.linkedclaim">
+              {{LinkedClaim.linkedclaim}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="container">
+      <div class="row ">
+      </div>
+    </div> -->
+    <article class=" sepscView">
+      <div class="container container_section" style="overflow: hidden;">
+        <div class="row fontsize">
+          <div class="col-md-3 rightBr">
+            <h5 class="heading_text" [ngStyle]="{color: '#00579c'}">
+              <strong>Basic Info</strong>
+            </h5>
+            <label [hidden]="ClaimDetailFinal[0].ClaimNumber == 'isHidden'"><b>Claim:
+              </b>{{ClaimDetailFinal[0].ClaimNumber}}</label><br
+              [hidden]="ClaimDetailFinal[0].ClaimNumber == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].FullName == 'isHidden'">{{ClaimDetailFinal[0].FullName}}</label><br
+              [hidden]="ClaimDetailFinal[0].FullName == 'isHidden'">
+            <label
+              [hidden]="ClaimDetailFinal[0].FullAddress == 'isHidden'">{{ClaimDetailFinal[0].FullAddress}}</label><br
+              [hidden]="ClaimDetailFinal[0].FullAddress == 'isHidden'">
+            <!-- <label [hidden]="ClaimDetailFinal[0].Zip == 'isHidden'">{{ClaimDetailFinal[0].Zip}}</label><br
+              [hidden]="ClaimDetailFinal[0].Zip == 'isHidden'"> -->
+            <!-- <label [hidden]="ClaimDetailFinal[0].Phone == 'isHidden'">{{ClaimDetailFinal[0].Phone}}</label><br
+              [hidden]="ClaimDetailFinal[0].Phone == 'isHidden'"> -->
+            <label [hidden]="ClaimDetailFinal[0].DOB == 'isHidden'"><b>DOB: </b>{{ClaimDetailFinal[0].DOB}}</label><br
+              [hidden]="ClaimDetailFinal[0].DOB == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].SSN == 'isHidden'"><b>SSN: </b>{{ClaimDetailFinal[0].SSN}}</label>
+            <br [hidden]="ClaimDetailFinal[0].SSN == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].Phone == 'isHidden'"><b>Phone:
+              </b>{{ClaimDetailFinal[0].Phone}}</label>
+            <br [hidden]="ClaimDetailFinal[0].Phone == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].Gender == 'isHidden'">{{ClaimDetailFinal[0].Gender}}</label><br
+              [hidden]="ClaimDetailFinal[0].Gender == 'isHidden'">
+
+          </div>
+          <div class="col-md-3 rightBr" *ngIf="IsPFL == 'Y'">
+            <h5 class="heading_text" [ngStyle]="{color: '#00579c'}">
+              <strong>Benefit Details</strong>
+            </h5>
+            <label [hidden]="ClaimDetailFinal[0].BenifitRate == 'isHidden'"><b>Benefit Rate:
+              </b>{{ClaimDetailFinal[0].BenifitRate}}</label><br
+              [hidden]="ClaimDetailFinal[0].BenifitRate == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].FirstDayOfLeave == 'isHidden'"><b>First Day Of
+                Leave: </b>{{ClaimDetailFinal[0].FirstDayOfLeave}}</label><br
+              [hidden]="ClaimDetailFinal[0].FirstDayOfLeave == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].LeaveType == 'isHidden'"><b>Leave Type:
+              </b>{{ClaimDetailFinal[0].LeaveType}}</label><br [hidden]="ClaimDetailFinal[0].LeaveType == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].LeavePattern == 'isHidden'"><b>Leave Pattern:
+              </b>{{ClaimDetailFinal[0].LeavePattern}}</label><br
+              [hidden]="ClaimDetailFinal[0].LeavePattern == 'isHidden'">
+
+
+
+            <!-- <br [hidden]="ClaimDetailFinal[0].varDaysWorked == 'isHidden'"> -->
+            <label [hidden]="ClaimDetailFinal[0].AccountACCumulator == 'isHidden'"><b>Account Accumulator:
+              </b>{{ClaimDetailFinal[0].AccountACCumulator}}</label><br
+              [hidden]="ClaimDetailFinal[0].AccountACCumulator == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].PFACCumulator == 'isHidden'"><b>PFL Accumulator:
+              </b>{{ClaimDetailFinal[0].PFACCumulator}}</label><br
+              [hidden]="ClaimDetailFinal[0].PFACCumulator == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].Contribution == 'isHidden'"><b>Contribution:
+              </b>{{ClaimDetailFinal[0].Contribution}}</label><br
+              [hidden]="ClaimDetailFinal[0].Contribution == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].TAX == 'isHidden'"><b>TAX %: </b>{{ClaimDetailFinal[0].TAX}}</label><br
+              [hidden]="ClaimDetailFinal[0].TAX == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].UintedLocation == 'isHidden'"><b>Linked Location #:
+              </b>{{ClaimDetailFinal[0].UintedLocation}}</label><br
+              [hidden]="ClaimDetailFinal[0].UintedLocation == 'isHidden'">
+
+            <!-- <u *ngIf="isVisbleDayswork"><a data-toggle="modal" data-target="#ViewWorkDays"
+                style='margin-right:16px;color:deepskyblue;' data-backdrop="static" data-keyboard="false"><strong># Days
+                  Worked</strong></a></u>
+            <u *ngIf="isVisbleDayswork"><a data-toggle="modal" data-target="#ViewWorkDays"
+                style='margin-right:16px;color:deepskyblue;' data-backdrop="static"
+                data-keyboard="false"><strong>{{varDaysWorkedCount}}</strong></a></u> -->
+            <u [hidden]="varShowDays == 'isHidden'"><a data-toggle="modal" data-target="#ViewShowDays"
+                style='margin-right:16px;color:deepskyblue;' data-backdrop="static" data-keyboard="false"
+                (click)="showClaimStatusDetaill"><strong>Show Days</strong></a></u> <br
+              [hidden]="varShowDays == 'isHidden'">
+          </div>
+          <div class="col-md-3 rightBr" *ngIf="IsPFL == 'N'">
+            <h5 class="heading_text" [ngStyle]="{color: '#00579c'}">
+              <strong>Benefit Details</strong>
+            </h5>
+            <label [hidden]="ClaimDetailFinal[0].BenifitRate == 'isHidden'"><b>Benefit Rate:
+              </b>{{ClaimDetailFinal[0].BenifitRate}}</label><br
+              [hidden]="ClaimDetailFinal[0].BenifitRate == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].OnSetDate == 'isHidden'"><b>Onset Date:
+              </b>{{ClaimDetailFinal[0].OnSetDate}}</label><br [hidden]="ClaimDetailFinal[0].OnSetDate == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].DeliveryDate == 'isHidden'"><b>Delivery Date:
+              </b>{{ClaimDetailFinal[0].DeliveryDate}}</label><br
+              [hidden]="ClaimDetailFinal[0].DeliveryDate == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].DeliveryType == 'isHidden'"><b>Delivery Type:
+              </b>{{ClaimDetailFinal[0].DeliveryType}}</label><br
+              [hidden]="ClaimDetailFinal[0].DeliveryType == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].DaysWorked == 'isHidden'"><b>Days Worked:
+              </b>{{ClaimDetailFinal[0].DaysWorked}}</label><br [hidden]="ClaimDetailFinal[0].DaysWorked == 'isHidden'">
+
+            <label [hidden]="ClaimDetailFinal[0].AccountACCumulator == 'isHidden'"><b>Account Accumulator:
+              </b>{{ClaimDetailFinal[0].AccountACCumulator}}</label><br
+              [hidden]="ClaimDetailFinal[0].AccountACCumulator == 'isHidden'">
+            <!-- <label [hidden]="ClaimDetailFinal[0].PFACCumulator == 'isHidden'"><b>PF Accumulator:
+              </b>{{ClaimDetailFinal[0].PFACCumulator}}</label><br
+              [hidden]="ClaimDetailFinal[0].PFACCumulator == 'isHidden'"> -->
+            <label [hidden]="ClaimDetailFinal[0].Contribution == 'isHidden'"><b>Contribution:
+              </b>{{ClaimDetailFinal[0].Contribution}}</label><br
+              [hidden]="ClaimDetailFinal[0].Contribution == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].TAX == 'isHidden'"><b>TAX %: </b>{{ClaimDetailFinal[0].TAX}}</label><br
+              [hidden]="ClaimDetailFinal[0].TAX == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].UintedLocation == 'isHidden'"><b>Linked Location #:
+              </b>{{ClaimDetailFinal[0].UintedLocation}}</label><br
+              [hidden]="ClaimDetailFinal[0].UintedLocation == 'isHidden'">
+
+            <!-- <u><a data-toggle="modal" data-target="#ViewWorkDays" style='margin-right:16px;color:deepskyblue;'
+                data-backdrop="static" data-keyboard="false" (click)="showDaysWorked()"><strong># Days
+                  Worked</strong></a></u>
+            <u><a data-toggle="modal" data-target="#ViewWorkDays" style='margin-right:16px;color:deepskyblue;'
+                data-backdrop="static" data-keyboard="false"
+                (click)="showDaysWorked()"><strong>{{varDaysWorkedCount}}</strong></a></u> -->
+
+            <u *ngIf="isVisbleDayswork"><a data-toggle="modal" data-target="#ViewWorkDays"
+                style='margin-right:16px;color:deepskyblue;' data-backdrop="static" data-keyboard="false"><strong># Days
+                  Worked</strong></a></u>
+            <u *ngIf="isVisbleDayswork"><a data-toggle="modal" data-target="#ViewWorkDays"
+                style='margin-right:16px;color:deepskyblue;' data-backdrop="static"
+                data-keyboard="false"><strong>{{varDaysWorkedCount}}</strong></a></u>
+
+          </div>
+
+
+          <div *ngIf="isVisibleRegisteredUserinPortal" class="col-md-3 rightBr">
+            <h5 class="heading_text" [ngStyle]="{color: '#00579c'}">
+              <strong> Claim Status </strong>
+              <label *ngIf='!ShowClaimTermDate && firstPreviewClaim' style="color: #56ad00; font-size: 18px;">
+                Active</label>
+              <label *ngIf='ShowClaimTermDate && firstPreviewClaim' style="color: red; font-size: 18px">
+                Terminated</label>
+            </h5>
+            <u><a data-toggle="modal" data-target="#ViewClaimStatusDetaill" style='margin-right:16px;color:deepskyblue;'
+                data-backdrop="static" data-keyboard="false"><strong>Details</strong></a></u><br>
+            <div * ngIf="ShowClaimTermDate">
+              <label [hidden]="ClaimStatusDetailFinal[0].TermDate == 'isHidden'">
+                <b>Term Date: </b><label style="color: red;">{{ClaimStatusDetailFinal[0].TermDate}}</label>
+              </label> <br [hidden]="ClaimStatusDetailFinal[0].TermDate == 'isHidden'">
+            </div>
+            <label *ngIf="IsPFL == 'N'" [hidden]="ClaimStatusDetailFinal[0].MedRTW == 'isHidden'">
+              <b>Medical RTW Date: </b>{{ClaimStatusDetailFinal[0].MedRTW}}</label>
+            <!-- <br [hidden]="ClaimStatusDetailFinal[0].MedRTW == 'isHidden'"> -->
+            <label *ngIf="IsPFL == 'Y'" [hidden]="ClaimStatusDetailFinal[0].EstRTW == 'isHidden'"><b>Estimated
+                RTW Date: </b>{{ClaimStatusDetailFinal[0].EstRTW}}</label><br
+              [hidden]="ClaimStatusDetailFinal[0].EstRTW == 'isHidden'">
+            <!-- <label [hidden]="ClaimStatusDetailFinal[0].TentativeRTWDate == 'isHidden'"><b>Tentative RTW
+                Date:
+              </b>{{ClaimStatusDetailFinal[0].TentativeRTWDate}}</label><br
+              [hidden]="ClaimStatusDetailFinal[0].TentativeRTWDate == 'isHidden'">
+             <label [hidden]="ClaimStatusDetailFinal[0].ActualRTWDate == 'isHidden'"><b>Actual RTW Date:
+              </b>{{ClaimStatusDetailFinal[0].ActualRTWDate}}</label><br
+              [hidden]="ClaimStatusDetailFinal[0].ActualRTWDate == 'isHidden'"> -->
+
+            <label [hidden]="varTentativeRTWDate == 'isHidden'"><b>Tentative RTW Date:
+              </b>{{varTentativeRTWDate}}</label><br [hidden]="varTentativeRTWDate == 'isHidden'">
+
+            <label [hidden]="varactualreturntoworkdate == 'isHidden'"><b>Actual RTW Date:
+              </b>{{varactualreturntoworkdate}}</label><br [hidden]="varactualreturntoworkdate == 'isHidden'">
+
+
+
+            <u><a data-toggle="modal" data-target="#ViewUpdateRTW" style='margin-right:16px;color:deepskyblue;'
+                data-backdrop="static" data-keyboard="false" (click)="showUpdateRTWPopUp()"><strong>Update
+                  RTW</strong></a></u><br>
+            <!-- <label *ngIf="trWorkCertifiedTo" [hidden]="ClaimStatusDetailFinal[0].WorkCertifiedTo == 'isHidden'"><b>Work Certified To:
+              </b>{{ClaimStatusDetailFinal[0].WorkCertifiedTo}}</label><br *ngIf="trWorkCertifiedTo" [hidden]="ClaimStatusDetailFinal[0].WorkCertifiedTo == 'isHidden'">
+             -->
+              <label *ngIf="isVisibleAccountCreated"><b *ngIf="isVisibleAccountCreated">Account Created:
+              </b><label *ngIf="!accountCreated" style="color: red; font-size: 14px;font-weight: 500;">THIS CLAIMANT HAS NOT YET CREATED A CLAIM PORTAL ACCOUNT</label>
+              <label *ngIf="accountCreated" style="color: #56ad00; font-size: 14px;font-weight: 500;">YES</label>
+              </label>
+            <br *ngIf="isVisibleAccountCreated">
+
+
+            <label *ngIf="isVisibleID"><b *ngIf="isVisibleID">ID: </b>{{ClaimStatusDetailFinal[0].ID}}</label>
+            <br *ngIf="isVisibleID">
+            <label *ngIf="isVisibleAccountLocked"><b *ngIf="isVisibleAccountLocked">Account Locked:
+              </b>{{ClaimStatusDetailFinal[0].AccountLocked}}</label>
+            <br *ngIf="isVisibleAccountLocked">
+
+            <u *ngIf="isVisiblePasswordReset">
+              <a data-toggle="modal" data-target="#ViewResetPasswornUnlockAccount"
+                style='margin-right:16px;color:deepskyblue;' data-backdrop="static" data-keyboard="false"
+                (click)="showResetPasswornUnlockAccount"><strong>Reset Password/Unlock
+                  Account</strong></a></u>
+            <br />
+            <label *ngIf='isVisiblelblErrMsg' style="color: red;">{{lblErrMsg}} </label>
+          </div>
+
+
+          <div *ngIf="!isVisibleRegisteredUserinPortal" class="col-md-3 rightBr">
+            <h5 class="heading_text" [ngStyle]="{color: '#00579c'}">
+              <strong>RTW Dates </strong>
+            </h5>
+
+
+
+            <label *ngIf="pnlRTW_RowMedical" [hidden]="pnlRTW_lblMedicalRTWDt == 'isHidden'">
+              <b [hidden]="pnlRTW_lblMedicalRTWDt== 'isHidden'">Medical RTW Date: </b>{{pnlRTW_lblMedicalRTWDt}}</label>
+            <br *ngIf="pnlRTW_RowMedical" [hidden]="pnlRTW_lblMedicalRTWDt== 'isHidden'">
+
+            <label *ngIf="pnlRTW_RowTentiveDt" [hidden]="pnlRTW_lblTentativeWorkDt == 'isHidden'">
+              <b [hidden]="pnlRTW_lblTentativeWorkDt == 'isHidden'">Tentative RTW
+                Date: </b>{{pnlRTW_lblTentativeWorkDt}}</label>
+            <br *ngIf="pnlRTW_RowTentiveDt" [hidden]="pnlRTW_lblTentativeWorkDt == 'isHidden'">
+
+            <label *ngIf="pnlRTW_RowActualDt" [hidden]="pnlRTW_lblActualWorkDt == 'isHidden'">
+              <b [hidden]="pnlRTW_lblActualWorkDt == 'isHidden'">Actual RTW Date: </b>{{pnlRTW_lblActualWorkDt}}</label>
+            <br *ngIf="pnlRTW_RowActualDt" [hidden]="pnlRTW_lblActualWorkDt == 'isHidden'">
+
+            <label *ngIf="pnlRTW_RowClaimPercent" [hidden]="pnlRTW_lblPercent == 'isHidden'">
+              <b [hidden]="pnlRTW_lblPercent == 'isHidden'">75% of Claim Date: </b>{{pnlRTW_lblPercent}}</label>
+            <br *ngIf="pnlRTW_RowClaimPercent" [hidden]="pnlRTW_lblPercent== 'isHidden'">
+
+            <label *ngIf="pnlRTW_RowWorkCertified" [hidden]="pnlRTW_lblWorkCertifiedDt == 'isHidden'">
+              <b [hidden]="pnlRTW_lblWorkCertifiedDt == 'isHidden'">Work Certified
+                To: </b>{{pnlRTW_lblWorkCertifiedDt}}</label>
+            <br *ngIf="pnlRTW_RowWorkCertified" [hidden]="pnlRTW_lblWorkCertifiedDt == 'isHidden'">
+
+
+            <u><a data-toggle="modal" data-target="#ViewUpdateRTW" style='margin-right:16px;color:deepskyblue;'
+                data-backdrop="static" data-keyboard="false" (click)="showUpdateRTW">
+                <strong>Update RTW</strong></a>
+            </u>
+            <br>
+
+
+          </div>
+
+
+          <div class="col-md-3">
+            <h5 style="text-align:left" [ngStyle]="{color: '#00579c'}">
+              <strong> Policy Info </strong>
+              <label *ngIf='!ShowPolicyTermDate && firstPreviewPolicy' style="color: #56ad00; font-size: 18px">
+                Active</label>
+              <label *ngIf='ShowPolicyTermDate && firstPreviewPolicy' style="color: red; font-size: 18px">
+                Terminated </label>
+            </h5>
+            <label [hidden]="ClaimDetailFinal[0].PolicyNumber == 'isHidden'"><b>Policy:
+              </b>{{ClaimDetailFinal[0].PolicyNumber}}</label><br
+              [hidden]="ClaimDetailFinal[0].PolicyNumber == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].Name == 'isHidden'">{{ClaimDetailFinal[0].Name}}</label><br
+              [hidden]="ClaimDetailFinal[0].Name == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].pFullAddress == 'isHidden'">{{ClaimDetailFinal[0].pFullAddress}}</label><br
+              [hidden]="ClaimDetailFinal[0].pFullAddress == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].Effective == 'isHidden'"><b>Effective:
+              </b>{{ClaimDetailFinal[0].Effective}}</label><br [hidden]="ClaimDetailFinal[0].Effective == 'isHidden'">
+            <div *ngIf="ShowPolicyTermDate">
+              <label [hidden]="ClaimDetailFinal[0].TermDatePolicyInfo == 'isHidden'"> <b> Term Date: </b> <label
+                  style="color: red;">{{ClaimDetailFinal[0].TermDatePolicyInfo}}</label>
+              </label>
+              <br [hidden]="ClaimDetailFinal[0].TermDatePolicyInfo == 'isHidden'">
+            </div>
+
+
+            <label [hidden]="ClaimDetailFinal[0].TermCode == 'isHidden'"><b>Term Code:
+              </b>{{ClaimDetailFinal[0].TermCode}}</label><br [hidden]="ClaimDetailFinal[0].TermCode == 'isHidden'">
+            <label [hidden]="ClaimDetailFinal[0].BenifitLevel == 'isHidden'"><b>Benefit Level:
+              </b>{{ClaimDetailFinal[0].BenifitLevel}}</label><br
+              [hidden]="ClaimDetailFinal[0].BenifitLevel == 'isHidden'">
+
+
+            <label [hidden]="varSpecialProvisions == 'isHidden'"><b>Special Provisions</b></label>
+            <a [hidden]="varSpecialProvisions == 'isHidden'" class="tooltipbig">
+              <img alt="" src="assets/Images/icon_question_22.png" style="vertical-align: middle; margin-top: -5px" />
+              <span [hidden]="varSpecialProvisions == 'isHidden'">
+                <img alt="" class="callout" src="assets/Images/popCallout.png" />
+                {{varSpecialProvisions}}
+              </span>
+            </a>
+            <br [hidden]="varSpecialProvisions == 'isHidden'">
+            <u><a data-toggle="modal" data-target="#ViewAdditionalCoverageDetails"
+                style='margin-right:16px;color:deepskyblue;' data-backdrop="static" data-keyboard="false"
+                (click)="showAdditionalCoverageDetails()"><strong>View Additional Coverage Details</strong></a></u>
+
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12 p-l-15 p-r-20">
+            <h5 style="text-align:left" [ngStyle]="{color: '#00579c'}">
+              <strong>Payment Information</strong>
+            </h5>
+            <div class="policyInfoGrid">
+              <div class="dbGridWrapper" style="background: white;">
+                <div style="max-height: 194px; overflow-y: auto;">
+                  <!-- <div style="min-height: calc(100% - 194px); overflow-y: scroll;height: 194px;"> -->
+                  <!-- <div style="height: 194px; overflow-y: scroll;"> -->
+
+                  <table id="tblPaymentInfo" class="dbGridTable"
+                    style="border-style:None;width:100%;border-collapse:collapse;" border="1" cellspacing="0"
+                    cellpadding="0">
+                    <tr>
+                      <th>Check Date</th>
+                      <th>Check#</th>
+                      <th>Check From</th>
+                      <th>Check To</th>
+                      <th>Weeks</th>
+                      <th>To Date</th>
+                      <th>FICA</th>
+                      <th>NET</th>
+                      <th>Add'l Tax</th>
+                      <th>Send Code</th>
+                      <th>Check Status</th>
+                      <th>Claims Void Date</th>
+                      <th *ngIf="isfilled" [hidden]="(IsPFLTrue)">Periodic Payment</th>
+                    </tr>
+                    <ng-container *ngIf="paymentInfoLength">
+                      <tr *ngFor="let cPaymentInfo of ClaimPaymentInfoDetailFinal">
+                        <td>{{cPaymentInfo.CheckDate}}</td>
+                        <td>{{cPaymentInfo.Check}}</td>
+                        <td>{{cPaymentInfo.CheckFrom}}</td>
+                        <td>{{cPaymentInfo.ChecTo}}</td>
+                        <td>{{cPaymentInfo.Weeks}}</td>
+                        <td>{{cPaymentInfo.ToDate}}</td>
+                        <td>{{cPaymentInfo.FICA}}</td>
+                        <td>{{cPaymentInfo.NET}}</td>
+                        <td>{{cPaymentInfo.AddlTax}}</td>
+                        <td>{{cPaymentInfo.SendCode}}</td>
+                        <td>{{cPaymentInfo.CheckStatus}}</td>
+                        <td>{{cPaymentInfo.ClaimsVoidDate}}</td>
+                        <td *ngIf="isfilled">
+                          <label hidden> {{cPaymentInfo.viewperiodicpayments}}
+                          </label>
+                          <u *ngIf="(cPaymentInfo.viewperiodicpayments)"><a data-toggle="modal"
+                              data-target="#ViewPeriodicPayments" style='margin-right:16px;color:deepskyblue;'
+                              data-backdrop="static" data-keyboard="false"
+                              (click)="showPeriodicPayments"><strong>View</strong></a></u>
+                        </td>
+                      </tr>
+                    </ng-container>
+                    <ng-container>
+                      <tr>
+                        <td colspan="13" style="text-align: center;font-size: 11.7px; color: black;"
+                          *ngIf="!paymentInfoLength">No Records Available</td>
+                      </tr>
+                    </ng-container>
+                  </table>
+
+                  <!-- <ag-grid-angular style="width: 100%;height: 150px;" class="ag-theme-balham"
+                    [rowData]="rowPaymentInfo" (gridReady)="onGridReady_Claim($event)"
+                    [columnDefs]="columnPaymentInfo">
+                    </ag-grid-angular> -->
+
+                </div>
+              </div>
+            </div>
+            <div>
+              <input type="checkbox" *ngIf="isVisibleChkAffidavit" title=""
+                (change)="callMakeAffidavitAvlbetoClaimant($event)"><label *ngIf="isVisibleChkAffidavit"> Make Affidavit
+                Available to Claimant</label>
+              <div *ngIf="isVisibleExportBenifitSummary">
+                <!-- <button id="btnExportBenifitSummary" class="btn btn-primary"
+                  style="float:right;" type="button" (click)="callExportBenifitSummary()">Export Benefit
+                  Summary</button><br /> -->
+                  <a style='margin-right:16px;color:deepskyblue;float:right;' (click)="callExportBenifitSummary()">
+                    <strong>Export Benefit Summary</strong></a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 style="text-align:left;color: #00579c;">
+              <strong>Claim Notes</strong>
+            </h5>
+            <div class="policyInfoGrid">
+              <div class="dbGridWrapper" style="background: white;">
+                <div>
+                  <div>
+                    <ag-grid-angular style="width: 100%;" class="ag-theme-balham {{ClaimGridSize}}"
+                      [rowData]="rowClaimNotes" [columnDefs]="columnClaimNotes" [getRowHeight]="getRowHeightClaimNotes"
+                      [overlayLoadingTemplate]="loadingTemplate" [overlayNoRowsTemplate]="noRowsTemplate"
+                      (gridReady)="onGridReady_Global($event)" [defaultColDef]="defaultColDef">
+                    </ag-grid-angular>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div>
+              <!-- <button id="btnAddNew" class="btn btn-primary" data-toggle="modal" data-target="#ViewAddNew"
+                data-backdrop="static" style="float:right;margin-right:0px;" data-keyboard="true"
+                (click)="ResetClaimNotesPopup()">Add New</button> -->
+                <a style='margin-right:16px;color:deepskyblue;float:right;' data-toggle="modal" data-target="#ViewAddNew"
+                data-backdrop="static" data-keyboard="true" (click)="ResetClaimNotesPopup()">
+                  <strong>Add New</strong></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <h5 style="text-align:left;color: #00579c;">
+              <strong>Form Received</strong>
+            </h5>
+            <div class="policyInfoGrid">
+              <div class="dbGridWrapper" style="background: white;">
+                <ag-grid-angular style="width: 100%;" class="ag-theme-balham {{FormsGridSize}}" [rowData]="rowFromRecieved"
+                  [columnDefs]="columnFromRecieved" [overlayLoadingTemplate]="loadingTemplate"
+                  [getRowHeight]="getRowHeightFormRece" [overlayNoRowsTemplate]="noRowsTemplate"
+                  (gridReady)="onGridReady_Global($event)" [defaultColDef]="defaultColDef">
+                </ag-grid-angular>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h5 style="text-align:left;color: #00579c;">
+              <strong>Form Sent</strong>
+            </h5>
+            <div class="policyInfoGrid">
+              <div class="dbGridWrapper" style="background: white;">
+                <ag-grid-angular style="width: 100%;" class="ag-theme-balham {{FormsGridSize}}" [rowData]="rowFromSent"
+                  [columnDefs]="columnFromSent" [overlayLoadingTemplate]="loadingTemplate"
+                  [getRowHeight]="getRowHeightFormSent" [overlayNoRowsTemplate]="noRowsTemplate"
+                  (gridReady)="onGridReady_Global($event)" [defaultColDef]="defaultColDef">
+                </ag-grid-angular>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div *ngIf="divClaimCertificationHistory" class="row">
+          <div class="col-md-6">
+            <h5 style="text-align:left" [ngStyle]="{color: '#00579c'}">
+              <strong>Claim Certification History</strong>
+            </h5>
+            <div class="policyInfoGrid p-l-1" style="border: 1px solid #ccc;">
+
+              <div>
+                <div class="row">
+                  <div class="col-md-6 p-r-0">
+                    <table id="tblWorkDates" class="dbGridTable"
+                      style="border-style:None;width:100%;border-collapse:collapse;" border="1" cellspacing="0"
+                      cellpadding="0">
+                      <tr>
+                        <th>Work</th>
+                      </tr>
+                      <ng-container *ngIf="workDateLength">
+                        <tr style="background: #ffffff;" *ngFor="let oWorkDates of WorkHistoryDateFinal">
+                          <td>{{oWorkDates.workcertificationperiod}}</td>
+                        </tr>
+                      </ng-container>
+                      <ng-container>
+                        <tr *ngIf="!workDateLength" style="background: #ffffff; font-size: 11.7px; color: black;">
+                          <td> No Records Available.</td>
+                        </tr>
+                      </ng-container>
+                    </table>
+                  </div>
+
+                  <div class="col-md-6 p-l-0 ">
+                    <table id="tblMedicalDates" class="dbGridTable"
+                      style="border-style:None;width:100%;border-collapse:collapse;" border="1" cellspacing="0"
+                      cellpadding="0">
+                      <tr>
+                        <th>Medical</th>
+                      </tr>
+                      <ng-container *ngIf="medicalDateLength">
+                        <tr style="background: #ffffff;" *ngFor="let oMedicalDates of MedicalHistoryDateFinal">
+                          <td>{{oMedicalDates.medicalcertificationperiod}}</td>
+                        </tr>
+                      </ng-container>
+                      <ng-container>
+                        <tr style="background: #ffffff; font-size: 11.7px; color: black;" *ngIf="!medicalDateLength">
+                          <td class="3"> No Records Available.</td>
+                        </tr>
+                      </ng-container>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row">
+          <div class="col-md-6">
+            <h5 style="text-align:left;color: #00579c;">
+              <strong>Claim Certification History</strong>
+            </h5>
+            <div class="policyInfoGrid" style="width: 100%;">
+              <div class="dbGridWrapper" style="background: white;width:48%;">
+                <ag-grid-angular style="width: 100%;height: 100px;" class="ag-theme-balham"
+                  [rowData]="rowWorkCertification" [columnDefs]="columnWorkCertification">
+                </ag-grid-angular>
+              </div>
+              <div class="dbGridWrapper" style="background: white;width:48%;">
+                <ag-grid-angular style="width: 100%;height: 100px;" class="ag-theme-balham"
+                  [rowData]="rowMedicalCertification" [columnDefs]="columnMedicalCertification">
+                </ag-grid-angular>
+              </div>
+            </div>
+          </div>
+          </div> -->
+
+        <div class="row">
+          <div class="col-md-12">
+            <label style="color: red;" *ngIf='isVisiblelblBlankClaim'><b>{{lblBlankClaim}}</b></label>
+          </div>
+        </div>
+
+
+
+        <!-- POPUPS-->
+        <!-- Claim Status Detail Popup when PFL false start-->
+        <div class="modal fade" id="ViewClaimStatusDetaill" role="dialog" aria-labelledby="ViewClaimStatusDetaillTitle"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <!-- <h5 class="modal-title">Claim Status Details</h5> -->
+                <h5 class="modal-title">CLAIM PORTAL USER VIEW (MY CLAIM STATUS DETAILS)</h5>
+
+              </div>
+              <div class="modal-body">
+                <!-- <div class="title">
+          <h2>Overall Status</h2>
+        </div> -->
+                <table width="100%" cellpadding="0" cellspacing="0" class="form-search" border="1"
+                  border-color="#666600" id="table1" runat="server">
+                  <tr>
+                    <td>
+                      <!-- Claim status page -->
+                      <div class="familyBody">
+                        <div>
+                          <br />
+                          <div id="divTerminatedClaim" *ngIf="isVisibledivTerminatedClaim"
+                            class="status_txt claimGreyBox">
+                            <strong>It looks like your claim has been finalized and closed.</strong>
+                            <br />
+                            Claims may be closed when:
+                            <ul style="padding-left: 20px; font-size: 16px;">
+                              <li style="list-style-type: disc;">A final payment has been issued </li>
+                              <li style="list-style-type: disc;">Return to Work dates have been reached</li>
+                              <li style="list-style-type: disc;">Work and Medical (DBL only) Certifications have expired
+                              </li>
+                              <li style="list-style-type: disc;">A Rejection Notice has been sent </li>
+                            </ul>
+                            <strong>What's next?</strong>
+                            <br />
+                            <ul style="padding-left: 20px; font-size: 16px;">
+                              <li style="list-style-type: disc;">Give <u>feedback</u> on your claims experience.</li>
+                              <li style="list-style-type: disc;">Find out how to file a new claim, re-open your current
+                                claim,
+                                or file for a re-occurrence <u>here</u>
+                                <!-- <a href="#myModal1" data-toggle="modal" data-target="#myModal1" class="grupimg-top-one .bs-example-modal-sm" style="text-decoration: underline">here</a>.</li> -->
+                            </ul>
+                          </div>
+                          <div id="divWelcomeClaimMessage" *ngIf="isVisibledivWelcomeClaimMessage"
+                            class="status_txt claimGreyBox">
+                            <strong>Welcome to ShelterPoint Claims Portal!</strong><br />
+                            Here you will be able to check in on the status of your claim, see when your next payment
+                            will be
+                            sent, upload forms, and much more!<br />
+                            We've received your claim, and are in the process of reviewing it. It may take a few
+                            business days
+                            to complete this process,
+                            so check back daily for an update to your status.
+                            <br />
+                            <strong>Want email alerts when you claim status changes?</strong><br />
+                            <u>Go here</u> to set your communication preferences now.
+                          </div>
+
+                          <div class="claim-status" id="divClaimStatus" *ngIf="isVisibledivClaimStatus">
+                            <!-- Basic Information section -->
+                            <div>
+                              <div class="col-md-12">
+                                <div class="overall-status">
+                                  <h2>Overall Status
+                                  </h2>
+                                  <div class="subtext">
+                                    <p id="pNextPaymentDate" *ngIf="isVisiblepNextPaymentDate">
+                                      <span class="dark-blue"><strong>Next Payment Date: </strong></span>
+                                      <label>{{varNextCheckDate}}</label>
+                                    </p>
+                                    <p><span class="dark-blue"><strong>Claim Status: </strong> </span><span
+                                        id="pClaimStatus" class={{classpClaimStatus}}>{{pClaimStatus}}</span></p>
+                                  </div>
+
+                                  <p class="font_size5">
+                                    <span id="pClaimStatusSummary">{{pClaimStatusSummary}}</span>
+                                  </p>
+                                </div>
+                              </div>
+                              <div>
+                                <div class={{classdivBasicStatusBox}} id="divBasicStatusBox">
+                                  <h4 class="claim-title dark-blue"><span id="spnDBLBasicHeader"
+                                      *ngIf="isVisiblespnDBLBasicHeader">Basic Information </span><span
+                                      id="spnPFLBasicHeader" *ngIf="isVisiblespnPFLBasicHeader">Claim Initiation
+                                      Information </span>
+                                    <span class="imgStatus">
+                                      <img src="assets/Images/icon_basic_gray.png" />
+
+
+                                    </span>
+                                  </h4>
+                                  <!--Basic claim Status-->
+                                  <div>
+                                    <div class=" leftClaimBox pad-left-zero pad-right-zero">
+                                      <div class="claimDesc borderBottom">
+                                        <div class="claimBox clearfix">
+                                          <div id="divBasicClaimStatus" class={{classdivBasicClaimStatus}}>
+
+                                            <div class="img"></div>
+                                            <h4 id="h4BasicInfo">{{h4BasicInfo}}</h4>
+                                            <div class="desc">
+                                              <p id="pBasicInfo" class={{classpBasicInfo}}><strong>Status:
+                                                </strong>{{pBasicInfo}}</p>
+                                              <!-- <label id="pBasicInfo" class= {{classpBasicInfo}} ><pre >{{pBasicInfo}} </pre></label> -->
+
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </div>
+
+                                      <!--status section-->
+                                      <div id="divBasicActionRequired" *ngIf="isVisibledivBasicActionRequired"
+                                        class="claimList pad-left-zero pad-right-zero">
+                                        <div class="seperator clearfix"></div>
+                                        <h3>Action required <span class="rightClaimBox Toggle pull-right">
+                                            <a>
+                                              <i class="{{defaultPlusMinus11}}"  (click)="toggleClass(11)"></i>
+                                            </a>
+                                          </span></h3>
+
+                                        <div class="{{statusSectionClass11}}" id="basicToggle">
+
+                                          <div style="padding: 0 10px">
+                                            <!-- <asp:DataList ID="dlClaimRedStatusReasons"  >
+                                                                    <ItemTemplate>
+                                                                        <i class="fa fa-circle" aria-hidden="true" style="color: #9f9f9f; font-size: 7px; padding-right: 10px;"></i><%#Eval("questionnote")%>
+                                                                    </ItemTemplate>
+                                                                </asp:DataList> -->
+                                            <label>{{dlClaimRedStatusReasons}}</label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!--ends-->
+                                      <div class="seperator clearfix"></div>
+                                      <!--new start-->
+                                      <div>
+                                        <!--toggle starts here-->
+                                        <h3><span id="spnDBLBasicHeaderDescription"
+                                            *ngIf="isspnDBLBasicHeaderDescription">What
+                                            is your Basic Information?</span><span id="spnPFLBasicHeaderDescription"
+                                            *ngIf="isVisiblespnPFLBasicHeaderDescription">What is your Claim Initiation
+                                            Information?</span>
+                                          <span class="rightClaimBoxToggle pull-right">
+                                            <a>
+                                              <i class="{{defaultPlusMinus12}}"  (click)="toggleClass(12)"></i>
+                                            </a>
+                                          </span>
+                                        </h3>
+                                        <p class="{{statusSectionClass12}}" id="basicinfo" style="display: block;">
+                                          <span id="DBLBasicInfo" *ngIf="isVisibleDBLBasicInfo">This is a combination of
+                                            key
+                                            data points taken from parts A, B and C of the initial claim form.
+                                            It includes your name, social security number, mailing address, work
+                                            history,
+                                            medical data,
+                                            and your employer’s statement of work history and wage earnings.
+                                          </span>
+                                          <span id="PFLBasicInfo" *ngIf="isVisiblePFLBasicInfo">It is any information
+                                            you
+                                            provided on the PFL-1 claim form, the leave-type specific form (PFL 2, 3 or
+                                            4),
+                                            and/or any supporting documentation/certifications, required to initiate
+                                            your claim,
+                                            e.g. your name, social security number, mailing address, leave type, your
+                                            employer’s
+                                            statement of work history, wage earnings, or documents such as your child’s
+                                            birth
+                                            certificate for bonding leave.
+                                          </span>
+                                        </p>
+                                      </div>
+                                      <!--ends-->
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                              <div>
+                                <div>
+                                  <!-- <div class="col-md-4 rightClaimBox" id="divWorkStatusBox"  > -->
+                                  <div class={{classdivWorkStatusBox}} id="divWorkStatusBox">
+                                    <h4 class="claim-title dark-blue">Work Certification
+                                      <span class="imgStatus">
+
+                                        <img src="assets/Images/icon_work_gray.png" />
+
+                                      </span>
+                                    </h4>
+                                    <div>
+
+                                      <div class=" leftClaimBox pad-left-zero pad-right-zero">
+                                        <div class="claimDesc borderBottom">
+                                          <div class="claimBox clearfix">
+                                            <div id="divWorkClaimStatus" class={{classdivWorkClaimStatus}}>
+
+                                              <a id="aimgWorkInfo">
+                                                <div class="img"></div>
+                                              </a>
+                                              <h4 id="h4WorkInfo">{{h4WorkInfo}}</h4>
+                                              <h4 *ngIf="lbDownloadWorkCertification" style="color:#3F569B;"><u> Download Work Certification Form here.</u>
+                                              </h4>
+
+                                              <!--<div class="desc">
+                                                                     <p id="pWorkInfo" class= {{classpWorkInfo}}  >
+                                                                        <span   id="sWorkInfo">{{sWorkInfo}}</span>
+                                                                        <span   id="Span1"></span>
+                                                                         <asp:LinkButton ID="lbDownloadWorkCertification"   Text="Download Work Certification Form here."></asp:LinkButton>
+                                                                    </p>
+
+                                                                </div>-->
+                                              <div class="desc">
+                                                <p id="pWorkInfo" class={{classpWorkInfo}}><strong>Status:
+                                                  </strong>{{sWorkInfo}}
+                                                </p>
+                                              </div>
+                                            </div>
+
+                                          </div>
+                                        </div>
+
+
+                                        <!--secondlast-->
+                                        <!-- <div id="divWorkActionRequired" runat="server"
+                                          class="claimList pad-left-zero pad-right-zero">
+                                          <div class="seperator clearfix"></div>
+                                          <div>
+                                            <h3>How to submit your form
+                                              <span class="rightClaimBoxToggle pull-right">
+                                                <a id="aOpenToggleWork">
+                                                  <i class="{{defaultPlusMinus21}}" id="icon3"  (click)="toggleClass(21)"></i>
+                                                </a>
+                                              </span>
+                                            </h3>
+                                          </div>
+                                          <div class="{{statusSectionClass21}}" id="workToggle">
+                                            <p id="pActionsRequiredWork" runat="server"></p>
+                                            <div id="dvHowToSubmitDBLForms" runat="server">
+                                              <ul style="margin-top: 0;">
+                                                <li style="margin-top: 0px;">
+
+
+                                                  Complete and submit your Work Certification Form (ISSNY/Blue Form)
+                                                  online here.<br />
+                                                  <br />
+                                                  OR, complete and submit via any of the following:
+                                                </li>
+                                                <li>
+                                                  <span class="pull-left">
+                                                    <img src="assets/Images/Upload-500.png" width="18" /></span>
+                                                  <span class="pull-left"
+                                                    style="margin-left: 15px; width: 206px;">Upload here.</span></li>
+                                                <li>
+                                                  <span class="pull-left">
+                                                    <img src="assets/Images/Email-500.png" width="18" /></span>
+                                                  <span class="pull-left" style="margin-left: 15px; width: 206px;">Email
+                                                    claimforms@shelterpoint.com</span></li>
+                                                <li>
+                                                  <span class="pull-left">
+                                                    <img src="assets/Images/Message-500.png" width="18" /></span>
+                                                  <span style="margin-left: 15px; float: left; width: 206px;">Mail
+                                                    to:<br />
+                                                    ShelterPoint<br />
+                                                    Disability Claims<br />
+                                                    1225 Franklin Avenue, Ste. 475<br />
+                                                    Garden City, NY 11530.</span>
+                                                </li>
+                                              </ul>
+                                              <div class="clearfix"></div>
+                                              <div class="marg-top-t">
+                                                <p>Note: If you have misplaced your Work Certification Form (ISSNY /
+                                                  Blue form) please download and/or print here.</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div> -->
+                                        <!--ends-->
+
+                                        <!--secondlast-->
+                                        <div id="divWorkActionRequired" *ngIf="isVisibledivWorkActionRequired"
+                                          class="claimList pad-left-zero pad-right-zero">
+                                          <div class="seperator clearfix"></div>
+                                          <div>
+                                            <h3>How to submit your form
+                                              <span class="rightClaimBoxToggle pull-right">
+                                                <a id="aOpenToggleWork">
+                                                  <i class="{{defaultPlusMinus22}}" id="icon3"  (click)="toggleClass(22)"></i>
+                                                </a>
+                                              </span>
+                                            </h3>
+                                          </div>
+                                          <div class="{{statusSectionClass22}}" id="workToggle">
+
+                                            <div id="dvHowToSubmitDBLForms" *ngIf="isVisibledvHowToSubmitDBLForms">
+
+
+                                              <ul style="margin-top: 0;">
+                                                <li style="margin-top: 0px;">
+
+                                                  Complete and submit your Work Certification Form (ISSNY/Blue Form)
+                                                  online here.<br />
+                                                  <br />
+                                                  OR, complete and submit via any of the following:
+                                                </li>
+                                                <li>
+                                                  <span class="pull-left">
+                                                    <img src="assets/Images/Upload-500.png" width="18" />
+                                                  </span>
+                                                  <span class="pull-left"
+                                                    style="margin-left: 15px; width: 206px;">Upload here.</span></li>
+                                                <li>
+                                                  <span class="pull-left">
+                                                    <img src="assets/Images/Email-500.png" width="18" />
+                                                  </span>
+                                                  <span class="pull-left" style="margin-left: 15px; width: 206px;">Email
+                                                    claimforms@shelterpoint.com</span>
+                                                </li>
+                                                <li>
+                                                  <span class="pull-left">
+                                                    <img src="assets/Images/Message-500.png" width="18" />
+                                                  </span>
+                                                  <span style="margin-left: 15px; float: left; width: 206px;">Mail
+                                                    to:<br />
+                                                    ShelterPoint<br />
+                                                    Disability Claims<br />
+                                                    1225 Franklin Avenue, Ste. 475<br />
+                                                    Garden City, NY 11530.</span>
+                                                </li>
+                                              </ul>
+                                              <div class="clearfix"></div>
+                                              <div class="marg-top-t">
+                                                <p>Note: If you have misplaced your Work Certification Form (ISSNY /
+                                                  Blue form)
+                                                  please download and/or print here.</p>
+                                              </div>
+                                            </div>
+                                            <div id="dvHowToSubmitPFLForms" *ngIf="isVisibledvHowToSubmitPFLForms">
+                                              <ul style="margin-top: 0;">
+                                                <li style="margin-top: 0px;">Complete and submit your Work Certification
+                                                  Form
+                                                  (ISSNY/Blue Form) via any of the following:
+                                                </li>
+                                                <li>
+                                                  <span class="pull-left">
+                                                    <img src="assets/Images/Upload-500.png" width="18" />
+                                                  </span>
+                                                  <span class="pull-left" style="margin-left: 15px;">Upload here.</span>
+                                                </li>
+                                                <li>
+                                                  <span class="pull-left">
+                                                    <img src="assets/Images/Email-500.png" width="18" />
+                                                  </span>
+                                                  <span class="pull-left" style="margin-left: 15px;">Email
+                                                    claimforms@shelterpoint.com</span>
+                                                </li>
+                                                <li>
+                                                  <span class="pull-left">
+                                                    <img src="assets/Images/Message-500.png" width="18" />
+                                                  </span>
+                                                  <span style="margin-left: 15px; float: left;">Mail to:<br />
+                                                    ShelterPoint<br />
+                                                    Disability Claims<br />
+                                                    1225 Franklin Avenue, Ste. 475,<br />
+                                                    Garden City, NY 11530.</span>
+                                                </li>
+                                              </ul>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!--ends-->
+                                        <div class="seperator clearfix"></div>
+
+
+                                        <div>
+
+                                          <h3>What is Work Certification?
+                                            <span class="rightClaimBoxToggle pull-right">
+                                              <a>
+                                                <i class="{{defaultPlusMinus23}}"  (click)="toggleClass(23)"></i>
+                                              </a>
+                                            </span>
+
+                                          </h3>
+
+                                          <p class="{{statusSectionClass23}}" id="workinfo" style="display: block;">
+                                            <span id="DBLWorkInfo" *ngIf="isVisibleDBLWorkInfo">Benefit payments are
+                                              directly
+                                              related to your working status and Medical Certification.
+                                              We ask for updates during your disability claim to ensure that benefits
+                                              are being
+                                              paid for the appropriate periods.<br />
+                                              We may ask you to submit updated working status to us, confirming whether
+                                              you have
+                                              returned to the workforce or are planning on returning.
+                                              We’ll always alert you when an update is required to continue processing
+                                              your claim,
+                                              and send the Work Certification Form to you by your preferred
+                                              delivery method.
+                                              <br />
+                                              <br />
+                                              Click here to view & set your preferences now.
+                                            </span>
+                                            <span id="PFLWorkInfo" *ngIf="isVisiblePFLWorkInfo">Benefit payments are
+                                              directly
+                                              related to your working status. We ask for updates during your paid family
+                                              leave
+                                              claim to ensure that benefits are being paid for the appropriate periods.
+                                              <br />
+                                              We may ask you to submit updated working status to us, confirming whether
+                                              you have
+                                              stopped taking paid family leave and returned to work, or when your leave
+                                              schedule
+                                              may have changed. We’ll always alert you when an update is required to
+                                              continue
+                                              processing your claim.
+                                            </span>
+                                          </p>
+                                          <div id="DBLReturnToWork" *ngIf="isVisibleDBLReturnToWork">
+                                            <h3>Returning to work? </h3>
+                                            <p>Click on the green "Returning to work?" button at the top. <i
+                                                class="fa fa-arrow-up" aria-hidden="true"></i></p>
+                                          </div>
+                                          <div id="PFLReturnToWork" *ngIf="isVisiblePFLReturnToWork">
+                                            <h3>Ending Leave and Returning to Work? </h3>
+                                            <p>Click on the green "End Leave and Return to Work" button at the top. <i
+                                                class="fa fa-arrow-up" aria-hidden="true"></i></p>
+                                          </div>
+                                        </div>
+                                        <!--ends-->
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Medical Information section -->
+                              <div>
+                                <div class="">
+                                  <div class={{classdivMedicalStatusBox}} id="divMedicalStatusBox"
+                                    *ngIf="isVisibledivMedicalStatusBox">
+                                    <h4 class="claim-title dark-blue">Medical Certification
+                                      <span class="imgStatus">
+                                        <img src="assets/Images/icon_medical_gray.png" />
+
+                                      </span>
+                                    </h4>
+
+
+
+                                    <div>
+                                      <div class="leftClaimBox pad-left-zero pad-right-zero">
+                                        <div class="claimDesc borderBottom">
+                                          <div class="claimBox clearfix">
+                                            <div id="divMedicalClaimStatus" class={{classdivMedicalClaimStatus}}>
+
+                                              <a id="aimgMedicalInfo">
+                                                <div class="img"></div>
+                                              </a>
+                                              <h4 id="h4MedicalInfo">{{h4MedicalInfo}}</h4>
+                                              <div class="desc">
+                                                <p id="pMedicalInfo" class={{classpMedicalInfo}}><strong>Status:
+                                                  </strong>{{pMedicalInfo}}</p>
+                                              </div>
+                                            </div>
+                                            <div id="divMedicalActionRequired" *ngIf="isVisibledivMedicalActionRequired"
+                                              class="claimList pad-left-zero pad-right-zero">
+                                              <div class="seperator clearfix"></div>
+                                              <div>
+                                                <h3>How to submit your form
+                                                  <span class="rightClaimBoxToggle pull-right">
+                                                    <a id="aOpenToggleMedical">
+                                                      <i class="{{defaultPlusMinus31}}" id="icon5"  (click)="toggleClass(31)"></i>
+                                                    </a>
+                                                  </span>
+                                                </h3>
+                                              </div>
+                                              <div class="{{statusSectionClass31}}" id="medicalToggle">
+
+                                                <div>
+
+                                                  <ul>
+                                                    <li style="margin-top: 0;">
+
+                                                      Complete and submit your Medical Certification Form (APSNY/Yellow
+                                                      Form) via any
+                                                      of the following:
+                                                    </li>
+                                                    <li>
+                                                      <span class="pull-left">
+                                                        <img src="assets/Images/Upload-500.png" width="18" />
+                                                      </span>
+                                                      <span class="pull-left" style="margin-left: 15px;">Upload
+                                                        here.</span></li>
+                                                    <li>
+                                                      <span class="pull-left">
+                                                        <img src="assets/Images/Email-500.png" width="18" />
+                                                      </span>
+                                                      <span class="pull-left" style="margin-left: 15px;">Email
+                                                        claimforms@shelterpoint.com</span>
+                                                    </li>
+                                                    <li>
+                                                      <span class="pull-left">
+                                                        <img src="assets/Images/Message-500.png" width="18" />
+                                                      </span>
+                                                      <span class="pull-left" style="margin-left: 15px;">Mail to:<br />
+                                                        ShelterPoint<br />
+                                                        Disability Claims<br />
+                                                        1225 Franklin Avenue, Ste. 475,<br />
+                                                        Garden City, NY 11530.</span>
+                                                    </li>
+                                                  </ul>
+                                                  <div class="clearfix"></div>
+                                                  <div class="marg-top-t">
+                                                    <p>Note: If you have misplaced your Medical Certification Form
+                                                      (ASPNY / Yellow
+                                                      form) download and/or print here.</p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="seperator clearfix"></div>
+
+                                            <!--last section-->
+                                            <div>
+                                              <h3>What is Medical Certification?
+                                                <span class="rightClaimBoxToggle pull-right">
+                                                  <a>
+                                                    <i class="{{defaultPlusMinus32}}"  (click)="toggleClass(32)"></i>
+                                                  </a>
+                                                </span>
+                                              </h3>
+                                              <p class="{{statusSectionClass32}}" id="medicalinfo" style="display: block;">
+                                                Benefit payments are directly related to your working status and Medical
+                                                Certification.
+                                                We ask for updates during your disability claim to ensure that benefits
+                                                are being paid
+                                                for the appropriate periods.<br />
+                                                We may ask you to submit updated medical information to us during your
+                                                disability
+                                                claim.
+                                                Prognoses often change during care and treatment of disabling
+                                                conditions, and that can
+                                                impact when your health care provider feels you should be medically able
+                                                to return to
+                                                work.
+                                                We’ll always alert you when new medical is required, and will send the
+                                                Medical Certification Form to you by your preferred delivery method.
+                                                <br />
+                                                <br />
+                                                Click here to view & set your preferences now.
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <!--last section-->
+
+
+                                        <!--ends-->
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>
+                              <!--End Medical Information section -->
+                            </div>
+                          </div>
+                          <div>
+                            <div class="row">
+                              <div id="divclaimstatussummary" *ngIf="isVisibledivclaimstatussummary"
+                                class="status_txt claimGreyBox col-md-11 center m-auto">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <h3 class="title">Claim Status Summary</h3>
+                                  </div>
+                                </div>
+                                <div class="blue-data">
+
+                                  <p>
+                                    <strong id="lblBecomeDisableLabel">{{lblBecomeDisableLabel}}</strong>: <span>
+                                      <!-- <asp:Label ID="lblDisabledDate"  ></asp:Label> -->
+                                      <label>{{lblDisabledDate}}</label>
+                                    </span>
+                                  </p>
+                                  <p>
+                                    <strong>Number of weeks paid to date</strong>: <span>
+                                      <!-- <asp:Label ID="lblNumWeeksPaid"  ></asp:Label> -->
+                                      <label>{{lblNumWeeksPaid}}</label>
+
+                                    </span>
+                                  </p>
+                                  <p>
+                                    <strong>Amount of benefits paid to date</strong>: <span>
+                                      <!-- <asp:Label ID="lblBenefitAmtPaid"  ></asp:Label> -->
+                                      <label>{{lblBenefitAmtPaid}}</label>
+                                    </span>
+                                  </p>
+                                  <p id="pNextPaymentDate1" *ngIf="isVisiblepNextPaymentDate1">
+                                    <strong>Next estimated payment date</strong>: <span>
+                                      <!-- <asp:Label ID="lblNextPaymentDate1"  ></asp:Label> -->.
+                                      <label>{{lblNextPaymentDate1}}</label>
+                                    </span>
+                                  </p>
+                                  <p><strong>Claim status</strong>: <span id="pClaimStatus1"
+                                      class={{classpClaimStatus1}}>{{pClaimStatus1}}</span></p>
+                                </div>
+                                <span id="pClaimStatusSummary1">{{pClaimStatusSummary1}}</span>
+                                <a href="claimstatus.aspx" id="aSeeMoreSummary" *ngIf="isVisibleaSeeMoreSummary">See
+                                  more
+                                  details</a>
+                                <br />
+                                <p class="marg-top-t">Need help? Please contact us if you have any questions.
+                                </p>
+                              </div>
+
+                              <div id="Div1" class="col-md-4 marg-top-tw">
+                                <div class="sign-up-communication" id="divSetCommPref" *ngIf="isVisibledivSetCommPref">
+                                  <h2 style="margin-top: 0px !important"><strong>Make sure your preferences are set!
+                                    </strong>
+                                    <br />
+                                    Customize which important notifications you receive on your claim via email. If you
+                                    don't
+                                    sign up for e-alerts, you
+                                    need to log into your account proactively to stay on top of any claim-related
+                                    actions you
+                                    may need to take.
+                                  </h2>
+                                  <div class="center-block">
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Claim Status Detail Popup close-->
+
+
+
+        <!-- Claim Status Update RTW" Popup start-->
+        <form class="needs-validation" novalidate>
+          <div class="modal fade" id="ViewUpdateRTW" role="dialog" aria-labelledby="ViewUpdateRTWDetaillTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered rtwpopup" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Update RTW Date</h5>
+                </div>
+                <div class="modal-body">
+                  <!-- <div class="title">
+              <h2 ></h2><br>
+          </div>           -->
+                  <table>
+                    <tr>
+                      <td><b>Claim# : </b></td>
+                      <td>{{LinkedClaimNo}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>User : </b></td>
+                      <td>{{UserName}}</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 180px;"><b>Current Date : </b></td>
+                      <td>{{strTodayDAte}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>New RTW Date: </b></td>
+                      <td>
+                        <!-- <div class="col-12 text-center dp-input RTW_date_picker p-l-0 custom_dateRTW">
+                           <dp-date-picker name="cal1" #dpcalCalls align="center" [theme]="'dp-material'" style="width: 195px;"
+                            [(ngModel)]="selectedRTWDate" (onChange)="dateSelection_Calendar()" [config]="dateConfig">
+                          </dp-date-picker>
+                          <img src="assets/Images/cal.gif"
+                            style="width: 16px;margin-top:-23 px;margin-right:-50 px;float: right;"
+                            (click)="dateOpen(1);" />
+                          </div>-->
+
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="picker" readonly [(ngModel)]="selectedRTWDate" (dateChange)="addEvent('change', $event)"
+                            [ngModelOptions]="{standalone: true}">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <label *ngIf="errorRTW" class="text-danger"> *Required </label>
+                      </td>
+                    </tr>
+                    <tr *ngIf="showRTW_currentOLess">
+                        <td colspan="2" class="rtwDateUpdateMessage">This will be the new 'Actual Return to Work' Date.</td>
+                    </tr>
+                    <tr *ngIf="showRTW_greaterThanToday">
+                      <td colspan="2" class="rtwDateUpdateMessage">This will be the new 'Tentative Return to Work' Date.</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button id="UpdateRTW" type="button" class="btn btn-primary"
+                    (click)="callUpdateRTWDate()" (keydown.enter)="!validate.invalid">Update
+                    RTW Date
+                  </button>
+                  <button type="button" id="btnCloaseUpdateRTW" class="btn btn-primary" data-dismiss="modal"
+                    (click)="showUpdateRTWPopUp()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Claim Status Update RTW" Popup close-->
+
+        <!-- Claim Status Update RTW" Popup start-->
+        <div class="modal fade" id="ViewResetPasswornUnlockAccount" role="dialog"
+          aria-labelledby="ViewResetPasswornUnlockAccountTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">ARE YOU SURE WANT TO RESET THIS USER'S PASSWORD???</h5>
+              </div>
+              <div class="modal-body">
+                <!-- <div class="title">pay
+              <h2 ></h2><br>
+          </div>           -->
+                This will remove the old password and send an email to the claimant with a
+                new temporary password.Once they log in using the temporary password
+                The will be prompted to create a new password.
+              </div>
+              <div class="modal-footer">
+                <button id="btnyesPassword" type="button" class="btn btn-primary"
+                  (click)="callUserPassword()">Yes</button>
+                <button type="button" id="btnCloseUpdateRTW" class="btn btn-primary" data-dismiss="modal">No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Claim Status Update RTW" Popup close-->
+
+
+
+
+        <div class="modal fade" id="ViewAdditionalCoverageDetails" role="dialog"
+          aria-labelledby="ViewAdditionalCoverageDetailsTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Additional Coverage Details For Policy {{varPolicyNumber}}</h5>
+              </div>
+              <div class="modal-body">
+                <div class="title">
+                  <h4> Locations / Insureds</h4>
+                </div>
+                <div class="policyInfoGrid">
+                  <div class="dbGridWrapper" style="background: white;height: 200px;">
+                    <ag-grid-angular style="width: 100%;height: 200px;" class="ag-theme-balham"
+                      [rowData]="rowLocationInfo_PopUp" [overlayLoadingTemplate]="loadingTemplate"
+                      [overlayNoRowsTemplate]="noRowsTemplate" [columnDefs]="columnLocInsured"
+                      [getRowHeight]="getRowHeightLocation" (gridReady)="onGridReady_AdditionalCov($event)"
+                      [defaultColDef]="defaultColDef">
+                    </ag-grid-angular>
+                  </div>
+                </div>
+
+              </div>
+              <div class="p-l-15 p-r-15 ">
+                <div>
+                  <div class="row">
+                    <div class="col-md-6" [hidden]="varProprietorPartner == 'isHidden'">
+                      <b [hidden]="varProprietorPartner == 'isHidden'">Proprietor/Partner Coverage</b>
+                      <ag-grid-angular style="width: 100%;height: 100px;" class="ag-theme-balham"
+                        [rowData]="rowProprietorPartnerInfo_PopUp" [columnDefs]="columnProprietorPartner"
+                        [overlayLoadingTemplate]="loadingTemplate" [overlayNoRowsTemplate]="noRowsTemplate"
+                        (gridReady)="onGridReady_AdditionalCov($event)" [defaultColDef]="defaultColDef">
+                      </ag-grid-angular>
+                    </div>
+                    <div class="col-md-6">
+                      <b [hidden]="varOutOfStateCoverage == 'isHidden'">Out of state coverage</b>
+                      <textarea disabled [hidden]="varOutOfStateCoverage == 'isHidden'"
+                        style="width:100%;height:90px;">{{varOutOfStateCoverage}}</textarea>
+                      <input type="checkbox" [checked]="variNonStat" [hidden]="varOutOfStateCoverage == 'isHidden'"
+                        disabled><b [hidden]="varOutOfStateCoverage == 'isHidden'">All non-stat States</b>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <b [hidden]="varVoluntaryCoverage == 'isHidden'">Voluntary Coverage</b>
+                      <textarea [hidden]="varVoluntaryCoverage == 'isHidden'" style="width:100%;height:90px;"
+                        disabled>{{varVoluntaryCoverage}} </textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <b [hidden]="varExclusionsCoverage == 'isHidden'">Exclusions</b>
+                      <textarea [hidden]="varExclusionsCoverage == 'isHidden'" style="width:100%;height:90px;"
+                        disabled>{{varExclusionsCoverage}}</textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Claim Status Update RTW Popup close-->
+
+
+
+        <!-- Benifit Details Show Days Popup start-->
+
+
+        <!--
+<div class="modal fade" id="ViewShowDays" role="dialog"  aria-labelledby="ViewShowDaysTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">WORKED DAYS</h5>
+      </div>
+      <div class="modal-body">
+        <textarea id="txtLeaveDatesList" style="width:100%" readonly>{{ varShowDays }}</textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+        
+
+<div class="modal fade" id="ViewShowDays" role="dialog" aria-labelledby="ViewShowDaysTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title">Leave Dates</h5>
+      </div>
+
+      <div class="modal-body">
+        <textarea id="txtLeaveDatesList" style="width:100%" readonly>{{ varShowDays }}</textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+        <!-- Benifit Details Show Days Popup start-->
+
+
+
+        <!-- Work Days Count Days Popup Start-->
+        <div class="modal fade" id="ViewWorkDays" role="dialog" aria-labelledby="ViewWorkDaysTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">WORKED DAYS</h5>
+              </div>
+              <div class="modal-body">
+                <!-- <div class="title">
+              <h2 ></h2><br>
+          </div>           -->
+
+                <label>
+                  <pre class="pretext">{{varDaysWorked}} </pre>Total Days: {{varDaysWorkedCount}}</label>
+
+                <!-- {{varDaysWorked}}  -->
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Work Days Count Days Popup Stop-->
+
+
+
+        <!-- ViewPeriodicPayments -->
+        <!-- PeriodicsPayments Popup start-->
+        <div class="modal fade" id="ViewPeriodicPayments" role="dialog" aria-labelledby="ViewPeriodicPaymentsTitle"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <u>
+                  <h5 class="modal-title">Periodic Check Date</h5>
+                </u>
+              </div>
+              <div class="modal-body">
+                <table>
+                  <tr>
+                    <td><strong>Check Date</strong></td>
+                    <td>
+                      {{varCheckDate}}
+                    </td>
+                    <td><strong>Check #</strong></td>
+                    <td>
+                      {{varCheck}}
+                    </td>
+                    <td><strong>Check From</strong></td>
+                    <td>
+                      {{varCheckFrom}}
+                    </td>
+                    <td><strong>Check To</strong></td>
+                    <td>
+                      {{varChecTo}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Weeks</strong></td>
+                    <td>
+                      {{varWeeks}}
+                    </td>
+                    <td><strong>To Date</strong></td>
+                    <td>
+                      {{varCheckDate}}
+                    </td>
+                    <td><strong>FICA</strong></td>
+                    <td>
+                      {{varFICA}}
+                    </td>
+                    <td><strong>NET</strong></td>
+                    <td>
+                      {{varNET}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Add'l Tax</strong></td>
+                    <td>
+                      {{varAddlTax}}
+                    </td>
+                    <td><strong>Send Code</strong></td>
+                    <td>
+                      {{varSendCode}}
+                    </td>
+                    <td colspan="4"><strong>Check Status</strong>&nbsp;&nbsp;
+                      {{varCheckStatus}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="8"><strong>Periodic Dates:</strong></td>
+                  </tr>
+                  <tr>
+                    <td colspan="8">
+                      <div style="overflow-x: hidden; overflow-y: scroll; height: 78px;">
+                        <input type="multiline" Style="height: 70px; width: 600px" title="{{varPeriodicCheckDates}}"
+                          readonly="true">
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PeriodicsPayments Popup stop-->
+
+
+        <!-- Add New Claim Note Popup start-->
+        <!-- <form id="Form" class="form-horizontal"> -->
+        <form class="needs-validation" novalidate>
+          <div class="modal fade" id="ViewAddNew" role="dialog" aria-labelledby="ViewAddNewTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add New Claim Note</h5>
+                </div>
+                <!-- <form [formGroup]="myForm" (ngSubmit)="submitForm()"> -->
+                <div class="modal-body">
+                  <!-- <form id="Form"> -->
+                  <table style="width: 100%;">
+                    <tr>
+                      <td>
+                        <span style="margin-top: 6px; text-align: left;"><strong>Claim# : </strong></span>
+                        <span>{{LinkedClaimNo}}</span>
+                      </td>
+                      <td>
+                        <span style="margin-top: 6px; text-align: left;"><strong>User : </strong></span>
+                        <span>{{UserName}}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <textarea id="txtClaimNotes" rows="4" style="min-width: 100%;" [(ngModel)]="Userid"
+                          name="txtClaimNotes" required="required" #box (keyup)="onKeyUp(box)"
+                          maxlength="255"></textarea>
+                        <label *ngIf="error" class="text-danger">*Required</label>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <input type="test" value={{varlength}} style="width:50px;height:25px;" disabled> characters left
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="modal-footer">
+                  <button id="SaveNotes" type="button" class="btn btn-primary"
+                    (click)="Userid == '' ? checkComment() : callAddNewClaimNote(box.value)"
+                    (keydown.enter)="!validate.invalid">Save</button>
+                  <button type="button" id="btnCloseAddNewClaimNote" class="btn btn-primary"
+                    data-dismiss="modal">Close</button>
+                </div>
+                <!-- </form> -->
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Add New Claim Note Popup stop-->
+
+        <div class="modal fade" id="ViewSpecialProvisions" role="dialog" aria-labelledby="ViewSpecialProvisionsTitle"
+          aria-hidden="false">
+          <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                {{varSpecialProvisions}}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+              </div>
+            </div>

@@ -1,0 +1,35 @@
+<header>
+    <aside class="container">
+        <div class="row">
+
+            <div class="logo col-md-6">
+                <a [routerLink]="['/home']" id="aLogoHomePageLink">
+                    <img src="assets/Images/logo.png" />
+                </a>
+            </div>
+
+            <div class="welcome white col-md-6">
+                <div class="flex">
+                    <span style="margin-right:15px;"><i class="fa fa-user"></i>&nbsp; {{UserName}}</span>
+                    <span id="iMenu" onclick="openNav()" *ngIf="setMenuDisplay()" class="menu"><i class="fa fa-list"></i></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <span href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</span>
+            <span class="menu-title">Menu</span>
+            <a (click)="homeClick()" *ngIf="isHomeAccess">Home</a>
+            <a *ngFor="let item of UserPermissions" (click)="clickCall(item.ControlName)"> {{item.ControlName}} </a>
+            <!-- @if (oUserMenus != null && UserMenuIntranetXML.CheckUserAccess(oUserMenus, "Add New Payroll/Batch Profile")) -->
+            <!-- <a (click)="GoToClaimInfoSearch()"  *ngIf="blnCIS">Claim Information Search</a> -->
+            <!-- @if (oUserMenus != null && UserMenuIntranetXML.CheckUserAccess(oUserMenus, "Add Profile Under Payroll/Batch")) -->
+            <!-- <a (click)="GoToPolicyInfoSearch()" *ngIf="blnPIS" >Policy Information Search</a> -->
+            <!-- @if (oUserMenus != null && UserMenuIntranetXML.CheckUserAccess(oUserMenus, "Add ACH Profile")) -->
+            <!-- <a [routerLink]="['/selectuser']" *ngIf="blnSUA" >Search User Accounts</a> -->
+            <!-- @if (oUserMenus != null && UserMenuIntranetXML.CheckUserAccess(oUserMenus, "Update UserID")) -->
+            <!-- <a href="" *ngIf="blnCSI" >Commission Statement Information</a> -->
+        </div>
+    </aside>
+</header>

@@ -1,0 +1,333 @@
+<head>
+    <title>WebUtilities :: Home</title>
+</head>
+
+<section class="container ach_portal">
+    <div class="main-heading ">
+        <h2>CUSTOMER SERVICE REP TOOLS</h2>
+    </div>
+
+    <!-- <div class="m-t-35 m-b-35 text-center">
+        <h4 class="fNormal">A Dashboard for CSR’s to Search Claim, Policy and User Account Information</h4>
+        <p class="m-t-20"></p>
+    </div> -->
+
+    <div class="row">
+        <div class="col-lg-7 col-md-12">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row" style="padding-bottom: 15px;"><img src="assets/Images/ShelterPoint-logo-icon-55x65.png" style="width: 40px;height: 50px;"  />
+                    &nbsp;&nbsp;&nbsp;
+                    <h4 style="font-size: 35px; font-weight: 400;">{{CallAttendant}}</h4></div>
+                    <div class="jumbotron p-4 mb-3"> 
+                        <table class="profileTable">
+                            <tr>
+                                <td><strong class="labelStrong">Insured Calls:</strong></td>
+                                <td *ngIf="countsBind">{{ProfileCountsFinal[0].Count_InsuredCalls}}</td>
+                                <td><strong class="labelStrong">Total Calls Logged:</strong></td>
+                                <td *ngIf="countsBind" style="width: 100px !important;">
+                                    {{ProfileCountsFinal[0].Count_TotalCalls}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong class="labelStrong">Policyholder Calls:</strong></td>
+                                <td *ngIf="countsBind">{{ProfileCountsFinal[0].Count_PolicyholderCalls}}</td>
+                                <td><strong class="labelStrong">Calls Logged:</strong></td>
+                                <td *ngIf="countsBind" style="width: 100px !important;">
+                                    {{ProfileCountsFinal[0].Count_AnsweredCalls}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong class="labelStrong">Broker Calls:</strong></td>
+                                <td *ngIf="countsBind">{{ProfileCountsFinal[0].Count_BrokerCalls}}</td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class=" custGrid">
+                        <div>
+                            <p><strong>Recently Logged Calls:</strong>
+                                <a class="pull-right text-primary" data-toggle="modal"
+                                    data-target="#ViewFullRecentCallHistory"
+                                    (click)="getRecentCallHistory_Popup('first', false)" data-backdrop="static"
+                                    data-keyboard="false">Full History</a></p>
+                            <div style="max-width: 635px;max-height:272px;">
+                                <ag-grid-angular #agGrid id="myGrid" style="width: 100%;height: 100%;"
+                                    class="ag-theme-balham" [rowData]="rowRecentCallHistory" [pagination]="true"
+                                    [defaultColDef]="defaultColDef" [paginationAutoPageSize]="false"
+                                    [domLayout]="autoHeight" (gridReady)="onGridReady_Main($event)"
+                                    [overlayNoRowsTemplate]="noRowsTemplate"
+                                    [columnDefs]="columnRecentHist" >
+                                </ag-grid-angular>
+                            </div>
+                        </div>
+
+                        <div class="{{classMarg}}">
+                            <button class="btn btn-primary" type="button"
+                            data-toggle="modal" data-target="#ViewFullRecentClaimNotes"
+                            (click)="getClaimNoteHistory_Popup('first', false)">Claim Notes History</button>
+                        </div>
+
+                        <!-- <div style="padding-top: 20px;">
+                            <p><strong>Recent Claim Notes:</strong>
+                                <a class="pull-right text-primary" data-toggle="modal"
+                                    data-target="#ViewFullRecentClaimNotes"
+                                    (click)="getClaimNoteHistory_Popup('first', false)" data-backdrop="static"
+                                    data-keyboard="false">Full History</a></p>
+
+
+                            <ag-grid-angular style="width: 100%;" class="ag-theme-balham"
+                                [rowData]="rowClaimNoteHistory" [pagination]="true" [defaultColDef]="defaultColDef"
+                                [paginationAutoPageSize]="false" [domLayout]="autoHeight"
+                                (gridReady)="onGridReady_Claim($event)"
+                                [overlayNoRowsTemplate]="noRowsTemplate" [columnDefs]="columnClaimNoteHist">
+                            </ag-grid-angular>
+                        </div> -->
+
+
+                        <div style="margin-top: 20px;">
+                            <button class="btn btn-primary" type="button"
+                            data-toggle="modal" data-target="#ViewFullRecentPolicyNotes"
+                            (click)="getPolicyNoteHistory_Popup('first', false)">Policy Notes History</button>
+                        </div>
+
+                        <!-- <div style="padding-top: 20px;">
+                            <p><strong>Recent Policy Notes:</strong>
+                                <a class="pull-right text-primary" data-toggle="modal"
+                                    data-target="#ViewFullRecentPolicyNotes"
+                                    (click)="getPolicyNoteHistory_Popup('first', false)" data-backdrop="static"
+                                    data-keyboard="false">Full History</a></p>
+
+                            <ag-grid-angular style="width: 100%;" class="ag-theme-balham"
+                                [rowData]="rowPolicyNoteHistory" [pagination]="true" [defaultColDef]="defaultColDef"
+                                [paginationAutoPageSize]="false" [domLayout]="autoHeight"
+                                (gridReady)="onGridReady_Policy($event)"
+                                [overlayNoRowsTemplate]="noRowsTemplate" [columnDefs]="columnPolicyNoteHist">
+                            </ag-grid-angular>
+                        </div> -->
+
+
+                    </div>
+                </div>
+
+                <!-- POPUPS-->
+                <!-- Recent Call History -- start-->
+                <div *ngIf="popUp" class="modal fade" id="ViewFullRecentCallHistory" role="dialog"
+                    aria-labelledby="ViewFullRecentCallHistoryTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Logged Calls History</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12 col-md-1">
+                                        <!-- <a (click)="getRecentCallHistory_Popup('back',true)">previous
+                                             day</a>-->
+                                     </div> 
+                                     <div id="matCustomDate" class="col-12 col-md-9 text-center homeCustom_date">
+                                         <mat-form-field>
+                                             <input matInput [matDatepicker]="picker1" [max]="maxDate" [formControl]="serializedDateCall1" (dateChange)="dateSelection_Calendar($event,1,1)" >
+                                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                             <mat-datepicker #picker1></mat-datepicker>
+                                         </mat-form-field>
+                                         &nbsp;-&nbsp;
+                                         <mat-form-field>
+                                             <input matInput [matDatepicker]="picker12" [max]="maxDate" [formControl]="serializedDateCall" (dateChange)="dateSelection_Calendar($event,1,2)" >
+                                             <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+                                             <mat-datepicker #picker12></mat-datepicker>
+                                         </mat-form-field>
+                                     </div>
+                                     <!-- <div *ngIf="showInvalidDateRange" class="col-12 text-center invalidDateRange">
+                                             Invalid Date Range !
+                                     </div> -->
+                                     <div class="col-md-2 col-12 text-left searchOnPopUp">
+                                         <br/>
+                                         <button type="button" class="btn btn-primary btnCus" (click)="SearchHistoryOnPopups(1)">Search</button>
+                                         <label *ngIf="showInvalidDateRange" class="invalidDateRange">Invalid date range!</label>
+                                     </div> 
+                                </div>
+                                <div class="row mb-1">                                    
+                                    <div class="col-12">
+                                        <a (click)="showCallExport && ExportToExcel(1)" class="excelIcon float-right">Export to Excel</a>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <ag-grid-angular style="width: 100%;" class="ag-theme-balham"
+                                            [rowData]="rowRecentCallHistory_PopUp" [pagination]="true"
+                                            [defaultColDef]="defaultColDef" [overlayLoadingTemplate]="loadingTemplate"
+                                            [domLayout]="autoHeight" (gridReady)="onGridReady_Call_Popup($event)"
+                                            [overlayNoRowsTemplate]="noRowsTemplate" [paginationAutoPageSize]="false"
+                                            [columnDefs]="columnRecentHistPopUp" >
+                                        </ag-grid-angular>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" (click)="clearPopupGrids()"
+                                    data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Call History  close-->
+
+                <!-- Recent Claim Notes -- start-->
+                <div *ngIf="popUp" class="modal fade" id="ViewFullRecentClaimNotes" role="dialog"
+                    aria-labelledby="ViewFullRecentClaimNotesTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Claim Notes History</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-1">
+                                    </div>
+                                   <div id="matCustomDate" class="col-md-9 col-12 text-center homeCustom_date">
+                                       <mat-form-field>
+                                           <input matInput [matDatepicker]="picker2" [max]="maxDate" [formControl]="serializedDateClaim1" (dateChange)="dateSelection_Calendar($event,2,1)">
+                                           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                           <mat-datepicker #picker2></mat-datepicker>
+                                       </mat-form-field>
+                                       &nbsp;-&nbsp;
+                                       <mat-form-field>
+                                           <input matInput [matDatepicker]="picker22" [max]="maxDate" [formControl]="serializedDateClaim" (dateChange)="dateSelection_Calendar($event,2,2)">
+                                           <mat-datepicker-toggle matSuffix [for]="picker22"></mat-datepicker-toggle>
+                                           <mat-datepicker #picker22></mat-datepicker>
+                                       </mat-form-field>
+                                   </div>
+                                   <!-- <div class="col-3 text-right">
+                                       <a style="float: right;" 
+                                           (click)="showNextLink_Claim && getClaimNoteHistory_Popup('next',true)">next day</a>
+                                   </div> -->
+                                   <div class="col-md-2 col-12 text-left searchOnPopUp">
+                                       <br/>
+                                       <button type="button" class="btn btn-primary btnCus" (click)="SearchHistoryOnPopups(2)">Search</button>
+                                       <label *ngIf="showInvalidDateRange" class="invalidDateRange">Invalid date range!</label>
+                                   </div>
+                                </div>
+                                <div class="row mb-1">
+                                    <!-- <div class="col-3">
+                                        <a (click)="getClaimNoteHistory_Popup('back',true)">previous
+                                            day</a>
+                                    </div> -->
+                                    <!-- <div class="col-6 text-center dp-input  customDateHome">
+                                        <dp-date-picker name="cal2" #dpcalClaim align="center" [theme]="'dp-material'"
+                                            [(ngModel)]="selectedDate" (onChange)="dateSelection_Calendar($event,2)"
+                                            [config]="dateConfig">
+                                        </dp-date-picker>
+                                        <img src="assets/Images/cal.gif" style="width: 16px;
+                                            margin-top: -10px;" (click)="dateOpen(2);" />
+                                    </div> -->
+                                  
+                                    <div class="col-12">
+                                        <a (click)="showClaimExport && ExportToExcel(2)" class="excelIcon float-right">Export to Excel</a>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                            <ag-grid-angular style="width: 100%;" class="ag-theme-balham"
+                                                [rowData]="rowClaimNoteHistory_PopUp" [pagination]="true"
+                                                [defaultColDef]="defaultColDef" [overlayLoadingTemplate]="loadingTemplate"
+                                                [domLayout]="autoHeight" (gridReady)="onGridReady_Popup($event)"
+                                                [overlayNoRowsTemplate]="noRowsTemplate" [paginationAutoPageSize]="false"
+                                                [columnDefs]="columnClaimNoteHist" >
+                                            </ag-grid-angular>
+                                        </div>
+                                </div>
+ 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" (click)="clearPopupGrids()"
+                                    data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Claim Notes  close-->
+
+                <!-- Recent Policy Notes -- start-->
+                <div *ngIf="popUp" class="modal fade" id="ViewFullRecentPolicyNotes" role="dialog"
+                    aria-labelledby="ViewFullRecentPolicyNotesTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered maxwidthDialouge" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Policy Notes History</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div id="matCustomDate" class="col-12 col-md-9 text-center homeCustom_date">
+                                        <mat-form-field>
+                                            <input matInput [matDatepicker]="picker3" [max]="maxDate" [formControl]="serializedDatePolicy1" (dateChange)="dateSelection_Calendar($event,3,1)">
+                                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker3></mat-datepicker>
+                                        </mat-form-field>
+                                        &nbsp;-&nbsp;
+                                        <mat-form-field>
+                                            <input matInput [matDatepicker]="picker32" [max]="maxDate" [formControl]="serializedDatePolicy" (dateChange)="dateSelection_Calendar($event,3,2)">
+                                            <mat-datepicker-toggle matSuffix [for]="picker32"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker32></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                 
+
+                                    <div class="col-md-2 col-12 text-left searchOnPopUp">
+                                        <br/>
+                                        <button type="button" class="btn btn-primary btnCus" (click)="SearchHistoryOnPopups(3)">Search</button>
+                                        <label *ngIf="showInvalidDateRange" class="invalidDateRange">Invalid date range!</label>
+                                    </div> 
+                                </div>
+                                <div class="row mb-1">                                
+                                    <div class="col-12">
+                                        <a (click)="showPolicyExport && ExportToExcel(3)" class="excelIcon float-right">Export to Excel</a>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <ag-grid-angular style="width: 100%;" class="ag-theme-balham"
+                                            [rowData]="rowPolicyNoteHistory_PopUp" [pagination]="true"
+                                            [domLayout]="autoHeight" [overlayLoadingTemplate]="loadingTemplate"
+                                            (gridReady)="onGridReady_Popup($event)"
+                                            [overlayNoRowsTemplate]="noRowsTemplate" [paginationAutoPageSize]="false"
+                                            [columnDefs]="columnPolicyNoteHist" >
+                                        </ag-grid-angular>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" (click)="clearPopupGrids()"
+                                    data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Policy Notes  close-->
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-12" style="margin-top: 25px;">
+            <div class="m-b-25">
+                <aside class="grid-heading">
+                    <h2><span class="circle-left"></span>Tools<span class="circle-right"></span></h2>
+                </aside>
+                <aside class="row">
+
+                    <div *ngFor="let item of UserPermissions" class="col-md-6 col-6 col-sm-6 m-t-20"
+                        [style]="item.styleData" (click)="clickCall(item.ControlName)">
+                        <a [className]="item.className" >
+                            <img [src]="item.ImagePath" [alt]="item.ControlName" />
+                            <div class="headstrip">
+                                <span>
+                                    {{item.ControlName}}
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</section>

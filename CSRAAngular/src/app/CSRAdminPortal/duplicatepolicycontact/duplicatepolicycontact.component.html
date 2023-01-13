@@ -1,0 +1,142 @@
+<!-- {{DPContact.value|json}} -->
+<head><title>WebUtilities :: Duplicate Policy Request</title></head>
+<section class="form-horizontal">
+    <article class="main-heading">
+      <h2>Duplicate Policy Request: DBL/PFL and BaseLine Insurance</h2>
+    </article>  
+    <article class="content-center">
+        <div class="container-fluid" *ngIf="!result">
+            <h5>Contact Information: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Policy # {{l_Policyno}}&nbsp;&nbsp;<label id="lblPolicyNO" ></label> </h5>
+
+            <form [formGroup]="DPContact" novalidate>
+              <div class="row mb-2">
+                <div class="col-md-4">
+                    <label>The recipient works at: </label>               
+                    <select class="browser-default form-control custom-select" name="ddlRecipient" 
+                      formControlName="ddlRecipient" required (change)="getReceipientRole($event.target.value)">
+                      <option value="" selected>--Select--</option>
+                      <option value="12">Brokerage</option>
+                      <option value="13">Employer</option>
+                      <option value="14">Third Party</option> 
+                    </select>
+                
+                  </div>
+                </div>
+              <div>
+                <label> Recipient's Role:</label>	
+                <select class="custom-select form-control" name="ddlRecipientRole" formControlName="ddlRecipientRole" 
+                required name="ddlReceipientRole">
+                    <option value="" selected>--Select--</option>
+                    <option *ngFor="let item of ReceipientDetailFinal" value={{item.subgroup_id}}>
+                      {{item.subgroup_def}}
+                    </option>                      
+                </select>
+                
+                </div>               
+                <div class="row  my-2">
+                    <div class="col-md-6">
+                      <label>First Name</label>
+                      <input type="text" (keyup)="onKeydown($event)" name="FirstName" maxlength="25" autocomplete="off"
+                       class="form-control {{dynamicBorder}}"
+                        oninput="this.value = this.value.toUpperCase()" formControlName="FirstName" required/>
+                        <div>
+                          <span class="text-danger" *ngIf="DPContact.get('FirstName').hasError('required') 
+                          && (DPContact.get('FirstName').touched || DPContact.get('FirstName').dirty)">
+                            Required
+                          </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Last Name</label>
+                      <input type="text" (keyup)="onKeydown($event)" name="LastName" maxlength="25" autocomplete="off"
+                         class="form-control {{dynamicBorder}}" oninput="this.value = this.value.toUpperCase()"
+                         formControlName="LastName" required/>
+                         <div>
+                          <span class="text-danger" *ngIf="DPContact.get('LastName').hasError('required') 
+                          && (DPContact.get('LastName').touched || DPContact.get('LastName').dirty)">
+                            Required
+                          </span>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row my-2">
+                    <div class="col-md-6">
+                      <label>Email</label>
+                      <!-- <input type="text" (keyup)="onKeydown($event)" name="WorkEmail" maxlength="100" autocomplete="off"
+                        [(ngModel)]="WorkEmail" class="form-control {{dynamicBorder}}"
+                        oninput="this.value = this.value.toUpperCase()" /> -->
+                        <input type="text" name="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"                      
+                         class="form-control" placeholder="info@example.com" formControlName="Email"/>
+                         <div>
+                          <span class="text-danger" *ngIf="DPContact.get('Email').hasError('required') 
+                          && (DPContact.get('Email').touched || DPContact.get('Email').dirty)">
+                            Required
+                          </span>
+                          <span class="text-danger" *ngIf="DPContact.get('Email').hasError('pattern')">
+                            Email format is incorrect
+                          </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Confirm Email</label>
+                      <input type="text" name="confirmEmail" compare="Email"
+                        class="form-control" placeholder="info@example.com" formControlName="confirmEmail"/>
+                        <div>
+                          <span class="text-danger" *ngIf="DPContact.get('confirmEmail').hasError('required') 
+                          && (DPContact.get('confirmEmail').touched || DPContact.get('confirmEmail').dirty)">
+                            Required
+                          </span>
+                          <span class="text-danger" *ngIf="DPContact.get('confirmEmail').hasError('compare')">
+                            Confirm Email should match
+                          </span>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6 col-6 p-r-0">
+                      <label>Confirm Email</label>
+                      <input type="text" (keyup)="onKeydown($event)" name="ConfirmEmail" maxlength="100" autocomplete="off"
+                        [(ngModel)]="ConfirmEmail" class="form-control {{dynamicBorder}}"
+                        />
+                    </div> -->
+                  </div>
+                  <div class="row mt-3 mb-3">
+                    <div class="col-md-12">
+                      <small>
+                        <label>Please send a copy of the requested documentation to the additional email address provided above.
+                          By providing this email address, I certify that the addressee is authorized to receive the requested
+                          documentation. I understand that ShelterPoint will store this additional email for the sole purpose of
+                          sending this one-time email and for maintaining a record of the communication, and that it will not be
+                          shared and/or used for any other purpose.</label>
+                      </small>
+                    </div>
+                  </div>
+                <div align="center">
+                    <button class="btn btn-primary" type="button" [disabled]="!(DPContact.valid)"  (click)="GoToSearch(DPContact.value)">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="contaner-fluid" *ngIf="result">
+          <table width="100%"  style="font-size: 20px;">
+            <tr>
+              <th colspan="2" align="left">
+                <h4>Contact Information: Policy # {{ l_Policyno }}</h4>
+              </th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <br />
+                Thanks for your request. A copy of the document were sent to the
+                following recipient(s):
+              </td>
+            </tr>
+            <tr id="trPaperPolicy">
+              <td class="m-1">
+                {{ nameValue }}
+              </td>
+              <td style="text-align: center">
+                {{ emailValue }}
+              </td>
+            </tr>
+          </table>
+        </div>
+    </article>
+</section>

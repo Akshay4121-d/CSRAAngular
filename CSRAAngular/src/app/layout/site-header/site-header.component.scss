@@ -1,0 +1,16 @@
+.welcome{
+
+    .flex{
+        justify-content:flex-end;
+        padding-top:5px;
+    }
+
+    .flex span{
+        display: inline-block;
+    }
+
+    .menu i{
+        cursor: pointer;
+        padding-top: 3px;       
+    }
+}

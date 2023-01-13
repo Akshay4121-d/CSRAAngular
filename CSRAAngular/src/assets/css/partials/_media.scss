@@ -1,0 +1,50 @@
+
+$tablet-width: 768px;
+$desktop-width: 1024px;
+$small-width:767px;
+$iphone-width:320px 568px;
+$android-width:480px 800px;
+
+
+@media (min-width: 0px) and (max-width: 767px) {
+
+.searchOnPopUp, .btnCus{
+display: flex;
+margin: 0 auto;
+align-items: center;
+align-content: center;
+justify-content: center;
+
+}
+
+ .logo, .welcome{
+     width:50%!important;
+ }  
+
+ .logo img{
+    max-width: 125px!important;
+ }
+
+.content-center{
+    width:100%!important;
+    font-size:13px!important;
+}
+
+.producerBtn{ 
+    button{
+        margin-top:10px!important;
+    }
+}
+
+.memberUpdateBtn{ 
+    button{
+        margin-top:10px!important;
+    }
+}
+.employerUpdate{
+    button{
+        margin-top:10px!important;
+    }
+}
+
+}

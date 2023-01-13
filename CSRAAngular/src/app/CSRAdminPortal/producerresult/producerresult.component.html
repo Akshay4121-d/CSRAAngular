@@ -1,0 +1,64 @@
+<head><title>WebUtilities :: Producer Account Search Results</title></head>
+<div *ngIf="norecords">
+    <section class="form-horizontal">
+        <article class="main-heading">
+            <h2>PRODUCER ACCOUNT SEARCH RESULTS</h2>
+        </article>
+        <article class="content-center">
+            <div class="alert alert-danger box-msg" role="alert">
+                <strong>No records found!</strong>
+            </div>
+            <br />
+            <div align="center">
+                <button class="btn btn-primary" type="button" [routerLink]="['/producersearch']">Back</button>
+            </div>
+        </article>
+    </section>
+</div>
+
+<div *ngIf="records">
+    <section class="form-horizontal">
+        <article class="main-heading">
+            <h2>PRODUCER ACCOUNT SEARCH RESULTS</h2>
+        </article>
+        <article class="content-center">
+            <p [ngStyle]="{color: '#00579c'}" *ngIf="EmailText != '' && ProducerNoText ==''" style="text-align: center;">
+                <strong>{{EmailText}}</strong> is registered with the following User IDs:
+            </p>
+            <p [ngStyle]="{color: '#00579c'}" *ngIf="ProducerNoText != '' && EmailText == ''" style="text-align: center;">
+                <strong>{{ProducerNoText}}</strong> is registered with the following User IDs:
+            </p>
+            <p [ngStyle]="{color: '#00579c'}" *ngIf="ProducerNoText != '' && EmailText != ''" style="text-align: center;">
+                <strong>{{ProducerNoText}}</strong> is registered with the following User IDs:
+            </p>
+
+            <div class="table-responsive">
+                <table align="center" width="100%" style="text-align: center;" class="ProducerDetailFinal table table-bordered"
+                    border="1" frame="void" rules="rows">
+                    <tr>
+                        <th>
+                            Producer #
+                        </th>
+                        <th>
+                            User IDs
+                        </th>
+                        <th>Email</th>
+                        <th>
+                           Action
+                        </th>
+                    </tr>
+                    <tr *ngFor="let Producer of ProducerDetailFinal">
+                        <td>{{Producer.BrokerNumber}}</td>
+                        <td>{{Producer.UserID}}</td>
+                        <td>{{Producer.Email}}</td>
+                        <td style="font-style:italic;"><a [routerLink]="['/producerupdate', Producer.ID_LoginEnc]">Update
+                                User Account</a></td>
+                    </tr>
+                </table>
+            </div>           
+            <div align="center">
+                <button class="btn btn-primary btn btn-default" type="button" [routerLink]="['/producersearch']">Close</button>
+            </div>
+        </article>
+    </section>
+</div>

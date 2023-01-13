@@ -1,0 +1,50 @@
+<head>
+  <title>WebUtilities :: Search Employer Accounts</title>
+</head>
+<section class="form-horizontal">
+  <article class="main-heading">
+    <h2>SEARCH EMPLOYER ACCOUNTS</h2>
+  </article>
+  <article class="content-center">
+    <form #userForm="ngForm" (keyup.enter)="searchInput()">
+      <div class="alert alert-danger form-group container-fluid" *ngIf="error">Please provide at least one search
+        criteria.</div>
+      <div class="form-group container-fluid" [class.has-error]="UserId.required || FederalId.required || PolicyNo.required">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-6 p-l-0">
+              <label>User ID</label>
+              <input autofocus type="text" name="UserId" #UserId="ngModel" maxlength="50" autocomplete="off"
+                [(ngModel)]="Userid" class="form-control" />
+            </div>
+            <div class="col-md-6 col-6 p-r-0">
+              <label> Federal ID #</label>
+              <input type="text" name="FederalId" #FederalId="ngModel" maxlength="9" autocomplete="off" [(ngModel)]="Federalid"
+                class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-6 p-l-0">
+              <label> Policy #</label>
+              <input type="text" name="PolicyNo" #PolicyNo="ngModel" maxlength="9" autocomplete="off" [(ngModel)]="Policyno"
+                class="form-control" />
+            </div>
+            <div class="col-md-6 col-6 p-r-0">
+              <label>Company Name</label>
+              <input type="text" name="CompanyName" #PolicyNo="ngModel" maxlength="200" autocomplete="off" [(ngModel)]="CompanyName"
+                class="form-control" />
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div align="center">
+          <button class="btn btn-primary btn btn-default" style='margin-right:16px' type="button" [routerLink]="['/selectuser']">Back</button>
+          <button id="Search" class="btn btn-primary" type="button" (click)="Userid=='' && Federalid=='' && Policyno=='' && CompanyName=='' ? searchInput() : getPolicyholderBySearch()">Search</button><br />
+        </div>
+      </div>
+    </form>
+  </article>
+</section>
